@@ -23,6 +23,7 @@ namespace WinUI
         public MainForm()
         {
             InitializeComponent();
+            loadForm(new frmUsers());
         }
 
         private void loadForm(object form)
