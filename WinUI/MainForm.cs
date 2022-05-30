@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinUI.Forms.Amenidies;
 using WinUI.Forms.Analytics;
+using WinUI.Forms.Auth;
 using WinUI.Forms.Employees;
 using WinUI.Forms.Facilites;
 using WinUI.Forms.Reservations;
 using WinUI.Forms.Rooms;
 using WinUI.Forms.RoomTypes;
 using WinUI.Forms.Users;
+using WinUI.Helpers;
 
 namespace WinUI
 {
@@ -83,6 +85,20 @@ namespace WinUI
         private void btnAnalytics_Click(object sender, EventArgs e)
         {
             loadForm(new frmAnalytics());
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            lblLoggedUser.Text = $"Welcome {AuthHelper.Username}";
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            AuthHelper.Username = null;
+            AuthHelper.Password= null;
+            AuthHelper.Roles= null;
+            this.Hide();
+            new frmLogin().Show();
         }
     }
 }

@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using TheLionsDen.Auth;
 using TheLionsDen.Services;
 using TheLionsDen.Services.Database;
 using TheLionsDen.Services.Impl;
@@ -11,13 +14,36 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opts =>
+{
+    opts.AddSecurityDefinition("basicAuth", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "basic"
+    });
+
+    opts.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference{Type=ReferenceType.SecurityScheme,Id="basicAuth"}
+            },
+            new string[]{}
+        }
+    });
+});
 
 builder.Services.AddTransient<IAmenityService, AmenityService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddDbContext<TheLionsDenContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("AppDb")));
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
+builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
 
 var app = builder.Build();
 
@@ -30,6 +56,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

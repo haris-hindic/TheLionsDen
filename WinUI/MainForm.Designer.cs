@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panelSide = new System.Windows.Forms.Panel();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.lblLoggedUser = new System.Windows.Forms.Label();
             this.btnAnalytics = new System.Windows.Forms.Button();
             this.btnRoomTypes = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
@@ -47,6 +49,8 @@
             // panelSide
             // 
             this.panelSide.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panelSide.Controls.Add(this.btnLogout);
+            this.panelSide.Controls.Add(this.lblLoggedUser);
             this.panelSide.Controls.Add(this.btnAnalytics);
             this.panelSide.Controls.Add(this.btnRoomTypes);
             this.panelSide.Controls.Add(this.btnEmployees);
@@ -62,14 +66,35 @@
             this.panelSide.Size = new System.Drawing.Size(336, 767);
             this.panelSide.TabIndex = 0;
             // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Location = new System.Drawing.Point(209, 733);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(121, 30);
+            this.btnLogout.TabIndex = 9;
+            this.btnLogout.Text = "Log out";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // lblLoggedUser
+            // 
+            this.lblLoggedUser.AutoSize = true;
+            this.lblLoggedUser.Location = new System.Drawing.Point(12, 738);
+            this.lblLoggedUser.Name = "lblLoggedUser";
+            this.lblLoggedUser.Size = new System.Drawing.Size(0, 20);
+            this.lblLoggedUser.TabIndex = 8;
+            // 
             // btnAnalytics
             // 
             this.btnAnalytics.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnAnalytics.FlatAppearance.BorderSize = 0;
             this.btnAnalytics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAnalytics.Location = new System.Drawing.Point(3, 651);
+            this.btnAnalytics.Location = new System.Drawing.Point(12, 630);
             this.btnAnalytics.Name = "btnAnalytics";
-            this.btnAnalytics.Size = new System.Drawing.Size(321, 37);
+            this.btnAnalytics.Size = new System.Drawing.Size(312, 37);
             this.btnAnalytics.TabIndex = 5;
             this.btnAnalytics.Text = "Analytics";
             this.btnAnalytics.UseVisualStyleBackColor = false;
@@ -80,9 +105,9 @@
             this.btnRoomTypes.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnRoomTypes.FlatAppearance.BorderSize = 0;
             this.btnRoomTypes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRoomTypes.Location = new System.Drawing.Point(3, 434);
+            this.btnRoomTypes.Location = new System.Drawing.Point(12, 413);
             this.btnRoomTypes.Name = "btnRoomTypes";
-            this.btnRoomTypes.Size = new System.Drawing.Size(321, 37);
+            this.btnRoomTypes.Size = new System.Drawing.Size(312, 37);
             this.btnRoomTypes.TabIndex = 4;
             this.btnRoomTypes.Text = "Room Types";
             this.btnRoomTypes.UseVisualStyleBackColor = false;
@@ -93,9 +118,9 @@
             this.btnEmployees.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnEmployees.FlatAppearance.BorderSize = 0;
             this.btnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEmployees.Location = new System.Drawing.Point(3, 326);
+            this.btnEmployees.Location = new System.Drawing.Point(12, 305);
             this.btnEmployees.Name = "btnEmployees";
-            this.btnEmployees.Size = new System.Drawing.Size(321, 37);
+            this.btnEmployees.Size = new System.Drawing.Size(312, 37);
             this.btnEmployees.TabIndex = 7;
             this.btnEmployees.Text = "Employees";
             this.btnEmployees.UseVisualStyleBackColor = false;
@@ -106,9 +131,9 @@
             this.btnReservations.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnReservations.FlatAppearance.BorderSize = 0;
             this.btnReservations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReservations.Location = new System.Drawing.Point(3, 597);
+            this.btnReservations.Location = new System.Drawing.Point(12, 576);
             this.btnReservations.Name = "btnReservations";
-            this.btnReservations.Size = new System.Drawing.Size(321, 37);
+            this.btnReservations.Size = new System.Drawing.Size(312, 37);
             this.btnReservations.TabIndex = 6;
             this.btnReservations.Text = "Reservations";
             this.btnReservations.UseVisualStyleBackColor = false;
@@ -119,9 +144,9 @@
             this.btnFacilites.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnFacilites.FlatAppearance.BorderSize = 0;
             this.btnFacilites.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFacilites.Location = new System.Drawing.Point(3, 490);
+            this.btnFacilites.Location = new System.Drawing.Point(12, 469);
             this.btnFacilites.Name = "btnFacilites";
-            this.btnFacilites.Size = new System.Drawing.Size(321, 37);
+            this.btnFacilites.Size = new System.Drawing.Size(312, 37);
             this.btnFacilites.TabIndex = 3;
             this.btnFacilites.Text = "Facilities";
             this.btnFacilites.UseVisualStyleBackColor = false;
@@ -132,9 +157,9 @@
             this.btnAmenidies.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnAmenidies.FlatAppearance.BorderSize = 0;
             this.btnAmenidies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAmenidies.Location = new System.Drawing.Point(3, 545);
+            this.btnAmenidies.Location = new System.Drawing.Point(12, 524);
             this.btnAmenidies.Name = "btnAmenidies";
-            this.btnAmenidies.Size = new System.Drawing.Size(321, 37);
+            this.btnAmenidies.Size = new System.Drawing.Size(312, 37);
             this.btnAmenidies.TabIndex = 2;
             this.btnAmenidies.Text = "Amenidies";
             this.btnAmenidies.UseVisualStyleBackColor = false;
@@ -145,9 +170,9 @@
             this.btnRooms.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnRooms.FlatAppearance.BorderSize = 0;
             this.btnRooms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRooms.Location = new System.Drawing.Point(3, 381);
+            this.btnRooms.Location = new System.Drawing.Point(12, 360);
             this.btnRooms.Name = "btnRooms";
-            this.btnRooms.Size = new System.Drawing.Size(321, 37);
+            this.btnRooms.Size = new System.Drawing.Size(312, 37);
             this.btnRooms.TabIndex = 1;
             this.btnRooms.Text = "Rooms";
             this.btnRooms.UseVisualStyleBackColor = false;
@@ -158,9 +183,9 @@
             this.btnUsers.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnUsers.FlatAppearance.BorderSize = 0;
             this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUsers.Location = new System.Drawing.Point(3, 270);
+            this.btnUsers.Location = new System.Drawing.Point(12, 249);
             this.btnUsers.Name = "btnUsers";
-            this.btnUsers.Size = new System.Drawing.Size(321, 37);
+            this.btnUsers.Size = new System.Drawing.Size(312, 37);
             this.btnUsers.TabIndex = 0;
             this.btnUsers.Text = "Users";
             this.btnUsers.UseVisualStyleBackColor = false;
@@ -196,7 +221,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
             this.Text = "The Lion\'s Den";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panelSide.ResumeLayout(false);
+            this.panelSide.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -215,5 +242,7 @@
         private Button btnAmenidies;
         private Button btnRooms;
         private Button btnUsers;
+        private Button btnLogout;
+        private Label lblLoggedUser;
     }
 }
