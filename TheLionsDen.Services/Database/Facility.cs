@@ -12,10 +12,10 @@ namespace TheLionsDen.Services.Database
         }
 
         public int FacilityId { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; } = null!;
         public string? Description { get; set; }
-        public float? Price { get; set; }
-        public string? Status { get; set; }
+        public float Price { get; set; }
+        public string Status { get; set; } = null!;
         public string? Image { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }

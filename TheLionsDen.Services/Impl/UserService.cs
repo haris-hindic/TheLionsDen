@@ -25,9 +25,14 @@ namespace TheLionsDen.Services.Impl
                 filteredQuery = filteredQuery.Where(x => x.FirstName.ToLower().Contains(searchObject.Name.ToLower()) ||
                                                        x.LastName.ToLower().Contains(searchObject.Name.ToLower()));
             }
-            if (!String.IsNullOrWhiteSpace(searchObject.Name))
+            if (!String.IsNullOrWhiteSpace(searchObject.Username))
             {
                 filteredQuery = filteredQuery.Where(x => x.Username.Equals(searchObject.Username));
+            }
+            if (searchObject.Active)
+            {
+                filteredQuery = filteredQuery.Where(x => x.Status.Equals("ACTIVE"));
+
             }
 
             return filteredQuery;
@@ -39,7 +44,7 @@ namespace TheLionsDen.Services.Impl
 
             if (searchObject.IncludeRoles)
             {
-                includedQuery = includedQuery.Include("UserRole.Role");
+                includedQuery = includedQuery.Include("Role");
             }
 
             return includedQuery;
@@ -58,7 +63,7 @@ namespace TheLionsDen.Services.Impl
 
         public UserResponse Login(string username, string password)
         {
-            var entity = context.Users.Include("UserRoles.Role").FirstOrDefault(x => x.Username.Equals(username));
+            var entity = context.Users.Include("Role").FirstOrDefault(x => x.Username.Equals(username));
 
             if (entity == null)
             {

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WinUI.Forms.Amenidies;
+﻿using WinUI.Forms.Amenidies;
 using WinUI.Forms.Analytics;
 using WinUI.Forms.Auth;
 using WinUI.Forms.Employees;
@@ -22,24 +13,29 @@ namespace WinUI
 {
     public partial class MainForm : Form
     {
+        private string loadedForm;
         public MainForm()
         {
             InitializeComponent();
-            loadForm(new frmUsers());
+            loadForm(new frmUsers(), FormTypes.user);
         }
 
-        private void loadForm(object form)
+        private void loadForm(object form, string formName)
         {
-            if (this.panelMain.Controls.Count > 0)
+            if (loadedForm != formName)
             {
-                this.panelMain.Controls.RemoveAt(0);
+                if (this.panelMain.Controls.Count > 0)
+                {
+                    this.panelMain.Controls.RemoveAt(0);
+                }
+                Form frm = form as Form;
+                frm.TopLevel = false;
+                frm.Dock = DockStyle.Fill;
+                loadedForm = formName;
+                this.panelMain.Controls.Add(frm);
+                this.panelMain.Tag = frm;
+                frm.Show();
             }
-            Form frm = form as Form;
-            frm.TopLevel = false;
-            frm.Dock = DockStyle.Fill;
-            this.panelMain.Controls.Add(frm);
-            this.panelMain.Tag = frm;
-            frm.Show();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -49,42 +45,42 @@ namespace WinUI
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            loadForm(new frmUsers());
+            loadForm(new frmUsers(), FormTypes.user);
         }
 
         private void btnEmployees_Click(object sender, EventArgs e)
         {
-            loadForm(new frmEmployees());
+            loadForm(new frmEmployees(), FormTypes.employee);
         }
 
         private void btnRooms_Click(object sender, EventArgs e)
         {
-            loadForm(new frmRooms());
+            loadForm(new frmRooms(), FormTypes.room);
         }
 
         private void btnRoomTypes_Click(object sender, EventArgs e)
         {
-            loadForm(new frmRoomTypes());
+            loadForm(new frmRoomTypes(), FormTypes.roomType);
         }
 
         private void btnFacilites_Click(object sender, EventArgs e)
         {
-            loadForm(new frmFacilites());
+            loadForm(new frmFacilites(), FormTypes.facility);
         }
 
         private void btnAmenidies_Click(object sender, EventArgs e)
         {
-            loadForm(new frmAmenidies());
+            loadForm(new frmAmenidies(), FormTypes.amentiy);
         }
 
         private void btnReservations_Click(object sender, EventArgs e)
         {
-            loadForm(new frmReservations());
+            loadForm(new frmReservations(), FormTypes.reservations);
         }
 
         private void btnAnalytics_Click(object sender, EventArgs e)
         {
-            loadForm(new frmAnalytics());
+            loadForm(new frmAnalytics(), FormTypes.analytics);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -95,8 +91,8 @@ namespace WinUI
         private void btnLogout_Click(object sender, EventArgs e)
         {
             AuthHelper.Username = null;
-            AuthHelper.Password= null;
-            AuthHelper.Roles= null;
+            AuthHelper.Password = null;
+            AuthHelper.Roles = null;
             this.Hide();
             new frmLogin().Show();
         }

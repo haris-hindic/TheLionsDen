@@ -21,6 +21,8 @@ namespace TheLionsDen.Services.Mapper
             CreateMap<User, UserResponse>();
             CreateMap<UserInsertRequest, User>();
             CreateMap<UserUpdateRequest, User>();
+            //Amenity
+            CreateMap<Role, RoleResponse>();
         }
     }
 }

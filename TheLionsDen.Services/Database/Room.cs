@@ -13,14 +13,14 @@ namespace TheLionsDen.Services.Database
         }
 
         public int RoomId { get; set; }
-        public string? Name { get; set; }
-        public float? Price { get; set; }
+        public string Name { get; set; } = null!;
+        public float Price { get; set; }
         public int? Number { get; set; }
         public int? Floor { get; set; }
-        public string? State { get; set; }
-        public int? RoomTypeId { get; set; }
+        public string State { get; set; } = null!;
+        public int RoomTypeId { get; set; }
 
-        public virtual RoomType? RoomType { get; set; }
+        public virtual RoomType RoomType { get; set; } = null!;
         public virtual ICollection<Favourite> Favourites { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
         public virtual ICollection<RoomAmenity> RoomAmenities { get; set; }

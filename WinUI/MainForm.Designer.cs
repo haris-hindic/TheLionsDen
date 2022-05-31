@@ -63,7 +63,7 @@
             this.panelSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSide.Location = new System.Drawing.Point(0, 0);
             this.panelSide.Name = "panelSide";
-            this.panelSide.Size = new System.Drawing.Size(336, 767);
+            this.panelSide.Size = new System.Drawing.Size(290, 717);
             this.panelSide.TabIndex = 0;
             // 
             // btnLogout
@@ -71,9 +71,9 @@
             this.btnLogout.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Location = new System.Drawing.Point(209, 733);
+            this.btnLogout.Location = new System.Drawing.Point(183, 684);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(121, 30);
+            this.btnLogout.Size = new System.Drawing.Size(101, 30);
             this.btnLogout.TabIndex = 9;
             this.btnLogout.Text = "Log out";
             this.btnLogout.UseVisualStyleBackColor = false;
@@ -82,7 +82,7 @@
             // lblLoggedUser
             // 
             this.lblLoggedUser.AutoSize = true;
-            this.lblLoggedUser.Location = new System.Drawing.Point(12, 738);
+            this.lblLoggedUser.Location = new System.Drawing.Point(22, 689);
             this.lblLoggedUser.Name = "lblLoggedUser";
             this.lblLoggedUser.Size = new System.Drawing.Size(0, 20);
             this.lblLoggedUser.TabIndex = 8;
@@ -92,9 +92,9 @@
             this.btnAnalytics.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnAnalytics.FlatAppearance.BorderSize = 0;
             this.btnAnalytics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAnalytics.Location = new System.Drawing.Point(12, 630);
+            this.btnAnalytics.Location = new System.Drawing.Point(12, 598);
             this.btnAnalytics.Name = "btnAnalytics";
-            this.btnAnalytics.Size = new System.Drawing.Size(312, 37);
+            this.btnAnalytics.Size = new System.Drawing.Size(269, 31);
             this.btnAnalytics.TabIndex = 5;
             this.btnAnalytics.Text = "Analytics";
             this.btnAnalytics.UseVisualStyleBackColor = false;
@@ -105,9 +105,9 @@
             this.btnRoomTypes.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnRoomTypes.FlatAppearance.BorderSize = 0;
             this.btnRoomTypes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRoomTypes.Location = new System.Drawing.Point(12, 413);
+            this.btnRoomTypes.Location = new System.Drawing.Point(12, 381);
             this.btnRoomTypes.Name = "btnRoomTypes";
-            this.btnRoomTypes.Size = new System.Drawing.Size(312, 37);
+            this.btnRoomTypes.Size = new System.Drawing.Size(269, 31);
             this.btnRoomTypes.TabIndex = 4;
             this.btnRoomTypes.Text = "Room Types";
             this.btnRoomTypes.UseVisualStyleBackColor = false;
@@ -118,9 +118,9 @@
             this.btnEmployees.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnEmployees.FlatAppearance.BorderSize = 0;
             this.btnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEmployees.Location = new System.Drawing.Point(12, 305);
+            this.btnEmployees.Location = new System.Drawing.Point(12, 273);
             this.btnEmployees.Name = "btnEmployees";
-            this.btnEmployees.Size = new System.Drawing.Size(312, 37);
+            this.btnEmployees.Size = new System.Drawing.Size(269, 31);
             this.btnEmployees.TabIndex = 7;
             this.btnEmployees.Text = "Employees";
             this.btnEmployees.UseVisualStyleBackColor = false;
@@ -131,9 +131,9 @@
             this.btnReservations.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnReservations.FlatAppearance.BorderSize = 0;
             this.btnReservations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReservations.Location = new System.Drawing.Point(12, 576);
+            this.btnReservations.Location = new System.Drawing.Point(12, 544);
             this.btnReservations.Name = "btnReservations";
-            this.btnReservations.Size = new System.Drawing.Size(312, 37);
+            this.btnReservations.Size = new System.Drawing.Size(269, 31);
             this.btnReservations.TabIndex = 6;
             this.btnReservations.Text = "Reservations";
             this.btnReservations.UseVisualStyleBackColor = false;
@@ -144,9 +144,9 @@
             this.btnFacilites.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnFacilites.FlatAppearance.BorderSize = 0;
             this.btnFacilites.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFacilites.Location = new System.Drawing.Point(12, 469);
+            this.btnFacilites.Location = new System.Drawing.Point(12, 437);
             this.btnFacilites.Name = "btnFacilites";
-            this.btnFacilites.Size = new System.Drawing.Size(312, 37);
+            this.btnFacilites.Size = new System.Drawing.Size(269, 31);
             this.btnFacilites.TabIndex = 3;
             this.btnFacilites.Text = "Facilities";
             this.btnFacilites.UseVisualStyleBackColor = false;
@@ -157,9 +157,9 @@
             this.btnAmenidies.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnAmenidies.FlatAppearance.BorderSize = 0;
             this.btnAmenidies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAmenidies.Location = new System.Drawing.Point(12, 524);
+            this.btnAmenidies.Location = new System.Drawing.Point(12, 492);
             this.btnAmenidies.Name = "btnAmenidies";
-            this.btnAmenidies.Size = new System.Drawing.Size(312, 37);
+            this.btnAmenidies.Size = new System.Drawing.Size(269, 31);
             this.btnAmenidies.TabIndex = 2;
             this.btnAmenidies.Text = "Amenidies";
             this.btnAmenidies.UseVisualStyleBackColor = false;
@@ -170,9 +170,9 @@
             this.btnRooms.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnRooms.FlatAppearance.BorderSize = 0;
             this.btnRooms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRooms.Location = new System.Drawing.Point(12, 360);
+            this.btnRooms.Location = new System.Drawing.Point(12, 328);
             this.btnRooms.Name = "btnRooms";
-            this.btnRooms.Size = new System.Drawing.Size(312, 37);
+            this.btnRooms.Size = new System.Drawing.Size(269, 31);
             this.btnRooms.TabIndex = 1;
             this.btnRooms.Text = "Rooms";
             this.btnRooms.UseVisualStyleBackColor = false;
@@ -183,9 +183,9 @@
             this.btnUsers.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btnUsers.FlatAppearance.BorderSize = 0;
             this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUsers.Location = new System.Drawing.Point(12, 249);
+            this.btnUsers.Location = new System.Drawing.Point(12, 217);
             this.btnUsers.Name = "btnUsers";
-            this.btnUsers.Size = new System.Drawing.Size(312, 37);
+            this.btnUsers.Size = new System.Drawing.Size(269, 31);
             this.btnUsers.TabIndex = 0;
             this.btnUsers.Text = "Users";
             this.btnUsers.UseVisualStyleBackColor = false;
@@ -196,7 +196,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(330, 218);
+            this.pictureBox1.Size = new System.Drawing.Size(290, 194);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -206,16 +206,16 @@
             // 
             this.panelMain.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(336, 0);
+            this.panelMain.Location = new System.Drawing.Point(290, 0);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1082, 767);
+            this.panelMain.Size = new System.Drawing.Size(1078, 717);
             this.panelMain.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1418, 767);
+            this.ClientSize = new System.Drawing.Size(1368, 717);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelSide);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

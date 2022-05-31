@@ -14,12 +14,16 @@ namespace TheLionsDen.Services.Database
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }
         public float TotalPrice { get; set; }
-        public string? Status { get; set; }
-        public int? UserId { get; set; }
-        public int? RoomId { get; set; }
+        public string Status { get; set; } = null!;
+        public string? SpecialRequests { get; set; }
+        public string? EstimatedArrivalTime { get; set; }
+        public int UserId { get; set; }
+        public int RoomId { get; set; }
+        public int PaymentDetailsId { get; set; }
 
-        public virtual Room? Room { get; set; }
-        public virtual User? User { get; set; }
+        public virtual PaymentDetail PaymentDetails { get; set; } = null!;
+        public virtual Room Room { get; set; } = null!;
+        public virtual User User { get; set; } = null!;
         public virtual ICollection<ReservationFacilite> ReservationFacilites { get; set; }
     }
 }

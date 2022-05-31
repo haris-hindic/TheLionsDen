@@ -35,6 +35,13 @@ namespace WinUI.Services
             return entity;
         }
 
+        public async Task<string> Delete(int id)
+        {
+            var entity = await $"{endpoint}/{resourceName}/{id}".WithBasicAuth(AuthHelper.Username, AuthHelper.Password).DeleteAsync().ReceiveString();
+
+            return entity;
+        }
+
         public async Task<T> Post(TInsert request)
         {
             try

@@ -12,8 +12,8 @@ namespace TheLionsDen.Services.Database
         }
 
         public int RoomTypeId { get; set; }
-        public string? Name { get; set; }
-        public int? Capacity { get; set; }
+        public string Name { get; set; } = null!;
+        public int Capacity { get; set; }
         public int? Size { get; set; }
         public string? Description { get; set; }
         public string? Rules { get; set; }

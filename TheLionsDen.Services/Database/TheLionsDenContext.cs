@@ -20,6 +20,7 @@ namespace TheLionsDen.Services.Database
         public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Facility> Facilities { get; set; } = null!;
         public virtual DbSet<Favourite> Favourites { get; set; } = null!;
+        public virtual DbSet<PaymentDetail> PaymentDetails { get; set; } = null!;
         public virtual DbSet<Reservation> Reservations { get; set; } = null!;
         public virtual DbSet<ReservationFacilite> ReservationFacilites { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
@@ -28,7 +29,6 @@ namespace TheLionsDen.Services.Database
         public virtual DbSet<RoomImage> RoomImages { get; set; } = null!;
         public virtual DbSet<RoomType> RoomTypes { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
-        public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -138,12 +138,42 @@ namespace TheLionsDen.Services.Database
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.Favourites)
                     .HasForeignKey(d => d.RoomId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_8");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Favourites)
                     .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_7");
+            });
+
+            modelBuilder.Entity<PaymentDetail>(entity =>
+            {
+                entity.HasKey(e => e.PaymentDetailsId)
+                    .HasName("PK_8");
+
+                entity.Property(e => e.PaymentDetailsId).HasColumnName("PaymentDetailsID");
+
+                entity.Property(e => e.CardNumber)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Cvc).HasColumnName("CVC");
+
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
+                entity.Property(e => e.ExpDate)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PaymentType)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Reservation>(entity =>
@@ -156,7 +186,17 @@ namespace TheLionsDen.Services.Database
 
                 entity.Property(e => e.Departure).HasColumnType("datetime");
 
+                entity.Property(e => e.EstimatedArrivalTime)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PaymentDetailsId).HasColumnName("PaymentDetailsID");
+
                 entity.Property(e => e.RoomId).HasColumnName("RoomID");
+
+                entity.Property(e => e.SpecialRequests)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(40)
@@ -164,14 +204,22 @@ namespace TheLionsDen.Services.Database
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
+                entity.HasOne(d => d.PaymentDetails)
+                    .WithMany(p => p.Reservations)
+                    .HasForeignKey(d => d.PaymentDetailsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_REFERENCE_15");
+
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.Reservations)
                     .HasForeignKey(d => d.RoomId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_10");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Reservations)
                     .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_9");
             });
 
@@ -189,11 +237,13 @@ namespace TheLionsDen.Services.Database
                 entity.HasOne(d => d.Facility)
                     .WithMany(p => p.ReservationFacilites)
                     .HasForeignKey(d => d.FacilityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_12");
 
                 entity.HasOne(d => d.Reservation)
                     .WithMany(p => p.ReservationFacilites)
                     .HasForeignKey(d => d.ReservationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_11");
             });
 
@@ -229,6 +279,7 @@ namespace TheLionsDen.Services.Database
                 entity.HasOne(d => d.RoomType)
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.RoomTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_4");
             });
 
@@ -246,11 +297,13 @@ namespace TheLionsDen.Services.Database
                 entity.HasOne(d => d.Amenity)
                     .WithMany(p => p.RoomAmenities)
                     .HasForeignKey(d => d.AmenityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_5");
 
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.RoomAmenities)
                     .HasForeignKey(d => d.RoomId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_6");
             });
 
@@ -267,6 +320,7 @@ namespace TheLionsDen.Services.Database
                 entity.HasOne(d => d.RoomType)
                     .WithMany(p => p.RoomImages)
                     .HasForeignKey(d => d.RoomTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_3");
             });
 
@@ -291,11 +345,17 @@ namespace TheLionsDen.Services.Database
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
+                entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
+
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FirstName)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Gender)
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
@@ -315,6 +375,8 @@ namespace TheLionsDen.Services.Database
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
+                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+
                 entity.Property(e => e.Status)
                     .HasMaxLength(40)
                     .IsUnicode(false);
@@ -322,25 +384,11 @@ namespace TheLionsDen.Services.Database
                 entity.Property(e => e.Username)
                     .HasMaxLength(50)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<UserRole>(entity =>
-            {
-                entity.Property(e => e.UserRoleId).HasColumnName("UserRoleID");
-
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
-
-                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.UserRoles)
+                    .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_REFERENCE_2");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserRoles)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_REFERENCE_1");
+                    .HasConstraintName("FK_REFERENCE_14");
             });
 
             OnModelCreatingPartial(modelBuilder);

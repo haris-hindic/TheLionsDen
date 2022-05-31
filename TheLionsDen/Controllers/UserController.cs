@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheLionsDen.Auth;
 using TheLionsDen.Model.Requests;
@@ -10,7 +11,7 @@ using TheLionsDen.Services.Helpers;
 namespace TheLionsDen.Controllers
 {
     [Route("[controller]")]
-    [ApiController]
+    [ApiController,AllowAnonymous]
     public class UserController : BaseCRUDController<UserResponse, UserSearchObject, UserInsertRequest, UserUpdateRequest>
     {
         private readonly IUserService service;
