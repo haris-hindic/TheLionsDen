@@ -41,7 +41,7 @@ namespace TheLionsDen.Services.Impl
             return $"There is no entity with id -> {id}";
         }
 
-        public T Insert(TInsert request)
+        public virtual T Insert(TInsert request)
         {
             var entity = mapper.Map<TDb>(request);
 
@@ -59,7 +59,7 @@ namespace TheLionsDen.Services.Impl
             
         }
 
-        public T Update(int id, TUpdate request)
+        public virtual T Update(int id, TUpdate request)
         {
             TDb entity = dbSet.Find(id);
 
@@ -67,6 +67,7 @@ namespace TheLionsDen.Services.Impl
 
             if (entity != null)
             {
+                BeforeUpdate(request, entity);
                 dbSet.Update(entity);
                 context.SaveChanges();
             }
@@ -76,6 +77,11 @@ namespace TheLionsDen.Services.Impl
             }
 
             return mapper.Map<T>(entity);
+        }
+
+        public virtual void BeforeUpdate(TUpdate request, TDb entity)
+        {
+
         }
     }
 }

@@ -42,7 +42,9 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
-            this.cbActive = new System.Windows.Forms.CheckBox();
+            this.cbRole = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnClearForm = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +64,8 @@
             this.dgvUsers.RowTemplate.Height = 29;
             this.dgvUsers.Size = new System.Drawing.Size(1058, 406);
             this.dgvUsers.TabIndex = 7;
+            this.dgvUsers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellContentClick);
+            this.dgvUsers.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellContentDoubleClick);
             // 
             // Name
             // 
@@ -129,17 +133,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 209);
+            this.label2.Location = new System.Drawing.Point(12, 171);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 20);
+            this.label2.Size = new System.Drawing.Size(52, 20);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Name (First or Last):";
+            this.label2.Text = "Name:";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(159, 206);
+            this.txtName.Location = new System.Drawing.Point(70, 167);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(230, 27);
+            this.txtName.Size = new System.Drawing.Size(280, 27);
             this.txtName.TabIndex = 10;
             // 
             // btnSearch
@@ -160,11 +164,12 @@
             this.btnNew.TabIndex = 8;
             this.btnNew.Text = "Add new";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(408, 209);
+            this.label3.Location = new System.Drawing.Point(371, 171);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 20);
             this.label3.TabIndex = 13;
@@ -172,27 +177,48 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(492, 206);
+            this.txtUsername.Location = new System.Drawing.Point(455, 168);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(252, 27);
+            this.txtUsername.Size = new System.Drawing.Size(280, 27);
             this.txtUsername.TabIndex = 12;
             // 
-            // cbActive
+            // cbRole
             // 
-            this.cbActive.AutoSize = true;
-            this.cbActive.Location = new System.Drawing.Point(767, 208);
-            this.cbActive.Name = "cbActive";
-            this.cbActive.Size = new System.Drawing.Size(72, 24);
-            this.cbActive.TabIndex = 14;
-            this.cbActive.Text = "Active";
-            this.cbActive.UseVisualStyleBackColor = true;
+            this.cbRole.FormattingEnabled = true;
+            this.cbRole.Items.AddRange(new object[] {
+            "All"});
+            this.cbRole.Location = new System.Drawing.Point(789, 166);
+            this.cbRole.Name = "cbRole";
+            this.cbRole.Size = new System.Drawing.Size(281, 28);
+            this.cbRole.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(741, 171);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 20);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Role:";
+            // 
+            // btnClearForm
+            // 
+            this.btnClearForm.Location = new System.Drawing.Point(12, 206);
+            this.btnClearForm.Name = "btnClearForm";
+            this.btnClearForm.Size = new System.Drawing.Size(108, 27);
+            this.btnClearForm.TabIndex = 17;
+            this.btnClearForm.Text = "Clear form";
+            this.btnClearForm.UseVisualStyleBackColor = true;
+            this.btnClearForm.Click += new System.EventHandler(this.btnClearForm_Click);
             // 
             // frmUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 717);
-            this.Controls.Add(this.cbActive);
+            this.Controls.Add(this.btnClearForm);
+            this.Controls.Add(this.cbRole);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.dgvUsers);
@@ -202,7 +228,9 @@
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnNew);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            //this.Name = "frmUsers";
             this.Text = "frmUsers";
+            this.Load += new System.EventHandler(this.frmUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -219,12 +247,14 @@
         private Button btnNew;
         private Label label3;
         private TextBox txtUsername;
-        private CheckBox cbActive;
         private DataGridViewTextBoxColumn Name;
         private DataGridViewTextBoxColumn Username;
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn Gender;
         private DataGridViewTextBoxColumn Role;
         private DataGridViewButtonColumn Delete;
+        private ComboBox cbRole;
+        private Label label7;
+        private Button btnClearForm;
     }
 }

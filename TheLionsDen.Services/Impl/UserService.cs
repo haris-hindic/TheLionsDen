@@ -29,9 +29,9 @@ namespace TheLionsDen.Services.Impl
             {
                 filteredQuery = filteredQuery.Where(x => x.Username.Equals(searchObject.Username));
             }
-            if (searchObject.Active)
+            if (searchObject.RoleId > 0)
             {
-                filteredQuery = filteredQuery.Where(x => x.Status.Equals("ACTIVE"));
+                filteredQuery = filteredQuery.Where(x => x.RoleId == searchObject.RoleId);
 
             }
 
@@ -50,15 +50,62 @@ namespace TheLionsDen.Services.Impl
             return includedQuery;
         }
 
-        public override void BeforeInsert(UserInsertRequest request, User entitiy)
+        public override void BeforeInsert(UserInsertRequest request, User entity)
         {
             var salt = PasswordHelper.GenerateSalt();
             var hash = PasswordHelper.GenerateHash(salt, request.Password);
 
-            entitiy.PasswordSalt = salt;
-            entitiy.PasswordHash = hash;
+            entity.PasswordSalt = salt;
+            entity.PasswordHash = hash;
 
-            base.BeforeInsert(request, entitiy);
+            entity.Status = "New";
+
+            base.BeforeInsert(request, entity);
+        }
+
+        public override UserResponse Insert(UserInsertRequest request)
+        {
+            if (request.PasswordConfirmation != request.Password)
+                throw new Model.UserException("Password and Confirmation must be the same!");
+
+            var entity = base.Insert(request);
+
+            context.SaveChanges();
+
+            return GetById(entity.UserId);
+        }
+
+        public override void BeforeUpdate(UserUpdateRequest request, User entity)
+        {
+            entity.Status = "Modified";
+
+            if(!String.IsNullOrEmpty(request.Password) && !String.IsNullOrEmpty(request.PasswordConfirmation))
+            {
+                if (request.PasswordConfirmation != request.Password)
+                    throw new Model.UserException("Password and Confirmation must be the same!");
+
+                var salt = PasswordHelper.GenerateSalt();
+                var hash = PasswordHelper.GenerateHash(salt, request.Password);
+
+                entity.PasswordSalt = salt;
+                entity.PasswordHash = hash;
+            }
+
+            base.BeforeUpdate(request, entity);
+        }
+
+        public override UserResponse Update(int id, UserUpdateRequest request)
+        {
+            base.Update(id, request);
+
+            return GetById(id);
+        }
+
+        public override UserResponse GetById(int id)
+        {
+            var entity = context.Users.Include("Role").FirstOrDefault(x => x.UserId == id);
+
+            return mapper.Map<UserResponse>(entity);
         }
 
         public UserResponse Login(string username, string password)

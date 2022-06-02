@@ -51,7 +51,7 @@ namespace TheLionsDen.Services.Impl
             return query;
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             var entity = dbSet.Find(id);
 

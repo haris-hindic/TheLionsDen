@@ -23,6 +23,10 @@ namespace TheLionsDen.Services.Mapper
             CreateMap<UserUpdateRequest, User>();
             //Amenity
             CreateMap<Role, RoleResponse>();
+            //Employee
+            CreateMap<Employee, EmployeeResponse>();
+            CreateMap<EmployeeInsertRequest, Employee>();
+            CreateMap<EmployeeUpdateRequest, Employee>();
         }
     }
 }

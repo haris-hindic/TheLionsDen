@@ -5,24 +5,21 @@ using System.Text;
 
 namespace TheLionsDen.Model.Requests
 {
-    public class UserInsertRequest
+    public class EmployeeUpdateRequest
     {
         [Required(AllowEmptyStrings = false)]
         public string FirstName { get; set; }
         [Required(AllowEmptyStrings = false)]
+
         public string LastName { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
         [Required(AllowEmptyStrings = false), EmailAddress]
         public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        [Required(AllowEmptyStrings = false), MinLength(4)]
-        public string Username { get; set; }
-        [Required(AllowEmptyStrings = false)]
-        public string Password { get; set; }
-        [Required(AllowEmptyStrings = false)]
-        public string PasswordConfirmation { get; set; }
-        public string Status { get; set; }
-        public DateTime? DateOfBirth { get; set; }
         public string Gender { get; set; }
-        public int? RoleId { get; set; }
+        [Required(AllowEmptyStrings = false)]
+        public string JobType { get; set; }
+        [Required(AllowEmptyStrings = false)]
+        public string Status { get; set; }
     }
 }

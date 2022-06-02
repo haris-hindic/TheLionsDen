@@ -15,10 +15,11 @@ namespace TheLionsDen.Model.Requests
         public string Email { get; set; }
         [Phone]
         public string PhoneNumber { get; set; }
-        [Required(AllowEmptyStrings = false)]
         public string Password { get; set; }
-        [Required(AllowEmptyStrings = false)]
         public string PasswordConfirmation { get; set; }
         public string Status { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public string Gender { get; set; }
+        public int? RoleId { get; set; }
     }
 }
