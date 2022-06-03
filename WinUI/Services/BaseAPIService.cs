@@ -1,7 +1,9 @@
 ﻿using Flurl;
 using Flurl.Http;
-using WinUI.Helpers;
+using System.Text;
+using System.Text.Json;
 using TheLionsDen.Model;
+using WinUI.Helpers;
 
 namespace WinUI.Services
 {
@@ -53,21 +55,21 @@ namespace WinUI.Services
             }
             catch (FlurlHttpException ex)
             {
-                //var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
 
-                //var err = errors.First(x => x.Key == "errors");
+                var err = errors.First(x => x.Key == "errors");
 
-                //string s = String.Join(",", err.Value);
+                string s = String.Join(",", err.Value);
 
-                //Dictionary<string, string[]> json = JsonSerializer.Deserialize<Dictionary<string, string[]>>(s);
+                Dictionary<string, string[]> json = JsonSerializer.Deserialize<Dictionary<string, string[]>>(s);
 
-                //var stringBuilder = new StringBuilder();
-                //foreach (var error in json)
-                //{
-                //    stringBuilder.AppendLine($"{error.Key}:\n {string.Join(",\n", error.Value)}");
-                //}
+                var stringBuilder = new StringBuilder();
+                foreach (var error in json)
+                {
+                    stringBuilder.AppendLine($"{error.Key}:\n{string.Join("\n", error.Value)}");
+                }
 
-                //MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return default(T);
             }
         }

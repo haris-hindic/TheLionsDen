@@ -11,7 +11,7 @@ namespace TheLionsDen.Filters
         {
             if (context.Exception is UserException)
             {
-                context.ModelState.AddModelError("errors", context.Exception.Message);
+                context.ModelState.AddModelError("Error message", context.Exception.Message);
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             }
             else
@@ -24,7 +24,7 @@ namespace TheLionsDen.Filters
             var list = context.ModelState.Where(x => x.Value.Errors.Count > 0)
                 .ToDictionary(x => x.Key, y => y.Value.Errors.Select(z => z.ErrorMessage));
 
-            context.Result = new JsonResult(list);
+            context.Result = new JsonResult(new { errors = list });
         }
     }
 }

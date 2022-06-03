@@ -59,8 +59,8 @@ namespace WinUI.Forms.Users
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren())
-            {
+            //if (ValidateChildren())
+            //{
                 if (user == null)
                 {
                     var request = populateInsertRequest();
@@ -87,7 +87,7 @@ namespace WinUI.Forms.Users
                         populateFields();
                     }
                 }
-            }
+            //}
         }
 
         private UserInsertRequest populateInsertRequest()
