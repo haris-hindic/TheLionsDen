@@ -42,6 +42,7 @@ builder.Services.AddTransient<IAmenityService, AmenityService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+builder.Services.AddTransient<IJobTypeService, JobTypeService>();
 
 builder.Services.AddDbContext<TheLionsDenContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("AppDb")));
 

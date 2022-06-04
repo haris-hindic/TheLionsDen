@@ -14,10 +14,11 @@ namespace TheLionsDen.Services.Database
         public string? PhoneNumber { get; set; }
         public string Email { get; set; } = null!;
         public string? Gender { get; set; }
-        public string JobType { get; set; } = null!;
         public string Status { get; set; } = null!;
         public int? FacilityId { get; set; }
+        public int JobTypeId { get; set; }
 
         public virtual Facility? Facility { get; set; }
+        public virtual JobType JobType { get; set; } = null!;
     }
 }

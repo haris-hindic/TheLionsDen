@@ -16,21 +16,21 @@ namespace TheLionsDen.Controllers
         }
 
         [HttpPost]
-        public virtual T Insert([FromBody] TInsert request)
+        public virtual async Task<T> Insert([FromBody] TInsert request)
         {
-            return ((ICRUDService<T, TSearch, TInsert, TUpdate>)this.service).Insert(request);
+            return await ((ICRUDService<T, TSearch, TInsert, TUpdate>)this.service).Insert(request);
         }
 
         [HttpPut("{id}")]
-        public virtual T Update(int id, [FromBody] TUpdate request)
+        public virtual async Task<T> Update(int id, [FromBody] TUpdate request)
         {
-            return ((ICRUDService<T, TSearch, TInsert, TUpdate>)this.service).Update(id, request);
+            return await ((ICRUDService<T, TSearch, TInsert, TUpdate>)this.service).Update(id, request);
         }
 
         [HttpDelete("{id}")]
-        public virtual string Delete(int id)
+        public virtual async Task<string> Delete(int id)
         {
-            return ((ICRUDService<T, TSearch, TInsert, TUpdate>)this.service).Delete(id);
+            return await ((ICRUDService<T, TSearch, TInsert, TUpdate>)this.service).Delete(id);
         }
     }
 }

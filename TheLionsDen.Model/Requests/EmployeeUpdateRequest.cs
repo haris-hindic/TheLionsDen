@@ -13,13 +13,14 @@ namespace TheLionsDen.Model.Requests
 
         public string LastName { get; set; }
         public string Address { get; set; }
+        public DateTime? BirthDate { get; set; }
         public string PhoneNumber { get; set; }
         [Required(AllowEmptyStrings = false), EmailAddress]
         public string Email { get; set; }
         public string Gender { get; set; }
         [Required(AllowEmptyStrings = false)]
-        public string JobType { get; set; }
-        [Required(AllowEmptyStrings = false)]
         public string Status { get; set; }
+        [Required]
+        public int JobTypeId { get; set; }
     }
 }

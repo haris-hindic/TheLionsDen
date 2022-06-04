@@ -16,7 +16,7 @@ namespace TheLionsDen.Services.Database
         public string? Description { get; set; }
         public float Price { get; set; }
         public string Status { get; set; } = null!;
-        public string? Image { get; set; }
+        public byte[]? Image { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<ReservationFacilite> ReservationFacilites { get; set; }

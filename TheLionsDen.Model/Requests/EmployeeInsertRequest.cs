@@ -10,7 +10,6 @@ namespace TheLionsDen.Model.Requests
         [Required(AllowEmptyStrings = false)]
         public string FirstName { get; set; }
         [Required(AllowEmptyStrings = false)]
-
         public string LastName { get; set; }
         public DateTime? BirthDate { get; set; }
         [Required]
@@ -21,8 +20,9 @@ namespace TheLionsDen.Model.Requests
         public string Email { get; set; }
         public string Gender { get; set; }
         [Required(AllowEmptyStrings = false)]
-        public string JobType { get; set; }
-        [Required(AllowEmptyStrings = false)]
         public string Status { get; set; }
+        [Required]
+        public int JobTypeId { get; set; }
+
     }
 }

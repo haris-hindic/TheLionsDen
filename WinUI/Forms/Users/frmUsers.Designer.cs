@@ -45,7 +45,9 @@
             this.cbRole = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnClearForm = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvUsers
@@ -133,7 +135,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 171);
+            this.label2.Location = new System.Drawing.Point(6, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 20);
             this.label2.TabIndex = 11;
@@ -141,14 +143,14 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(70, 167);
+            this.txtName.Location = new System.Drawing.Point(64, 30);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(280, 27);
+            this.txtName.Size = new System.Drawing.Size(274, 27);
             this.txtName.TabIndex = 10;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(962, 206);
+            this.btnSearch.Location = new System.Drawing.Point(944, 69);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(108, 27);
             this.btnSearch.TabIndex = 9;
@@ -169,7 +171,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(371, 171);
+            this.label3.Location = new System.Drawing.Point(359, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 20);
             this.label3.TabIndex = 13;
@@ -177,7 +179,7 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(455, 168);
+            this.txtUsername.Location = new System.Drawing.Point(443, 31);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(280, 27);
             this.txtUsername.TabIndex = 12;
@@ -187,15 +189,15 @@
             this.cbRole.FormattingEnabled = true;
             this.cbRole.Items.AddRange(new object[] {
             "All"});
-            this.cbRole.Location = new System.Drawing.Point(789, 166);
+            this.cbRole.Location = new System.Drawing.Point(777, 29);
             this.cbRole.Name = "cbRole";
-            this.cbRole.Size = new System.Drawing.Size(281, 28);
+            this.cbRole.Size = new System.Drawing.Size(275, 28);
             this.cbRole.TabIndex = 16;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(741, 171);
+            this.label7.Location = new System.Drawing.Point(729, 34);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 20);
             this.label7.TabIndex = 15;
@@ -203,35 +205,47 @@
             // 
             // btnClearForm
             // 
-            this.btnClearForm.Location = new System.Drawing.Point(12, 206);
+            this.btnClearForm.Location = new System.Drawing.Point(6, 69);
             this.btnClearForm.Name = "btnClearForm";
-            this.btnClearForm.Size = new System.Drawing.Size(108, 27);
+            this.btnClearForm.Size = new System.Drawing.Size(102, 27);
             this.btnClearForm.TabIndex = 17;
             this.btnClearForm.Text = "Clear form";
             this.btnClearForm.UseVisualStyleBackColor = true;
             this.btnClearForm.Click += new System.EventHandler(this.btnClearForm_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnClearForm);
+            this.groupBox1.Controls.Add(this.btnSearch);
+            this.groupBox1.Controls.Add(this.cbRole);
+            this.groupBox1.Controls.Add(this.txtName);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtUsername);
+            this.groupBox1.Location = new System.Drawing.Point(12, 121);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1058, 111);
+            this.groupBox1.TabIndex = 18;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Search";
             // 
             // frmUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 717);
-            this.Controls.Add(this.btnClearForm);
-            this.Controls.Add(this.cbRole);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtUsername);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvUsers);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtName);
-            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnNew);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             //this.Name = "frmUsers";
             this.Text = "frmUsers";
             this.Load += new System.EventHandler(this.frmUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,5 +270,6 @@
         private ComboBox cbRole;
         private Label label7;
         private Button btnClearForm;
+        private GroupBox groupBox1;
     }
 }

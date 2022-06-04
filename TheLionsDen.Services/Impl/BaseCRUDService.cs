@@ -27,21 +27,21 @@ namespace TheLionsDen.Services.Impl
             this.mapper = mapper;
         }
 
-        public string Delete(int id)
+        public async Task<string> Delete(int id)
         {
-            TDb entity = dbSet.Find(id);
+            TDb entity = await dbSet.FindAsync(id);
 
             if (entity != null)
             {
                 dbSet.Remove(entity);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
                 return $"Successfully deleted entity with id -> {id}";
             }
 
             return $"There is no entity with id -> {id}";
         }
 
-        public virtual T Insert(TInsert request)
+        public virtual async Task<T> Insert(TInsert request)
         {
             var entity = mapper.Map<TDb>(request);
 
@@ -49,7 +49,7 @@ namespace TheLionsDen.Services.Impl
 
             BeforeInsert(request, entity);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return mapper.Map<T>(entity);
         }
@@ -59,9 +59,9 @@ namespace TheLionsDen.Services.Impl
             
         }
 
-        public virtual T Update(int id, TUpdate request)
+        public virtual async Task<T> Update(int id, TUpdate request)
         {
-            TDb entity = dbSet.Find(id);
+            TDb entity = await dbSet.FindAsync(id);
 
             mapper.Map(request, entity);
 
@@ -69,7 +69,7 @@ namespace TheLionsDen.Services.Impl
             {
                 BeforeUpdate(request, entity);
                 dbSet.Update(entity);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             else
             {

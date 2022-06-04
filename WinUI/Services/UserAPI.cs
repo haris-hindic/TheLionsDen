@@ -11,7 +11,7 @@ using WinUI.Helpers;
 
 namespace WinUI.Services
 {
-    public class UserAPI : BaseAPIService<UserResponse, UserSearchObject, UserInsertRequest, UserUpdateRequest>
+    public class UserAPI : CRUDAPIService<UserResponse, UserSearchObject, UserInsertRequest, UserUpdateRequest>
     {
         public UserAPI(string resourceName="user") : base(resourceName)
         {

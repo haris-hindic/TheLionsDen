@@ -8,7 +8,7 @@ using TheLionsDen.Model.SearchObjects;
 
 namespace WinUI.Services
 {
-    public class RoleAPI : BaseAPIService<RoleResponse, BaseSearchObject, object, object>
+    public class RoleAPI : BaseAPIService<RoleResponse, BaseSearchObject>
     {
         public RoleAPI(string resourceName="role") : base(resourceName)
         {

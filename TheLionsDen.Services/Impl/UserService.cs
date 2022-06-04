@@ -63,16 +63,16 @@ namespace TheLionsDen.Services.Impl
             base.BeforeInsert(request, entity);
         }
 
-        public override UserResponse Insert(UserInsertRequest request)
+        public override async Task<UserResponse> Insert(UserInsertRequest request)
         {
             if (request.PasswordConfirmation != request.Password)
                 throw new Model.UserException("Password and Confirmation must be the same!");
 
-            var entity = base.Insert(request);
+            var entity = await base.Insert(request);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
-            return GetById(entity.UserId);
+            return await GetById(entity.UserId);
         }
 
         public override void BeforeUpdate(UserUpdateRequest request, User entity)
@@ -94,23 +94,23 @@ namespace TheLionsDen.Services.Impl
             base.BeforeUpdate(request, entity);
         }
 
-        public override UserResponse Update(int id, UserUpdateRequest request)
+        public override async Task<UserResponse> Update(int id, UserUpdateRequest request)
         {
-            base.Update(id, request);
+            await base.Update(id, request);
 
-            return GetById(id);
+            return await GetById(id);
         }
 
-        public override UserResponse GetById(int id)
+        public override async Task<UserResponse> GetById(int id)
         {
-            var entity = context.Users.Include("Role").FirstOrDefault(x => x.UserId == id);
+            var entity = await context.Users.Include("Role").FirstOrDefaultAsync(x => x.UserId == id);
 
             return mapper.Map<UserResponse>(entity);
         }
 
-        public UserResponse Login(string username, string password)
+        public async Task<UserResponse> Login(string username, string password)
         {
-            var entity = context.Users.Include("Role").FirstOrDefault(x => x.Username.Equals(username));
+            var entity = await context.Users.Include("Role").FirstOrDefaultAsync(x => x.Username.Equals(username));
 
             if (entity == null)
             {

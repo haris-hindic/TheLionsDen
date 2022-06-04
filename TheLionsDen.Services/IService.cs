@@ -9,7 +9,7 @@ namespace TheLionsDen.Services
 {
     public interface IService<T, TSearch> where T : class where TSearch : BaseSearchObject
     {
-        IEnumerable<T> Get(TSearch searchObject);
-        T GetById(int id);
+        Task<IEnumerable<T>> Get(TSearch searchObject);
+        Task<T> GetById(int id);
     }
 }

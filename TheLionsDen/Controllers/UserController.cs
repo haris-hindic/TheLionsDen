@@ -22,11 +22,11 @@ namespace TheLionsDen.Controllers
         }
 
         [HttpGet("login")]
-        public UserResponse Login()
+        public async Task<UserResponse> Login()
         {
             var credentials = CredentialsHelper.extractCredentials(Request);
 
-            return service.Login(credentials.Username, credentials.Password);
+            return await service.Login(credentials.Username, credentials.Password);
         }
     }
 }

@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.btnClearForm = new System.Windows.Forms.Button();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.cmbFacility = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JobType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.JobName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FacilityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,39 +46,42 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbJobType = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClearForm
             // 
-            this.btnClearForm.Location = new System.Drawing.Point(10, 214);
+            this.btnClearForm.Location = new System.Drawing.Point(6, 66);
             this.btnClearForm.Name = "btnClearForm";
-            this.btnClearForm.Size = new System.Drawing.Size(108, 27);
+            this.btnClearForm.Size = new System.Drawing.Size(102, 27);
             this.btnClearForm.TabIndex = 28;
             this.btnClearForm.Text = "Clear form";
             this.btnClearForm.UseVisualStyleBackColor = true;
+            this.btnClearForm.Click += new System.EventHandler(this.btnClearForm_Click);
             // 
-            // cmbStatus
+            // cmbFacility
             // 
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Items.AddRange(new object[] {
+            this.cmbFacility.FormattingEnabled = true;
+            this.cmbFacility.Items.AddRange(new object[] {
             "Active",
             "Inactive",
             "Recovery",
             "Vacation"});
-            this.cmbStatus.Location = new System.Drawing.Point(787, 174);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(281, 28);
-            this.cmbStatus.TabIndex = 27;
+            this.cmbFacility.Location = new System.Drawing.Point(769, 26);
+            this.cmbFacility.Name = "cmbFacility";
+            this.cmbFacility.Size = new System.Drawing.Size(275, 28);
+            this.cmbFacility.TabIndex = 27;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(729, 179);
+            this.label7.Location = new System.Drawing.Point(711, 31);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 20);
+            this.label7.Size = new System.Drawing.Size(57, 20);
             this.label7.TabIndex = 26;
-            this.label7.Text = "Status:";
+            this.label7.Text = "Facility:";
             // 
             // dgvEmployees
             // 
@@ -88,7 +91,7 @@
             this.EmploymentDate,
             this.Email,
             this.Gender,
-            this.JobType,
+            this.JobName,
             this.FacilityName,
             this.Delete});
             this.dgvEmployees.Location = new System.Drawing.Point(10, 246);
@@ -97,6 +100,8 @@
             this.dgvEmployees.RowTemplate.Height = 29;
             this.dgvEmployees.Size = new System.Drawing.Size(1058, 406);
             this.dgvEmployees.TabIndex = 19;
+            this.dgvEmployees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentClick);
+            this.dgvEmployees.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentDoubleClick);
             // 
             // Name
             // 
@@ -134,13 +139,13 @@
             this.Gender.Name = "Gender";
             this.Gender.Width = 86;
             // 
-            // JobType
+            // JobName
             // 
-            this.JobType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.JobType.DataPropertyName = "JobType";
-            this.JobType.HeaderText = "Job Type";
-            this.JobType.MinimumWidth = 6;
-            this.JobType.Name = "JobType";
+            this.JobName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.JobName.DataPropertyName = "JobName";
+            this.JobName.HeaderText = "Job Name";
+            this.JobName.MinimumWidth = 6;
+            this.JobName.Name = "JobName";
             // 
             // FacilityName
             // 
@@ -174,16 +179,16 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(68, 175);
+            this.txtName.Location = new System.Drawing.Point(76, 27);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(280, 27);
+            this.txtName.Size = new System.Drawing.Size(274, 27);
             this.txtName.TabIndex = 22;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(960, 214);
+            this.btnSearch.Location = new System.Drawing.Point(950, 66);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(108, 27);
+            this.btnSearch.Size = new System.Drawing.Size(102, 27);
             this.btnSearch.TabIndex = 21;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -197,11 +202,12 @@
             this.btnNew.TabIndex = 20;
             this.btnNew.Text = "Add new";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 179);
+            this.label2.Location = new System.Drawing.Point(18, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 20);
             this.label2.TabIndex = 23;
@@ -212,41 +218,52 @@
             this.cmbJobType.FormattingEnabled = true;
             this.cmbJobType.Items.AddRange(new object[] {
             "All"});
-            this.cmbJobType.Location = new System.Drawing.Point(440, 174);
+            this.cmbJobType.Location = new System.Drawing.Point(430, 26);
             this.cmbJobType.Name = "cmbJobType";
-            this.cmbJobType.Size = new System.Drawing.Size(281, 28);
+            this.cmbJobType.Size = new System.Drawing.Size(275, 28);
             this.cmbJobType.TabIndex = 30;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(366, 179);
+            this.label3.Location = new System.Drawing.Point(356, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 20);
             this.label3.TabIndex = 29;
             this.label3.Text = "Job type:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cmbFacility);
+            this.groupBox1.Controls.Add(this.cmbJobType);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.btnSearch);
+            this.groupBox1.Controls.Add(this.btnClearForm);
+            this.groupBox1.Controls.Add(this.txtName);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Location = new System.Drawing.Point(10, 122);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1058, 118);
+            this.groupBox1.TabIndex = 31;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Search";
             // 
             // frmEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 717);
-            this.Controls.Add(this.cmbJobType);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnClearForm);
-            this.Controls.Add(this.cmbStatus);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvEmployees);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtName);
-            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnNew);
-            this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            //this.Name = "frmEmployees";
             this.Text = "frmEmployees";
             this.Load += new System.EventHandler(this.frmEmployees_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,7 +272,7 @@
         #endregion
 
         private Button btnClearForm;
-        private ComboBox cmbStatus;
+        private ComboBox cmbFacility;
         private Label label7;
         private DataGridView dgvEmployees;
         private Label label1;
@@ -265,6 +282,7 @@
         private Label label2;
         private ComboBox cmbJobType;
         private Label label3;
+        private GroupBox groupBox1;
         private DataGridViewTextBoxColumn Name;
         private DataGridViewTextBoxColumn EmploymentDate;
         private DataGridViewTextBoxColumn Email;
@@ -272,5 +290,6 @@
         private DataGridViewTextBoxColumn JobType;
         private DataGridViewTextBoxColumn FacilityName;
         private DataGridViewButtonColumn Delete;
+        private DataGridViewTextBoxColumn JobName;
     }
 }

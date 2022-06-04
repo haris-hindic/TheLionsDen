@@ -23,7 +23,7 @@ namespace TheLionsDen.Services.Impl
             this.dbSet = context.Set<TDb>();
         }
 
-        public virtual IEnumerable<T> Get(TSearch searchObject = null)
+        public virtual async Task<IEnumerable<T>> Get(TSearch searchObject = null)
         {
             var entityQuery = dbSet.AsQueryable();
 
@@ -36,7 +36,7 @@ namespace TheLionsDen.Services.Impl
                     .Take(searchObject.RecordsPerPage.Value);
             }
 
-            var list = entityQuery.ToList();
+            var list = await entityQuery.ToListAsync();
 
             return mapper.Map<List<T>>(list);
         }
@@ -51,9 +51,9 @@ namespace TheLionsDen.Services.Impl
             return query;
         }
 
-        public virtual T GetById(int id)
+        public virtual async Task<T> GetById(int id)
         {
-            var entity = dbSet.Find(id);
+            var entity = await dbSet.FindAsync(id);
 
             return mapper.Map<T>(entity);
         }

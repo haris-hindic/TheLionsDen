@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
 
 namespace WinUI.Services
 {
-    public class EmployeeAPI : CRUDAPIService<EmployeeResponse, EmployeeSearchObject, EmployeeInsertRequest, EmployeeUpdateRequest>
+    public class JobTypeAPI : BaseAPIService<JobTypeResponse, BaseSearchObject>
     {
-        public EmployeeAPI(string resourceName="employee") : base(resourceName)
+        public JobTypeAPI(string resourceName="jobtype") : base(resourceName)
         {
         }
     }

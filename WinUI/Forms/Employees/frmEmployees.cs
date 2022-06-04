@@ -1,4 +1,4 @@
-﻿using TheLionsDen.Model.Enums;
+﻿using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
 using WinUI.Services;
 
@@ -7,23 +7,18 @@ namespace WinUI.Forms.Employees
     public partial class frmEmployees : Form
     {
         private EmployeeAPI employeeAPI;
+        private JobTypeAPI jobTypeAPI;
         public frmEmployees()
         {
             InitializeComponent();
             this.employeeAPI = new EmployeeAPI();
+            this.jobTypeAPI = new JobTypeAPI();
             dgvEmployees.AutoGenerateColumns = false;
         }
 
-        private async void btnSearch_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            var request = new EmployeeSearchObject
-            {
-                Name = txtName.Text
-            };
-
-            var response = await employeeAPI.Get(request);
-
-            dgvEmployees.DataSource = response;
+            loadData();
         }
 
         private void frmEmployees_Load(object sender, EventArgs e)
@@ -34,12 +29,79 @@ namespace WinUI.Forms.Employees
 
         private void loadFacilites()
         {
-
+            
         }
 
-        private void loadJobTypes()
+        private async void loadData()
         {
+            var request = new EmployeeSearchObject
+            {
+                Name = txtName.Text,
+                IncludeJobType = true,
+                //IncludeFacility = true
+            };
+            if (cmbJobType.SelectedValue != null && cmbJobType.SelectedIndex != -1)
+            {
+                request.JobTypeId = (int)cmbJobType.SelectedValue;
+            }
+            if (cmbFacility.SelectedValue != null && cmbFacility.SelectedIndex != -1)
+            {
+                request.FacilityId = (int)cmbFacility.SelectedValue;
+            }
 
+            var response = await employeeAPI.Get(request);
+
+            dgvEmployees.DataSource = response;
+        }
+
+        private async void loadJobTypes()
+        {
+            var jobTypeList = await jobTypeAPI.Get();
+
+            cmbJobType.DataSource = jobTypeList;
+            cmbJobType.DisplayMember = "Name";
+            cmbJobType.ValueMember = "JobTypeId";
+            cmbJobType.SelectedIndex = -1;
+        }
+
+        private void btnClearForm_Click(object sender, EventArgs e)
+        {
+            cmbJobType.SelectedIndex = -1;
+            cmbFacility.SelectedIndex = -1;
+            txtName.Text = "";
+        }
+
+        private async void dgvEmployees_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dgvEmployees.Columns["Delete"].Index && e.RowIndex >= 0)
+            {
+                var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    var item = dgvEmployees.Rows[e.RowIndex].DataBoundItem as EmployeeResponse;
+                    var response = await employeeAPI.Delete(item.EmployeeId);
+                    if (!String.IsNullOrEmpty(response))
+                    {
+                        loadData();
+                    }
+                }
+
+            }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            new frmEmployeeAddEdit().ShowDialog();
+        }
+
+        private void dgvEmployees_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!(e.ColumnIndex == dgvEmployees.Columns["Delete"].Index) && e.RowIndex >= 0)
+            {
+                var item = dgvEmployees.Rows[e.RowIndex].DataBoundItem as EmployeeResponse;
+                new frmEmployeeAddEdit(item).ShowDialog();
+            }
         }
     }
 }

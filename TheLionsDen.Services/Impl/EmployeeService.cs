@@ -22,13 +22,9 @@ namespace TheLionsDen.Services.Impl
                 filteredQuery = filteredQuery.Where(x => x.FirstName.ToLower().Contains(searchObject.Name.ToLower()) ||
                                                        x.LastName.ToLower().Contains(searchObject.Name.ToLower()));
             }
-            if (!String.IsNullOrWhiteSpace(searchObject.JobType))
+            if (searchObject.JobTypeId > 0)
             {
-                filteredQuery = filteredQuery.Where(x => x.JobType.Equals(searchObject.JobType));
-            }
-            if (!String.IsNullOrWhiteSpace(searchObject.Status))
-            {
-                filteredQuery = filteredQuery.Where(x => x.Status.Equals(searchObject.Status));
+                filteredQuery = filteredQuery.Where(x => x.JobTypeId == searchObject.JobTypeId);
             }
             if (searchObject.FacilityId > 0)
             {
@@ -38,11 +34,43 @@ namespace TheLionsDen.Services.Impl
             return filteredQuery;
         }
 
-        public override EmployeeResponse GetById(int id)
+        public override IQueryable<Employee> AddInclude(IQueryable<Employee> query, EmployeeSearchObject searchObject = null)
         {
-            var entity = context.Employees.Include("Facility").FirstOrDefault(x => x.EmployeeId == id);
+            var includedQuery = base.AddInclude(query, searchObject);
+
+            //if (searchObject.IncludeFacility)
+            //{
+            //    includedQuery = includedQuery.Include("Facility");
+            //}
+            if (searchObject.IncludeJobType)
+            {
+                includedQuery = includedQuery.Include("JobType");
+            }
+
+            return includedQuery;
+        }
+
+        public override async Task<EmployeeResponse> GetById(int id)
+        {
+            var entity = await context.Employees.Include("Facility").Include("JobType").FirstOrDefaultAsync(x => x.EmployeeId == id);
 
             return mapper.Map<EmployeeResponse>(entity);
+        }
+
+        public override async Task<EmployeeResponse> Insert(EmployeeInsertRequest request)
+        {
+            var entity = await base.Insert(request);
+
+            context.SaveChanges();
+
+            return await GetById(entity.EmployeeId);
+        }
+
+        public override async Task<EmployeeResponse> Update(int id, EmployeeUpdateRequest request)
+        {
+            await base.Update(id, request);
+
+            return await GetById(id);
         }
     }
 }

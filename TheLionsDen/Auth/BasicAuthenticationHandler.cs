@@ -26,7 +26,7 @@ namespace TheLionsDen.Auth
 
             var credentials = CredentialsHelper.extractCredentials(Request);
 
-            var user = userService.Login(credentials.Username, credentials.Password);
+            var user = await userService.Login(credentials.Username, credentials.Password);
 
             if (user == null)
             {

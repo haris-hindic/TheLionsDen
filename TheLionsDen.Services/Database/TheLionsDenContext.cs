@@ -20,6 +20,7 @@ namespace TheLionsDen.Services.Database
         public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Facility> Facilities { get; set; } = null!;
         public virtual DbSet<Favourite> Favourites { get; set; } = null!;
+        public virtual DbSet<JobType> JobTypes { get; set; } = null!;
         public virtual DbSet<PaymentDetail> PaymentDetails { get; set; } = null!;
         public virtual DbSet<Reservation> Reservations { get; set; } = null!;
         public virtual DbSet<ReservationFacilite> ReservationFacilites { get; set; } = null!;
@@ -82,9 +83,7 @@ namespace TheLionsDen.Services.Database
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
-                entity.Property(e => e.JobType)
-                    .HasMaxLength(40)
-                    .IsUnicode(false);
+                entity.Property(e => e.JobTypeId).HasColumnName("JobTypeID");
 
                 entity.Property(e => e.LastName)
                     .HasMaxLength(40)
@@ -102,6 +101,12 @@ namespace TheLionsDen.Services.Database
                     .WithMany(p => p.Employees)
                     .HasForeignKey(d => d.FacilityId)
                     .HasConstraintName("FK_REFERENCE_13");
+
+                entity.HasOne(d => d.JobType)
+                    .WithMany(p => p.Employees)
+                    .HasForeignKey(d => d.JobTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_REFERENCE_16");
             });
 
             modelBuilder.Entity<Facility>(entity =>
@@ -111,8 +116,6 @@ namespace TheLionsDen.Services.Database
                 entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
 
                 entity.Property(e => e.Description).HasColumnType("text");
-
-                entity.Property(e => e.Image).HasColumnType("text");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(40)
@@ -146,6 +149,19 @@ namespace TheLionsDen.Services.Database
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_7");
+            });
+
+            modelBuilder.Entity<JobType>(entity =>
+            {
+                entity.ToTable("JobType");
+
+                entity.Property(e => e.JobTypeId).HasColumnName("JobTypeID");
+
+                entity.Property(e => e.Description).IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<PaymentDetail>(entity =>
@@ -312,8 +328,6 @@ namespace TheLionsDen.Services.Database
                 entity.ToTable("RoomImage");
 
                 entity.Property(e => e.RoomImageId).HasColumnName("RoomImageID");
-
-                entity.Property(e => e.Image).HasColumnType("text");
 
                 entity.Property(e => e.RoomTypeId).HasColumnName("RoomTypeID");
 

@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Services.Database;
@@ -21,8 +16,10 @@ namespace TheLionsDen.Services.Mapper
             CreateMap<User, UserResponse>();
             CreateMap<UserInsertRequest, User>();
             CreateMap<UserUpdateRequest, User>();
-            //Amenity
+            //Role
             CreateMap<Role, RoleResponse>();
+            //Job Type
+            CreateMap<JobType, JobTypeResponse>();
             //Employee
             CreateMap<Employee, EmployeeResponse>();
             CreateMap<EmployeeInsertRequest, Employee>();
