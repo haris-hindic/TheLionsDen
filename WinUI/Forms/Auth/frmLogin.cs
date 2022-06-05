@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WinUI.Helpers;
+﻿using WinUI.Helpers;
 using WinUI.Services;
 
 namespace WinUI.Forms.Auth
@@ -36,7 +27,7 @@ namespace WinUI.Forms.Auth
             {
                 var result = await api.Login();
 
-                //AuthHelper.Roles = result.RoleNames;
+                AuthHelper.Roles = result.RoleName;
 
                 this.Hide();
                 new MainForm().Show();

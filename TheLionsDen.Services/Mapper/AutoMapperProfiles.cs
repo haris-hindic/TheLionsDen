@@ -12,6 +12,9 @@ namespace TheLionsDen.Services.Mapper
             //Amenity
             CreateMap<Amenity, AmenityResponse>();
             CreateMap<AmenityUpsertRequest, Amenity>();
+            //Facility
+            CreateMap<Facility, FacilityResponse>();
+            CreateMap<FacilityUpsertRequest, Facility>();
             //User
             CreateMap<User, UserResponse>();
             CreateMap<UserInsertRequest, User>();

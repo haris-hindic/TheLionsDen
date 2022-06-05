@@ -1,20 +1,85 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using TheLionsDen.Model.Responses;
+using TheLionsDen.Model.SearchObjects;
+using WinUI.Helpers;
+using WinUI.Services;
 
 namespace WinUI.Forms.Facilites
 {
     public partial class frmFacilites : Form
     {
+        private FacilityAPI facilityAPI;
+        private List<string> status = new List<string>()
+        {
+            "Active","Closed","Renovation"
+        };
         public frmFacilites()
         {
             InitializeComponent();
+            this.facilityAPI = new FacilityAPI();
+            dgvFacilites.AutoGenerateColumns = false;
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private async void loadData()
+        {
+            var request = new FacilitySearchObject()
+            {
+                IncludeEmployees = true,
+                Name = txtName.Text,
+                Status = (string)cmbStatus.SelectedItem
+            };
+
+            var response = await facilityAPI.Get(request);
+
+            dgvFacilites.DataSource = response;
+        }
+
+        private async void dgvFacilites_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dgvFacilites.Columns["Delete"].Index && e.RowIndex >= 0)
+            {
+                var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    var item = dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse;
+                    var response = await facilityAPI.Delete(item.FacilityId);
+                    if (!String.IsNullOrEmpty(response))
+                    {
+                        loadData();
+                    }
+                }
+
+            }
+            else
+            {
+                populateFields(dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse);
+            }
+        }
+
+        private void populateFields(FacilityResponse? facilityResponse)
+        {
+            if (pbImage.Image != null) pbImage.Image = null;
+
+            pbImage.Image = ImageHelper.ByteArrayToImage(facilityResponse.Image);
+            Employees.DataSource = facilityResponse.Employees;
+            Employees.DisplayMember = "OutlineText";
+        }
+
+        private void frmFacilites_Load(object sender, EventArgs e)
+        {
+            cmbStatus.DataSource = this.status;
+            cmbStatus.SelectedIndex = -1;
+        }
+
+        private void btnClearForm_Click(object sender, EventArgs e)
+        {
+            cmbStatus.SelectedIndex = -1;
+            txtName.Text = "";
         }
     }
 }
