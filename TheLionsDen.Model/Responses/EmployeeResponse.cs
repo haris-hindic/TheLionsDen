@@ -21,12 +21,13 @@ namespace TheLionsDen.Model.Responses
 
 
         public string FullName => $"{FirstName} {LastName}";
-        public string FacilityName => Facility == null ? "Not assigned" : $"{Facility.Name}";
-        public string JobName => $"{JobType.Name}";
-        public string OutlineText => $"{FullName} ({JobName})";
+        public string FacilityName { get; set; } //=> Facility == null ? "Not assigned" : $"{Facility.Name}";
+        public string JobName { get; set; } // => $"{JobType.Name}";
+        public string OutlineText { get; set; } // => $"{FullName} ({JobName})";
 
         [JsonIgnore]
         public virtual FacilityResponse Facility { get; set; }
+        [JsonIgnore]
         public virtual JobTypeResponse JobType { get; set; }
 
     }

@@ -134,6 +134,7 @@
             this.btnNew.TabIndex = 34;
             this.btnNew.Text = "Add new";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // label1
             // 
@@ -162,6 +163,7 @@
             this.dgvFacilites.Size = new System.Drawing.Size(1060, 289);
             this.dgvFacilites.TabIndex = 33;
             this.dgvFacilites.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFacilites_CellContentClick);
+            this.dgvFacilites.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFacilites_CellContentDoubleClick);
             // 
             // Name
             // 
@@ -214,7 +216,7 @@
             this.Employees.ItemHeight = 20;
             this.Employees.Location = new System.Drawing.Point(9, 26);
             this.Employees.Name = "Employees";
-            this.Employees.Size = new System.Drawing.Size(284, 204);
+            this.Employees.Size = new System.Drawing.Size(299, 204);
             this.Employees.TabIndex = 37;
             // 
             // pbImage
@@ -231,7 +233,7 @@
             this.groupBox2.Controls.Add(this.Employees);
             this.groupBox2.Location = new System.Drawing.Point(12, 459);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(304, 246);
+            this.groupBox2.Size = new System.Drawing.Size(314, 246);
             this.groupBox2.TabIndex = 39;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Employees";

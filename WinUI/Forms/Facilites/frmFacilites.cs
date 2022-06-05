@@ -8,10 +8,7 @@ namespace WinUI.Forms.Facilites
     public partial class frmFacilites : Form
     {
         private FacilityAPI facilityAPI;
-        private List<string> status = new List<string>()
-        {
-            "Active","Closed","Renovation"
-        };
+        
         public frmFacilites()
         {
             InitializeComponent();
@@ -36,6 +33,7 @@ namespace WinUI.Forms.Facilites
             var response = await facilityAPI.Get(request);
 
             dgvFacilites.DataSource = response;
+            clearImageEmployees();
         }
 
         private async void dgvFacilites_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -72,7 +70,7 @@ namespace WinUI.Forms.Facilites
 
         private void frmFacilites_Load(object sender, EventArgs e)
         {
-            cmbStatus.DataSource = this.status;
+            cmbStatus.DataSource = StatusHelper.facility;
             cmbStatus.SelectedIndex = -1;
         }
 
@@ -80,6 +78,25 @@ namespace WinUI.Forms.Facilites
         {
             cmbStatus.SelectedIndex = -1;
             txtName.Text = "";
+            clearImageEmployees();
+        }
+
+        private void clearImageEmployees()
+        {
+            pbImage.Image = null;
+            Employees.DataSource = null;
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            clearImageEmployees();
+            new frmFacilityAddEdit().ShowDialog();
+        }
+
+        private void dgvFacilites_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            clearImageEmployees();
+            new frmFacilityAddEdit(dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse).ShowDialog();
         }
     }
 }

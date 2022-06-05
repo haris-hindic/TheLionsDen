@@ -1,5 +1,6 @@
 ﻿using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
+using WinUI.Helpers;
 using WinUI.Services;
 
 namespace WinUI.Forms.Employees
@@ -9,10 +10,7 @@ namespace WinUI.Forms.Employees
         private JobTypeAPI jobTypeAPI;
         private EmployeeAPI employeeAPI;
         private EmployeeResponse employee;
-        private List<string> status = new List<string>()
-        {
-            "Active","Inactive","Vacation","Recovery"
-        };
+        
 
         public frmEmployeeAddEdit()
         {
@@ -42,7 +40,7 @@ namespace WinUI.Forms.Employees
             cmbJobType.DisplayMember = "Name";
             cmbJobType.ValueMember = "JobTypeId";
 
-            cmbStatus.DataSource = status;
+            cmbStatus.DataSource = StatusHelper.employee;
 
             if (employee != null)
             {

@@ -11,8 +11,23 @@ namespace TheLionsDen.Controllers
     [ApiController]
     public class EmployeeController : BaseCRUDController<EmployeeResponse, EmployeeSearchObject, EmployeeInsertRequest, EmployeeUpdateRequest>
     {
+        private readonly IEmployeeService service;
+
         public EmployeeController(IEmployeeService service) : base(service)
         {
+            this.service = service;
+        }
+
+        [HttpGet("{employeeId}/assign/{facilityId}")]
+        public Task<string> AssignToFacility([FromRoute] int employeeId, [FromRoute] int facilityId)
+        {
+            return service.AddToFromFacility(employeeId, facilityId);
+        }
+
+        [HttpDelete("{employeeId}/remove-facility")]
+        public Task<string> RemoveFromFacility([FromRoute] int employeeId)
+        {
+            return service.RemoveFromFacility(employeeId);
         }
     }
 }

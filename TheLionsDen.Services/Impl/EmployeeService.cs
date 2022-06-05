@@ -30,6 +30,10 @@ namespace TheLionsDen.Services.Impl
             {
                 filteredQuery = filteredQuery.Where(x => x.FacilityId == searchObject.FacilityId);
             }
+            if (searchObject.AvaliableForFacilityId > 0)
+            {
+                filteredQuery = filteredQuery.Where(x => x.FacilityId != searchObject.FacilityId && x.FacilityId == null);
+            }
 
             return filteredQuery;
         }
@@ -38,16 +42,32 @@ namespace TheLionsDen.Services.Impl
         {
             var includedQuery = base.AddInclude(query, searchObject);
 
-            //if (searchObject.IncludeFacility)
-            //{
-            //    includedQuery = includedQuery.Include("Facility");
-            //}
+            if (searchObject.IncludeFacility)
+            {
+                includedQuery = includedQuery.Include("Facility");
+            }
             if (searchObject.IncludeJobType)
             {
                 includedQuery = includedQuery.Include("JobType");
             }
 
             return includedQuery;
+        }
+
+        public async Task<string> AddToFromFacility(int employeeId, int facilityId)
+        {
+            var entity = await context.Employees.FindAsync(employeeId);
+
+
+            if (entity != null)
+            {
+                entity.FacilityId = facilityId;
+                context.Update(entity);
+                await context.SaveChangesAsync();
+                return $"Successfully added employee, with id -> {employeeId}, to this facility!";
+            }
+
+            return $"There is no such employee or facility!";
         }
 
         public override async Task<EmployeeResponse> GetById(int id)
@@ -64,6 +84,22 @@ namespace TheLionsDen.Services.Impl
             context.SaveChanges();
 
             return await GetById(entity.EmployeeId);
+        }
+
+        public async Task<string> RemoveFromFacility(int id)
+        {
+            var entity = await context.Employees.FindAsync(id);
+
+
+            if (entity != null)
+            {
+                entity.FacilityId = null;
+                context.Update(entity);
+                await context.SaveChangesAsync();
+                return $"Successfully removed employee, with id -> {id}, from his facility!";
+            }
+
+            return $"There is no entity with id -> {id}";
         }
 
         public override async Task<EmployeeResponse> Update(int id, EmployeeUpdateRequest request)

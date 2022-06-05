@@ -8,11 +8,13 @@ namespace WinUI.Forms.Employees
     {
         private EmployeeAPI employeeAPI;
         private JobTypeAPI jobTypeAPI;
+        private FacilityAPI facilityAPI;
         public frmEmployees()
         {
             InitializeComponent();
             this.employeeAPI = new EmployeeAPI();
             this.jobTypeAPI = new JobTypeAPI();
+            this.facilityAPI = new FacilityAPI();
             dgvEmployees.AutoGenerateColumns = false;
         }
 
@@ -27,9 +29,14 @@ namespace WinUI.Forms.Employees
             loadJobTypes();
         }
 
-        private void loadFacilites()
+        private async void loadFacilites()
         {
-            
+            var response = await facilityAPI.Get();
+
+            cmbFacility.DataSource = response;
+            cmbFacility.DisplayMember = "Name";
+            cmbFacility.ValueMember = "FacilityId";
+            cmbFacility.SelectedIndex = -1;
         }
 
         private async void loadData()
@@ -38,7 +45,7 @@ namespace WinUI.Forms.Employees
             {
                 Name = txtName.Text,
                 IncludeJobType = true,
-                //IncludeFacility = true
+                IncludeFacility = true
             };
             if (cmbJobType.SelectedValue != null && cmbJobType.SelectedIndex != -1)
             {

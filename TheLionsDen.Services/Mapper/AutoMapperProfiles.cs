@@ -24,7 +24,10 @@ namespace TheLionsDen.Services.Mapper
             //Job Type
             CreateMap<JobType, JobTypeResponse>();
             //Employee
-            CreateMap<Employee, EmployeeResponse>();
+            CreateMap<Employee, EmployeeResponse>()
+                .ForMember(x => x.OutlineText, opts => opts.MapFrom(y => $"{y.FirstName} {y.LastName} ({y.JobType.Name},{y.Gender},{DateTime.Now.Year - y.BirthDate.Value.Year})"))
+                .ForMember(x => x.FacilityName, opts => opts.MapFrom(y => $"{y.Facility.Name}" ?? "Not Assigned"))
+                .ForMember(x => x.JobName, opts => opts.MapFrom(y => y.JobType.Name));
             CreateMap<EmployeeInsertRequest, Employee>();
             CreateMap<EmployeeUpdateRequest, Employee>();
         }
