@@ -30,6 +30,12 @@ namespace TheLionsDen.Services.Mapper
                 .ForMember(x => x.JobName, opts => opts.MapFrom(y => y.JobType.Name));
             CreateMap<EmployeeInsertRequest, Employee>();
             CreateMap<EmployeeUpdateRequest, Employee>();
+            //Room Type
+            CreateMap<RoomType, RoomTypeResponse>();
+            CreateMap<RoomTypeUpsertRequest,RoomType>();
+            //Room Image
+            CreateMap<RoomImage, RoomImageResponse>();
+            CreateMap<RoomImageInsertRequest, RoomImage>();
         }
     }
 }

@@ -114,14 +114,14 @@ namespace TheLionsDen.Services.Impl
 
             if (entity == null)
             {
-                return null;
+                throw new Model.UserException("Not valid credentials!");
             }
 
             var hash = PasswordHelper.GenerateHash(entity.PasswordSalt, password);
 
             if (hash != entity.PasswordHash)
             {
-                return null;
+                throw new Model.UserException("Not valid credentials!");
             }
 
             return mapper.Map<UserResponse>(entity);

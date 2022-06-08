@@ -70,7 +70,7 @@ namespace WinUI.Forms.Facilites
 
         private void frmFacilites_Load(object sender, EventArgs e)
         {
-            cmbStatus.DataSource = StatusHelper.facility;
+            cmbStatus.DataSource = cmbHelper.facility;
             cmbStatus.SelectedIndex = -1;
         }
 

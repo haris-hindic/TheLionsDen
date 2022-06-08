@@ -42,7 +42,7 @@ namespace WinUI.Forms.Facilites
 
         private void frmFacilityAddEdit_Load(object sender, EventArgs e)
         {
-            cmbStatus.DataSource = StatusHelper.facility;
+            cmbStatus.DataSource = cmbHelper.facility;
             if (this.facility != null)
             {
                 populateFields();

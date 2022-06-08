@@ -38,15 +38,15 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvFacilites = new System.Windows.Forms.DataGridView();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Employees = new System.Windows.Forms.ListBox();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.NameField = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFacilites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
@@ -64,7 +64,7 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Location = new System.Drawing.Point(10, 83);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(828, 78);
+            this.groupBox1.Size = new System.Drawing.Size(844, 78);
             this.groupBox1.TabIndex = 35;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
@@ -151,7 +151,7 @@
             // 
             this.dgvFacilites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFacilites.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Name,
+            this.NameField,
             this.Description,
             this.Price,
             this.Status,
@@ -164,51 +164,6 @@
             this.dgvFacilites.TabIndex = 33;
             this.dgvFacilites.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFacilites_CellContentClick);
             this.dgvFacilites.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFacilites_CellContentDoubleClick);
-            // 
-            // Name
-            // 
-            this.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Name.DataPropertyName = "Name";
-            this.Name.HeaderText = "Name";
-            this.Name.MinimumWidth = 6;
-            this.Name.Name = "Name";
-            this.Name.ReadOnly = true;
-            this.Name.Width = 78;
-            // 
-            // Description
-            // 
-            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Description.DataPropertyName = "Description";
-            this.Description.HeaderText = "Description";
-            this.Description.MinimumWidth = 6;
-            this.Description.Name = "Description";
-            // 
-            // Price
-            // 
-            this.Price.DataPropertyName = "PriceCurrency";
-            this.Price.HeaderText = "Price";
-            this.Price.MinimumWidth = 6;
-            this.Price.Name = "Price";
-            this.Price.Width = 125;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "Status";
-            this.Status.HeaderText = "Status";
-            this.Status.MinimumWidth = 6;
-            this.Status.Name = "Status";
-            this.Status.Width = 125;
-            // 
-            // Delete
-            // 
-            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Delete.HeaderText = "Delete";
-            this.Delete.MinimumWidth = 6;
-            this.Delete.Name = "Delete";
-            this.Delete.Text = "Delete";
-            this.Delete.ToolTipText = "Delete";
-            this.Delete.UseColumnTextForButtonValue = true;
-            this.Delete.Width = 59;
             // 
             // Employees
             // 
@@ -248,6 +203,51 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Image";
             // 
+            // NameField
+            // 
+            this.NameField.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.NameField.DataPropertyName = "Name";
+            this.NameField.HeaderText = "Name";
+            this.NameField.MinimumWidth = 6;
+            this.NameField.Name = "NameField";
+            this.NameField.ReadOnly = true;
+            this.NameField.Width = 78;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Description.DataPropertyName = "Description";
+            this.Description.HeaderText = "Description";
+            this.Description.MinimumWidth = 6;
+            this.Description.Name = "Description";
+            // 
+            // Price
+            // 
+            this.Price.DataPropertyName = "PriceCurrency";
+            this.Price.HeaderText = "Price";
+            this.Price.MinimumWidth = 6;
+            this.Price.Name = "Price";
+            this.Price.Width = 125;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.HeaderText = "Status";
+            this.Status.MinimumWidth = 6;
+            this.Status.Name = "Status";
+            this.Status.Width = 125;
+            // 
+            // Delete
+            // 
+            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Delete.HeaderText = "Delete";
+            this.Delete.MinimumWidth = 6;
+            this.Delete.Name = "Delete";
+            this.Delete.Text = "Delete";
+            this.Delete.ToolTipText = "Delete";
+            this.Delete.UseColumnTextForButtonValue = true;
+            this.Delete.Width = 59;
+            // 
             // frmFacilites
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -260,6 +260,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvFacilites);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmFacilites";
             this.Text = "frmFacilites";
             this.Load += new System.EventHandler(this.frmFacilites_Load);
             this.groupBox1.ResumeLayout(false);
@@ -287,12 +288,12 @@
         private DataGridView dgvFacilites;
         private PictureBox pbImage;
         private ListBox Employees;
-        private DataGridViewTextBoxColumn Name;
+        private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private DataGridViewTextBoxColumn NameField;
         private DataGridViewTextBoxColumn Description;
         private DataGridViewTextBoxColumn Price;
         private DataGridViewTextBoxColumn Status;
         private DataGridViewButtonColumn Delete;
-        private GroupBox groupBox2;
-        private GroupBox groupBox3;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinUI.Helpers
 {
-    public static class StatusHelper
+    public static class cmbHelper
     {
         public static List<string> employee = new List<string>()
         {
@@ -15,6 +15,10 @@ namespace WinUI.Helpers
         public static List<string> facility = new List<string>()
         {
             "Active","Closed","Renovation"
+        };
+        public static List<string> comparator = new List<string>()
+        {
+            "<",">","=",">=","<="
         };
     }
 }

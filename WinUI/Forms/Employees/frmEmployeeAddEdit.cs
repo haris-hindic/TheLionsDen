@@ -40,7 +40,7 @@ namespace WinUI.Forms.Employees
             cmbJobType.DisplayMember = "Name";
             cmbJobType.ValueMember = "JobTypeId";
 
-            cmbStatus.DataSource = StatusHelper.employee;
+            cmbStatus.DataSource = cmbHelper.employee;
 
             if (employee != null)
             {

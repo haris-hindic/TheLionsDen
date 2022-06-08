@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
@@ -18,9 +19,31 @@ namespace WinUI.Services
         }
         public async Task<UserResponse> Login()
         {
-            var entity = await $"{endpoint}/{resourceName}/login".WithBasicAuth(AuthHelper.Username, AuthHelper.Password).GetJsonAsync<UserResponse>();
+            try
+            {
+                var entity = await $"{endpoint}/{resourceName}/login".WithBasicAuth(AuthHelper.Username, AuthHelper.Password).GetJsonAsync<UserResponse>();
 
-            return entity;
+                return entity;
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errorResponse = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+
+                var errors = errorResponse.First(x => x.Key == "errors");
+
+                string errorsJsonString = String.Join(",", errors.Value);
+
+                Dictionary<string, string[]> errorsMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(errorsJsonString);
+
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errorsMap)
+                {
+                    stringBuilder.AppendLine($"{error.Key}:\n{string.Join("\n", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(UserResponse);
+            }
         }
     }
 }

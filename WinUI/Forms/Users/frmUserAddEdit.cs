@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
+using WinUI.Helpers;
 using WinUI.Services;
 
 namespace WinUI.Forms.Users
@@ -78,13 +79,29 @@ namespace WinUI.Forms.Users
                 {
                     var request = populateUpdateRequest();
 
-                    var result = await userAPI.Put(user.UserId, request);
-
-                    if (result != null)
+                    if (this.user.Username.Equals(AuthHelper.Username))
                     {
-                        MessageBox.Show($"User {result.Username} successfully updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.user = result;
-                        populateFields();
+                        var confirmResult = MessageBox.Show("If you edit your credentials you will have to authenticate again.", "Are you sure?", MessageBoxButtons.YesNo);
+
+                        if (confirmResult == DialogResult.Yes)
+                        {
+
+                            var result = await userAPI.Put(user.UserId, request);
+
+                            if (result != null)
+                            {
+                                MessageBox.Show($"User {result.Username} successfully updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                this.user = result;
+                                if (this.user.Username.Equals(AuthHelper.Username))
+                                {
+                                    AuthHelper.Username = null;
+                                    AuthHelper.Password = null;
+                                    AuthHelper.Roles = null;
+                                    Application.Restart();
+                                }
+                                populateFields();
+                            }
+                        }
                     }
                 }
             }
