@@ -7,7 +7,7 @@ namespace TheLionsDen.Services
     public interface IEmployeeService : ICRUDService<EmployeeResponse, EmployeeSearchObject, EmployeeInsertRequest, EmployeeUpdateRequest>
     {
         public Task<string> RemoveFromFacility(int id);
-        public Task<string> AddToFromFacility(int employeeId,int facilityId);
+        public Task<string> AssignToFacility(int employeeId,int facilityId);
     }
 
 }

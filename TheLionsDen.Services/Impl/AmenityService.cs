@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheLionsDen.Model;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
@@ -25,8 +26,41 @@ namespace TheLionsDen.Services.Impl
             {
                 filteredQuery = filteredQuery.Where(x => x.Name.ToLower().Contains(searchObject.Name.ToLower()));
             }
+            if (searchObject.AmenityIds.Count > 0)
+            {
+                filteredQuery = filteredQuery.Where(x => searchObject.AmenityIds.Contains(x.AmenityId));
+            }
 
             return filteredQuery;
         }
+
+        #region VALIDATIONS
+        public override void validateUpdateRequest(int id, AmenityUpsertRequest request)
+        {
+            var errorMessage = new StringBuilder();
+
+            validateAmenityExist(id, errorMessage);
+
+            if (errorMessage.Length > 0)
+                throw new UserException(errorMessage.ToString());
+        }
+
+        public override void validateGetByIdRequest(int id)
+        {
+            var errorMessage = new StringBuilder();
+
+            validateAmenityExist(id, errorMessage);
+
+            if (errorMessage.Length > 0)
+                throw new UserException(errorMessage.ToString());
+        }
+
+        private void validateAmenityExist(int id, StringBuilder errorMessage)
+        {
+            var amenity = context.Amenities.FirstOrDefault(x => x.AmenityId == id);
+            if (amenity == null)
+                errorMessage.Append("You entered a non existent amenity!\n");
+        }
+        #endregion
     }
 }

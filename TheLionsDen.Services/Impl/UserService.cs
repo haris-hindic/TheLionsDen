@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using TheLionsDen.Model;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
@@ -103,6 +104,8 @@ namespace TheLionsDen.Services.Impl
 
         public override async Task<UserResponse> GetById(int id)
         {
+            validateGetByIdRequest(id);
+
             var entity = await context.Users.Include("Role").FirstOrDefaultAsync(x => x.UserId == id);
 
             return mapper.Map<UserResponse>(entity);
@@ -126,5 +129,52 @@ namespace TheLionsDen.Services.Impl
 
             return mapper.Map<UserResponse>(entity);
         }
+
+        #region VALIDATIONS
+
+        public override void validateInsertRequest(UserInsertRequest request)
+        {
+            var errorMessage = new StringBuilder();
+
+            validateRoleExist(request.RoleId, errorMessage);
+
+            if (errorMessage.Length > 0)
+                throw new UserException(errorMessage.ToString());
+        }
+
+        public override void validateUpdateRequest(int id, UserUpdateRequest request)
+        {
+            var errorMessage = new StringBuilder();
+
+            validateUserExist(id,errorMessage);
+            validateRoleExist(request.RoleId, errorMessage);
+
+            if (errorMessage.Length > 0)
+                throw new UserException(errorMessage.ToString());
+        }
+
+        public override void validateGetByIdRequest(int id)
+        {
+            var errorMessage = new StringBuilder();
+
+            validateUserExist(id, errorMessage);
+
+            if (errorMessage.Length > 0)
+                throw new UserException(errorMessage.ToString());
+        }
+
+        private void validateUserExist(int id, StringBuilder errorMessage)
+        {
+            var user = context.Users.FirstOrDefault(x => x.UserId == id);
+            if (user == null)
+                errorMessage.Append("You entered a non existent user!\n");
+        }
+        private void validateRoleExist(int roleId, StringBuilder errorMessage)
+        {
+            var role = context.Roles.FirstOrDefault(x => x.RoleId == roleId);
+            if (role == null)
+                errorMessage.Append("You entered a non existent role!\n");
+        }
+        #endregion
     }
 }

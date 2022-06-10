@@ -20,6 +20,6 @@ namespace TheLionsDen.Model.Requests
         public string Status { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string Gender { get; set; }
-        public int? RoleId { get; set; }
+        public int RoleId { get; set; }
     }
 }

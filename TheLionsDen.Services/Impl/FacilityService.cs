@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheLionsDen.Model;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
@@ -45,5 +46,34 @@ namespace TheLionsDen.Services.Impl
 
             return includedQuery;
         }
+
+        #region VALIDATIONS
+        public override void validateUpdateRequest(int id, FacilityUpsertRequest request)
+        {
+            var errorMessage = new StringBuilder();
+
+            validateFacilityExist(id, errorMessage);
+
+            if (errorMessage.Length > 0)
+                throw new UserException(errorMessage.ToString());
+        }
+
+        public override void validateGetByIdRequest(int id)
+        {
+            var errorMessage = new StringBuilder();
+
+            validateFacilityExist(id, errorMessage);
+
+            if (errorMessage.Length > 0)
+                throw new UserException(errorMessage.ToString());
+        }
+
+        private void validateFacilityExist(int id, StringBuilder errorMessage)
+        {
+            var facility = context.Facilities.FirstOrDefault(x => x.FacilityId == id);
+            if (facility == null)
+                errorMessage.Append("You entered a non existent facility!\n");
+        }
+        #endregion
     }
 }

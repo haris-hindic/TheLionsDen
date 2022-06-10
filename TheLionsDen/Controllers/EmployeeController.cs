@@ -21,7 +21,7 @@ namespace TheLionsDen.Controllers
         [HttpGet("{employeeId}/assign/{facilityId}")]
         public Task<string> AssignToFacility([FromRoute] int employeeId, [FromRoute] int facilityId)
         {
-            return service.AddToFromFacility(employeeId, facilityId);
+            return service.AssignToFacility(employeeId, facilityId);
         }
 
         [HttpDelete("{employeeId}/remove-facility")]

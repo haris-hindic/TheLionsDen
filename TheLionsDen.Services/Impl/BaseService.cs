@@ -12,7 +12,7 @@ namespace TheLionsDen.Services.Impl
 {
     public class BaseService<T, TDb, TSearch> : IService<T, TSearch> where T : class where TDb : class where TSearch : BaseSearchObject
     {
-        private readonly TheLionsDenContext context;
+        public readonly TheLionsDenContext context;
         private readonly IMapper mapper;
         private readonly DbSet<TDb> dbSet;
 
@@ -53,9 +53,17 @@ namespace TheLionsDen.Services.Impl
 
         public virtual async Task<T> GetById(int id)
         {
+            validateGetByIdRequest(id);
+
             var entity = await dbSet.FindAsync(id);
 
             return mapper.Map<T>(entity);
+        }
+
+
+        public virtual void validateGetByIdRequest(int id)
+        {
+
         }
     }
 }

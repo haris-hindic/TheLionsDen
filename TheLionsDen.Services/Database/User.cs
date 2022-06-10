@@ -22,9 +22,9 @@ namespace TheLionsDen.Services.Database
         public string PasswordHash { get; set; } = null!;
         public DateTime? DateOfBirth { get; set; }
         public string? Gender { get; set; }
-        public int? RoleId { get; set; }
+        public int RoleId { get; set; }
 
-        public virtual Role? Role { get; set; }
+        public virtual Role Role { get; set; }
         public virtual ICollection<Favourite> Favourites { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
     }

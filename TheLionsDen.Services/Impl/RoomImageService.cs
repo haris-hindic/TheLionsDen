@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using System.Text;
+using TheLionsDen.Model;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
@@ -24,5 +26,24 @@ namespace TheLionsDen.Services.Impl
 
             return filteredQuery;
         }
+        #region VALIDATIONS
+
+        public override void validateInsertRequest(RoomImageInsertRequest request)
+        {
+            var errorMessage = new StringBuilder();
+
+            validateRoomTypeExist(request.RoomTypeId, errorMessage);
+
+            if (errorMessage.Length > 0)
+                throw new UserException(errorMessage.ToString());
+        }
+
+        private void validateRoomTypeExist(int roomTypeId, StringBuilder errorMessage)
+        {
+            var roomType = context.RoomTypes.FirstOrDefault(x => x.RoomTypeId == roomTypeId);
+            if (roomType == null)
+                errorMessage.Append("You entered a non existent room type!\n");
+        }
+        #endregion
     }
 }

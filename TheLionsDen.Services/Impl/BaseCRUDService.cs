@@ -43,6 +43,8 @@ namespace TheLionsDen.Services.Impl
 
         public virtual async Task<T> Insert(TInsert request)
         {
+            validateInsertRequest(request); 
+
             var entity = mapper.Map<TDb>(request);
 
             dbSet.Add(entity);
@@ -61,6 +63,8 @@ namespace TheLionsDen.Services.Impl
 
         public virtual async Task<T> Update(int id, TUpdate request)
         {
+            validateUpdateRequest(id, request);
+
             TDb entity = await dbSet.FindAsync(id);
 
             mapper.Map(request, entity);
@@ -83,5 +87,16 @@ namespace TheLionsDen.Services.Impl
         {
 
         }
+
+        public virtual void validateInsertRequest(TInsert request)
+        {
+
+        }
+
+        public virtual void validateUpdateRequest(int id, TUpdate request)
+        {
+
+        }
+
     }
 }

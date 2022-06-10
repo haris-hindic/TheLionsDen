@@ -36,6 +36,13 @@ namespace TheLionsDen.Services.Mapper
             //Room Image
             CreateMap<RoomImage, RoomImageResponse>();
             CreateMap<RoomImageInsertRequest, RoomImage>();
+            //Room
+            CreateMap<Room, RoomResponse>()
+                .ForMember(x => x.Amenities, opts => opts.MapFrom(y => String.Join(", ",y.RoomAmenities.Select(j=>j.Amenity.Name))))
+                .ForMember(x => x.RoomTypeName, opts => opts.MapFrom(y => $"{y.RoomType.Name} ({y.RoomType.Capacity} persons, {y.RoomType.Size} m2)" ));
+            CreateMap<RoomUpsertRequest, Room>();
+            //RoomAmenity
+            CreateMap<RoomAmenity, RoomAmenityResponse>();
         }
     }
 }
