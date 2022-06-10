@@ -190,7 +190,7 @@ namespace WinUI.Forms.RoomTypes
 
         private async void btnSaveImage_Click(object sender, EventArgs e)
         {
-            if(pbNewImage.Image != null)
+            if (pbNewImage.Image != null)
             {
                 var request = new RoomImageInsertRequest()
                 {
@@ -204,6 +204,7 @@ namespace WinUI.Forms.RoomTypes
                 {
                     MessageBox.Show($"Image successfully added.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.roomType.RoomImages.Add(result);
+                    pbNewImage.Image = null;
                     populateFields();
                 }
             }
@@ -217,12 +218,18 @@ namespace WinUI.Forms.RoomTypes
         {
             if (images.Count() == 0) MessageBox.Show("No images!");
 
-            var result = await roomImageAPI.Delete(images[imageIndex].RoomImageId);
+            var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
 
-            if(result != null)
+            if (confirmResult == DialogResult.Yes)
             {
-                MessageBox.Show(result);
-                loadData();
+
+                var result = await roomImageAPI.Delete(images[imageIndex].RoomImageId);
+
+                if (result != null)
+                {
+                    MessageBox.Show(result);
+                    loadData();
+                }
             }
         }
     }

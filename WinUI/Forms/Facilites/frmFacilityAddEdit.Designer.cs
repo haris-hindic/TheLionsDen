@@ -46,11 +46,11 @@
             this.btnAssign = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.cmbAvaliableEmployees = new System.Windows.Forms.ComboBox();
             this.error = new System.Windows.Forms.ErrorProvider(this.components);
+            this.NameField = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
@@ -224,7 +224,7 @@
             // 
             this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Name,
+            this.NameField,
             this.EmploymentDate,
             this.Remove});
             this.dgvEmployees.Location = new System.Drawing.Point(6, 26);
@@ -235,14 +235,26 @@
             this.dgvEmployees.TabIndex = 20;
             this.dgvEmployees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentClick);
             // 
-            // Name
+            // cmbAvaliableEmployees
             // 
-            this.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Name.DataPropertyName = "OutlineText";
-            this.Name.HeaderText = "Name";
-            this.Name.MinimumWidth = 6;
-            this.Name.Name = "Name";
-            this.Name.ReadOnly = true;
+            this.cmbAvaliableEmployees.FormattingEnabled = true;
+            this.cmbAvaliableEmployees.Location = new System.Drawing.Point(596, 52);
+            this.cmbAvaliableEmployees.Name = "cmbAvaliableEmployees";
+            this.cmbAvaliableEmployees.Size = new System.Drawing.Size(266, 28);
+            this.cmbAvaliableEmployees.TabIndex = 12;
+            // 
+            // error
+            // 
+            this.error.ContainerControl = this;
+            // 
+            // NameField
+            // 
+            this.NameField.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameField.DataPropertyName = "OutlineText";
+            this.NameField.HeaderText = "Name";
+            this.NameField.MinimumWidth = 6;
+            this.NameField.Name = "NameField";
+            this.NameField.ReadOnly = true;
             // 
             // EmploymentDate
             // 
@@ -265,18 +277,6 @@
             this.Remove.UseColumnTextForButtonValue = true;
             this.Remove.Width = 69;
             // 
-            // cmbAvaliableEmployees
-            // 
-            this.cmbAvaliableEmployees.FormattingEnabled = true;
-            this.cmbAvaliableEmployees.Location = new System.Drawing.Point(596, 52);
-            this.cmbAvaliableEmployees.Name = "cmbAvaliableEmployees";
-            this.cmbAvaliableEmployees.Size = new System.Drawing.Size(266, 28);
-            this.cmbAvaliableEmployees.TabIndex = 12;
-            // 
-            // error
-            // 
-            this.error.ContainerControl = this;
-            // 
             // frmFacilityAddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -284,6 +284,7 @@
             this.ClientSize = new System.Drawing.Size(892, 684);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Name = "frmFacilityAddEdit";
             this.Text = "frmFacilityAddEdit";
             this.Load += new System.EventHandler(this.frmFacilityAddEdit_Load);
             this.groupBox1.ResumeLayout(false);
@@ -318,9 +319,9 @@
         private Button btnAssign;
         private Label label6;
         private DataGridView dgvEmployees;
-        private DataGridViewTextBoxColumn Name;
+        private ComboBox cmbAvaliableEmployees;
+        private DataGridViewTextBoxColumn NameField;
         private DataGridViewTextBoxColumn EmploymentDate;
         private DataGridViewButtonColumn Remove;
-        private ComboBox cmbAvaliableEmployees;
     }
 }

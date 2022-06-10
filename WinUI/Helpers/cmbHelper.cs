@@ -20,5 +20,9 @@ namespace WinUI.Helpers
         {
             "<",">","=",">=","<="
         };
+        public static List<string> roomState = new List<string>()
+        {
+            "New","Active","Hidden","Taken","Unavaliable"
+        };
     }
 }

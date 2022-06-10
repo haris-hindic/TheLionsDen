@@ -120,7 +120,7 @@ namespace WinUI.Forms.Users
                 DateOfBirth = dtpDateOfBirth.Value,
                 Gender = txtGender.Text,
                 PasswordConfirmation = txtConfirmPassword.Text,
-                RoleId = (int?)cbRole.SelectedValue
+                RoleId = (int)cbRole.SelectedValue
             };
         }
 
@@ -136,7 +136,7 @@ namespace WinUI.Forms.Users
                 DateOfBirth = dtpDateOfBirth.Value,
                 Gender = txtGender.Text,
                 PasswordConfirmation = txtConfirmPassword.Text,
-                RoleId = (int?)cbRole.SelectedValue
+                RoleId = (int)cbRole.SelectedValue
             };
         }
 

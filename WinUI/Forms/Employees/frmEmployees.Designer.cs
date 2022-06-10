@@ -32,13 +32,6 @@
             this.cmbFacility = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JobName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FacilityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -47,6 +40,13 @@
             this.cmbJobType = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.NameField = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.JobName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FacilityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -87,7 +87,7 @@
             // 
             this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Name,
+            this.NameField,
             this.EmploymentDate,
             this.Email,
             this.Gender,
@@ -102,69 +102,6 @@
             this.dgvEmployees.TabIndex = 19;
             this.dgvEmployees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentClick);
             this.dgvEmployees.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentDoubleClick);
-            // 
-            // Name
-            // 
-            this.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Name.DataPropertyName = "FullName";
-            this.Name.HeaderText = "Name";
-            this.Name.MinimumWidth = 6;
-            this.Name.Name = "Name";
-            this.Name.ReadOnly = true;
-            // 
-            // EmploymentDate
-            // 
-            this.EmploymentDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.EmploymentDate.DataPropertyName = "EmploymentDate";
-            this.EmploymentDate.HeaderText = "Employment Date";
-            this.EmploymentDate.MinimumWidth = 6;
-            this.EmploymentDate.Name = "EmploymentDate";
-            this.EmploymentDate.ReadOnly = true;
-            this.EmploymentDate.Width = 145;
-            // 
-            // Email
-            // 
-            this.Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Email";
-            this.Email.MinimumWidth = 6;
-            this.Email.Name = "Email";
-            // 
-            // Gender
-            // 
-            this.Gender.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Gender.DataPropertyName = "Gender";
-            this.Gender.HeaderText = "Gender";
-            this.Gender.MinimumWidth = 6;
-            this.Gender.Name = "Gender";
-            this.Gender.Width = 86;
-            // 
-            // JobName
-            // 
-            this.JobName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.JobName.DataPropertyName = "JobName";
-            this.JobName.HeaderText = "Job Name";
-            this.JobName.MinimumWidth = 6;
-            this.JobName.Name = "JobName";
-            // 
-            // FacilityName
-            // 
-            this.FacilityName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FacilityName.DataPropertyName = "FacilityName";
-            this.FacilityName.HeaderText = "Facility Name";
-            this.FacilityName.MinimumWidth = 6;
-            this.FacilityName.Name = "FacilityName";
-            // 
-            // Delete
-            // 
-            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Delete.HeaderText = "Delete";
-            this.Delete.MinimumWidth = 6;
-            this.Delete.Name = "Delete";
-            this.Delete.Text = "Delete";
-            this.Delete.ToolTipText = "Delete";
-            this.Delete.UseColumnTextForButtonValue = true;
-            this.Delete.Width = 59;
             // 
             // label1
             // 
@@ -249,6 +186,69 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
+            // NameField
+            // 
+            this.NameField.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameField.DataPropertyName = "FullName";
+            this.NameField.HeaderText = "Name";
+            this.NameField.MinimumWidth = 6;
+            this.NameField.Name = "NameField";
+            this.NameField.ReadOnly = true;
+            // 
+            // EmploymentDate
+            // 
+            this.EmploymentDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.EmploymentDate.DataPropertyName = "EmploymentDate";
+            this.EmploymentDate.HeaderText = "Employment Date";
+            this.EmploymentDate.MinimumWidth = 6;
+            this.EmploymentDate.Name = "EmploymentDate";
+            this.EmploymentDate.ReadOnly = true;
+            this.EmploymentDate.Width = 145;
+            // 
+            // Email
+            // 
+            this.Email.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Email.DataPropertyName = "Email";
+            this.Email.HeaderText = "Email";
+            this.Email.MinimumWidth = 6;
+            this.Email.Name = "Email";
+            // 
+            // Gender
+            // 
+            this.Gender.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Gender.DataPropertyName = "Gender";
+            this.Gender.HeaderText = "Gender";
+            this.Gender.MinimumWidth = 6;
+            this.Gender.Name = "Gender";
+            this.Gender.Width = 86;
+            // 
+            // JobName
+            // 
+            this.JobName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.JobName.DataPropertyName = "JobName";
+            this.JobName.HeaderText = "Job Name";
+            this.JobName.MinimumWidth = 6;
+            this.JobName.Name = "JobName";
+            // 
+            // FacilityName
+            // 
+            this.FacilityName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FacilityName.DataPropertyName = "FacilityName";
+            this.FacilityName.HeaderText = "Facility Name";
+            this.FacilityName.MinimumWidth = 6;
+            this.FacilityName.Name = "FacilityName";
+            // 
+            // Delete
+            // 
+            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Delete.HeaderText = "Delete";
+            this.Delete.MinimumWidth = 6;
+            this.Delete.Name = "Delete";
+            this.Delete.Text = "Delete";
+            this.Delete.ToolTipText = "Delete";
+            this.Delete.UseColumnTextForButtonValue = true;
+            this.Delete.Width = 59;
+            // 
             // frmEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -259,6 +259,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnNew);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmEmployees";
             this.Text = "frmEmployees";
             this.Load += new System.EventHandler(this.frmEmployees_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
@@ -283,13 +284,13 @@
         private ComboBox cmbJobType;
         private Label label3;
         private GroupBox groupBox1;
-        private DataGridViewTextBoxColumn Name;
+        private DataGridViewTextBoxColumn JobType;
+        private DataGridViewTextBoxColumn NameField;
         private DataGridViewTextBoxColumn EmploymentDate;
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn Gender;
-        private DataGridViewTextBoxColumn JobType;
+        private DataGridViewTextBoxColumn JobName;
         private DataGridViewTextBoxColumn FacilityName;
         private DataGridViewButtonColumn Delete;
-        private DataGridViewTextBoxColumn JobName;
     }
 }

@@ -108,6 +108,10 @@ namespace TheLionsDen.Services.Impl
             {
                 filteredQuery = filteredQuery.Where(x => x.RoomTypeId == searchObject.RoomTypeId);
             }
+            if (!String.IsNullOrEmpty(searchObject.State))
+            {
+                filteredQuery = filteredQuery.Where(x => x.State.ToLower().Equals(searchObject.State.ToLower()));
+            }
 
             return filteredQuery;
         }

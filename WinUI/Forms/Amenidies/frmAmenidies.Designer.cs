@@ -43,7 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.error = new System.Windows.Forms.ErrorProvider(this.components);
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameField = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAmenities)).BeginInit();
@@ -67,7 +67,7 @@
             // 
             this.dgvAmenities.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAmenities.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Name,
+            this.NameField,
             this.Description,
             this.Delete});
             this.dgvAmenities.Location = new System.Drawing.Point(8, 283);
@@ -191,14 +191,14 @@
             // 
             this.error.ContainerControl = this;
             // 
-            // Name
+            // NameField
             // 
-            this.Name.DataPropertyName = "Name";
-            this.Name.HeaderText = "Name";
-            this.Name.MinimumWidth = 6;
-            this.Name.Name = "Name";
-            this.Name.ReadOnly = true;
-            this.Name.Width = 165;
+            this.NameField.DataPropertyName = "Name";
+            this.NameField.HeaderText = "Name";
+            this.NameField.MinimumWidth = 6;
+            this.NameField.Name = "NameField";
+            this.NameField.ReadOnly = true;
+            this.NameField.Width = 165;
             // 
             // Description
             // 
@@ -230,6 +230,7 @@
             this.Controls.Add(this.dgvAmenities);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmAmenidies";
             this.Text = "frmAmenidies";
             ((System.ComponentModel.ISupportInitialize)(this.dgvAmenities)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -258,7 +259,7 @@
         private Label label3;
         private Label label4;
         private ErrorProvider error;
-        private DataGridViewTextBoxColumn Name;
+        private DataGridViewTextBoxColumn NameField;
         private DataGridViewTextBoxColumn Description;
         private DataGridViewButtonColumn Delete;
     }
