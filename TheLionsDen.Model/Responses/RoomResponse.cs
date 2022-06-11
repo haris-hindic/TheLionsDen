@@ -22,7 +22,7 @@ namespace TheLionsDen.Model.Responses
 
         //public virtual ICollection<Favourite> Favourites { get; set; }
         //public virtual ICollection<Reservation> Reservations { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual ICollection<RoomAmenityResponse> RoomAmenities { get; set; }
     }
 }

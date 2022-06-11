@@ -13,6 +13,7 @@ namespace WinUI.Forms.RoomTypes
         private RoomTypeResponse roomType;
         private List<RoomImageResponse> images = new List<RoomImageResponse>();
         private int imageIndex = 0;
+        private bool isPreview = false;
         public frmRoomTypeAddEdit()
         {
             InitializeComponent();
@@ -26,6 +27,14 @@ namespace WinUI.Forms.RoomTypes
             this.roomTypeAPI = new RoomTypeAPI();
             this.roomImageAPI = new RoomImageAPI();
             this.roomType = roomType;
+        }
+        public frmRoomTypeAddEdit(RoomTypeResponse roomType, bool preview)
+        {
+            InitializeComponent();
+            this.roomTypeAPI = new RoomTypeAPI();
+            this.roomImageAPI = new RoomImageAPI();
+            this.roomType = roomType;
+            this.isPreview = preview;
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
@@ -147,6 +156,21 @@ namespace WinUI.Forms.RoomTypes
                 btnPrevious.Enabled = false;
                 btnDelete.Enabled = false;
             }
+            if (isPreview)
+                disableField();
+        }
+
+        private void disableField()
+        {
+            btnUploadImage.Enabled = false;
+            btnSaveImage.Enabled = false;
+            btnDelete.Enabled = false;
+            txtDescription.ReadOnly = true;
+            txtName.ReadOnly = true;
+            numCapacity.ReadOnly = true;
+            numSize.ReadOnly = true;
+            txtRules.ReadOnly = true;
+            btnSave.Enabled = false;
         }
 
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -231,6 +255,11 @@ namespace WinUI.Forms.RoomTypes
                     loadData();
                 }
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -11,9 +11,29 @@ namespace TheLionsDen.Controllers
     [ApiController]
     public class RoomController : BaseCRUDController<RoomResponse, RoomSearchObject, RoomUpsertRequest, RoomUpsertRequest>
     {
+        private readonly IRoomService service;
+
         public RoomController(IRoomService service) : base(service)
         {
+            this.service = service;
+        }
 
+        [HttpPut("{id}/Activate")]
+        public async Task<string> ActivateAsync(int id)
+        {
+            return await service.Activate(id);
+        }
+
+        [HttpPut("{id}/Hide")]
+        public async Task<string> Hide(int id)
+        {
+            return await service.Hide(id);
+        }
+
+        [HttpPut("{id}/Taken")]
+        public async Task<string> SetAsTaken(int id)
+        {
+            return await service.SetAsTaken(id);
         }
     }
 }

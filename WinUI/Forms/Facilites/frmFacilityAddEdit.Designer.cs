@@ -46,11 +46,11 @@
             this.btnAssign = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
-            this.cmbAvaliableEmployees = new System.Windows.Forms.ComboBox();
-            this.error = new System.Windows.Forms.ErrorProvider(this.components);
             this.NameField = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.cmbAvaliableEmployees = new System.Windows.Forms.ComboBox();
+            this.error = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
@@ -231,21 +231,9 @@
             this.dgvEmployees.Name = "dgvEmployees";
             this.dgvEmployees.RowHeadersWidth = 51;
             this.dgvEmployees.RowTemplate.Height = 29;
-            this.dgvEmployees.Size = new System.Drawing.Size(584, 299);
+            this.dgvEmployees.Size = new System.Drawing.Size(463, 299);
             this.dgvEmployees.TabIndex = 20;
             this.dgvEmployees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentClick);
-            // 
-            // cmbAvaliableEmployees
-            // 
-            this.cmbAvaliableEmployees.FormattingEnabled = true;
-            this.cmbAvaliableEmployees.Location = new System.Drawing.Point(596, 52);
-            this.cmbAvaliableEmployees.Name = "cmbAvaliableEmployees";
-            this.cmbAvaliableEmployees.Size = new System.Drawing.Size(266, 28);
-            this.cmbAvaliableEmployees.TabIndex = 12;
-            // 
-            // error
-            // 
-            this.error.ContainerControl = this;
             // 
             // NameField
             // 
@@ -276,6 +264,18 @@
             this.Remove.ToolTipText = "Remove";
             this.Remove.UseColumnTextForButtonValue = true;
             this.Remove.Width = 69;
+            // 
+            // cmbAvaliableEmployees
+            // 
+            this.cmbAvaliableEmployees.FormattingEnabled = true;
+            this.cmbAvaliableEmployees.Location = new System.Drawing.Point(596, 52);
+            this.cmbAvaliableEmployees.Name = "cmbAvaliableEmployees";
+            this.cmbAvaliableEmployees.Size = new System.Drawing.Size(266, 28);
+            this.cmbAvaliableEmployees.TabIndex = 12;
+            // 
+            // error
+            // 
+            this.error.ContainerControl = this;
             // 
             // frmFacilityAddEdit
             // 

@@ -49,9 +49,15 @@
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnTaken = new System.Windows.Forms.Button();
+            this.btnHide = new System.Windows.Forms.Button();
+            this.btnActivate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRooms)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -181,12 +187,13 @@
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(960, 658);
+            this.btnNew.Location = new System.Drawing.Point(365, 35);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(108, 26);
+            this.btnNew.Size = new System.Drawing.Size(149, 26);
             this.btnNew.TabIndex = 21;
             this.btnNew.Text = "Add new";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // dgvRooms
             // 
@@ -202,8 +209,10 @@
             this.dgvRooms.Name = "dgvRooms";
             this.dgvRooms.RowHeadersWidth = 51;
             this.dgvRooms.RowTemplate.Height = 29;
-            this.dgvRooms.Size = new System.Drawing.Size(1058, 406);
+            this.dgvRooms.Size = new System.Drawing.Size(1058, 384);
             this.dgvRooms.TabIndex = 20;
+            this.dgvRooms.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRooms_CellContentClick);
+            this.dgvRooms.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRooms_CellContentDoubleClick);
             // 
             // NameField
             // 
@@ -270,13 +279,66 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Rooms";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.panel2);
+            this.groupBox2.Controls.Add(this.btnTaken);
+            this.groupBox2.Controls.Add(this.btnHide);
+            this.groupBox2.Controls.Add(this.btnNew);
+            this.groupBox2.Controls.Add(this.btnActivate);
+            this.groupBox2.Location = new System.Drawing.Point(531, 636);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(537, 84);
+            this.groupBox2.TabIndex = 23;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Actions";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(79)))), ((int)(((byte)(128)))));
+            this.panel2.Location = new System.Drawing.Point(326, 16);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1, 62);
+            this.panel2.TabIndex = 24;
+            // 
+            // btnTaken
+            // 
+            this.btnTaken.Location = new System.Drawing.Point(163, 20);
+            this.btnTaken.Name = "btnTaken";
+            this.btnTaken.Size = new System.Drawing.Size(149, 26);
+            this.btnTaken.TabIndex = 24;
+            this.btnTaken.Text = "Mark as taken";
+            this.btnTaken.UseVisualStyleBackColor = true;
+            this.btnTaken.Click += new System.EventHandler(this.btnTaken_Click);
+            // 
+            // btnHide
+            // 
+            this.btnHide.Location = new System.Drawing.Point(83, 52);
+            this.btnHide.Name = "btnHide";
+            this.btnHide.Size = new System.Drawing.Size(149, 26);
+            this.btnHide.TabIndex = 23;
+            this.btnHide.Text = "Hide";
+            this.btnHide.UseVisualStyleBackColor = true;
+            this.btnHide.Click += new System.EventHandler(this.btnHide_Click);
+            // 
+            // btnActivate
+            // 
+            this.btnActivate.Location = new System.Drawing.Point(6, 20);
+            this.btnActivate.Name = "btnActivate";
+            this.btnActivate.Size = new System.Drawing.Size(149, 26);
+            this.btnActivate.TabIndex = 22;
+            this.btnActivate.Text = "Activate";
+            this.btnActivate.UseVisualStyleBackColor = true;
+            this.btnActivate.Click += new System.EventHandler(this.btnActivate_Click);
+            // 
             // frmRooms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1078, 717);
+            this.ClientSize = new System.Drawing.Size(1078, 732);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnNew);
             this.Controls.Add(this.dgvRooms);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -287,6 +349,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRooms)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -315,5 +378,10 @@
         private DataGridViewTextBoxColumn Amenities;
         private DataGridViewTextBoxColumn State;
         private DataGridViewButtonColumn Delete;
+        private GroupBox groupBox2;
+        private Button btnTaken;
+        private Button btnHide;
+        private Button btnActivate;
+        private Panel panel2;
     }
 }

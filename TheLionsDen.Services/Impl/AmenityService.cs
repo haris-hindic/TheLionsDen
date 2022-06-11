@@ -30,6 +30,10 @@ namespace TheLionsDen.Services.Impl
             {
                 filteredQuery = filteredQuery.Where(x => searchObject.AmenityIds.Contains(x.AmenityId));
             }
+            if (searchObject.NotRoomId > 0)
+            {
+                filteredQuery = filteredQuery.Where(x => !x.RoomAmenities.Any(y=>y.RoomId == searchObject.NotRoomId));
+            }
 
             return filteredQuery;
         }

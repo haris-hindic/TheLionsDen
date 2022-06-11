@@ -49,10 +49,10 @@
             this.txtRules = new System.Windows.Forms.TextBox();
             this.btnSaveImage = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.pbImages = new System.Windows.Forms.PictureBox();
-            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.error)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNewImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCapacity)).BeginInit();
@@ -195,6 +195,7 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Facility details";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // label3
             // 
@@ -257,6 +258,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Image";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(244, 322);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(109, 27);
+            this.btnDelete.TabIndex = 48;
+            this.btnDelete.Text = "Delete Image";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // btnPrevious
             // 
             this.btnPrevious.Location = new System.Drawing.Point(6, 322);
@@ -285,16 +296,6 @@
             this.pbImages.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImages.TabIndex = 36;
             this.pbImages.TabStop = false;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(244, 322);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(109, 27);
-            this.btnDelete.TabIndex = 48;
-            this.btnDelete.Text = "Delete Image";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmRoomTypeAddEdit
             // 

@@ -10,6 +10,8 @@ namespace TheLionsDen.Model.Responses
         public int AmenityId { get; set; }
         public int RoomId { get; set; }
 
+        public string AmenityName =>Amenity.Name;
+
         public virtual AmenityResponse Amenity { get; set; }
     }
 }
