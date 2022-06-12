@@ -48,12 +48,17 @@
             this.dgvAmenities = new System.Windows.Forms.DataGridView();
             this.NameField = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnTaken = new System.Windows.Forms.Button();
+            this.btnHide = new System.Windows.Forms.Button();
+            this.btnActivate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRoomNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFloor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAmenities)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -69,7 +74,7 @@
             this.groupBox1.Controls.Add(this.numPrice);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtName);
-            this.groupBox1.Location = new System.Drawing.Point(12, 47);
+            this.groupBox1.Location = new System.Drawing.Point(12, 64);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(959, 151);
             this.groupBox1.TabIndex = 2;
@@ -199,7 +204,7 @@
             this.groupBox2.Controls.Add(this.clbAmenities);
             this.groupBox2.Controls.Add(this.dgvAmenities);
             this.groupBox2.Controls.Add(this.btnSave);
-            this.groupBox2.Location = new System.Drawing.Point(12, 204);
+            this.groupBox2.Location = new System.Drawing.Point(12, 221);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(961, 405);
             this.groupBox2.TabIndex = 20;
@@ -244,6 +249,7 @@
             this.dgvAmenities.RowTemplate.Height = 29;
             this.dgvAmenities.Size = new System.Drawing.Size(517, 290);
             this.dgvAmenities.TabIndex = 21;
+            this.dgvAmenities.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAmenities_CellContentClick);
             // 
             // NameField
             // 
@@ -265,11 +271,54 @@
             this.Remove.UseColumnTextForButtonValue = true;
             this.Remove.Width = 69;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnTaken);
+            this.groupBox3.Controls.Add(this.btnHide);
+            this.groupBox3.Controls.Add(this.btnActivate);
+            this.groupBox3.Location = new System.Drawing.Point(496, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(475, 60);
+            this.groupBox3.TabIndex = 24;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Actions";
+            // 
+            // btnTaken
+            // 
+            this.btnTaken.Location = new System.Drawing.Point(320, 26);
+            this.btnTaken.Name = "btnTaken";
+            this.btnTaken.Size = new System.Drawing.Size(149, 26);
+            this.btnTaken.TabIndex = 24;
+            this.btnTaken.Text = "Mark as taken";
+            this.btnTaken.UseVisualStyleBackColor = true;
+            this.btnTaken.Click += new System.EventHandler(this.btnTaken_Click);
+            // 
+            // btnHide
+            // 
+            this.btnHide.Location = new System.Drawing.Point(165, 26);
+            this.btnHide.Name = "btnHide";
+            this.btnHide.Size = new System.Drawing.Size(149, 26);
+            this.btnHide.TabIndex = 23;
+            this.btnHide.Text = "Hide";
+            this.btnHide.UseVisualStyleBackColor = true;
+            this.btnHide.Click += new System.EventHandler(this.btnHide_Click);
+            // 
+            // btnActivate
+            // 
+            this.btnActivate.Location = new System.Drawing.Point(6, 26);
+            this.btnActivate.Name = "btnActivate";
+            this.btnActivate.Size = new System.Drawing.Size(149, 26);
+            this.btnActivate.TabIndex = 22;
+            this.btnActivate.Text = "Activate";
+            this.btnActivate.UseVisualStyleBackColor = true;
+            this.btnActivate.Click += new System.EventHandler(this.btnActivate_Click);
+            // 
             // frmRoomAddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(985, 621);
+            this.ClientSize = new System.Drawing.Size(985, 667);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmRoomAddEdit";
@@ -283,6 +332,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAmenities)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -309,5 +359,9 @@
         private DataGridViewTextBoxColumn NameField;
         private DataGridViewButtonColumn Remove;
         private Label label7;
+        private GroupBox groupBox3;
+        private Button btnTaken;
+        private Button btnHide;
+        private Button btnActivate;
     }
 }

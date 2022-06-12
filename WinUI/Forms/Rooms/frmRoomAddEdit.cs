@@ -1,4 +1,5 @@
-﻿using TheLionsDen.Model.Requests;
+﻿using TheLionsDen.Model.Enums;
+using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using WinUI.Forms.RoomTypes;
 using WinUI.Services;
@@ -42,9 +43,12 @@ namespace WinUI.Forms.Rooms
             cmbRoomType.DisplayMember = "Name";
             cmbRoomType.SelectedIndex = -1;
 
+
             if (this.room == null) loadAmenities();
 
             if (this.room != null) populateFields();
+
+            if (this.room != null) setButtons(this.room);
         }
 
         private async void loadAmenities()
@@ -110,6 +114,12 @@ namespace WinUI.Forms.Rooms
             }
 
             loadAmenities();
+
+            btnHide.Enabled = false;
+            btnTaken.Enabled = false;
+            btnActivate.Enabled = false;
+
+            setButtons(room);
         }
 
         RoomUpsertRequest populateRequest() => new RoomUpsertRequest
@@ -121,5 +131,96 @@ namespace WinUI.Forms.Rooms
             RoomTypeId = (int)cmbRoomType.SelectedValue,
             AmenityIds = clbAmenities.CheckedItems.Cast<AmenityResponse>().Select(x => x.AmenityId).ToList()
         };
+
+        private async void dgvAmenities_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dgvAmenities.Columns["Remove"].Index && e.RowIndex >= 0)
+            {
+                var confirmResult = MessageBox.Show("Are you sure that you want to remove this item ??", "Confirm remove!!", MessageBoxButtons.YesNo);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    var item = dgvAmenities.Rows[e.RowIndex].DataBoundItem as RoomAmenityResponse;
+                    var response = await roomAPI.RemoveAmenity(this.room.RoomId, item.AmenityId);
+                    if (response != null)
+                    {
+                        this.room = response;
+                        populateFields();
+                    }
+                }
+
+            }
+        }
+
+        private async void btnActivate_Click(object sender, EventArgs e)
+        {
+            if (this.room != null)
+            {
+                var response = await roomAPI.Activate(this.room.RoomId);
+                if (!String.IsNullOrEmpty(response))
+                {
+                    MessageBox.Show(response);
+                    loadRoom();
+                }
+            }
+        }
+
+        private async void loadRoom()
+        {
+            var room = await roomAPI.GetById(this.room.RoomId);
+            this.room = room;
+            populateFields();
+        }
+
+        private async void btnHide_Click(object sender, EventArgs e)
+        {
+            if (this.room != null)
+            {
+                var response = await roomAPI.Hide(this.room.RoomId);
+                if (!String.IsNullOrEmpty(response))
+                {
+                    MessageBox.Show(response);
+                    loadRoom();
+                }
+            }
+        }
+
+        private async void btnTaken_Click(object sender, EventArgs e)
+        {
+            if (this.room != null)
+            {
+                var response = await roomAPI.SetAsTaken(this.room.RoomId);
+                if (!String.IsNullOrEmpty(response))
+                {
+                    MessageBox.Show(response);
+                    loadRoom();
+                }
+            }
+        }
+
+        private void setButtons(RoomResponse roomResponse)
+        {
+            if (roomResponse != null)
+            {
+                if (roomResponse.State == RoomState.Hidden.ToString()
+                    || roomResponse.State == RoomState.Taken.ToString()
+                    || roomResponse.State == RoomState.Draft.ToString())
+                {
+                    btnActivate.Enabled = true;
+                }
+
+                if (roomResponse.State == RoomState.Active.ToString()
+                    || roomResponse.State == RoomState.Draft.ToString()
+                    || roomResponse.State == RoomState.Taken.ToString())
+                {
+                    btnHide.Enabled = true;
+                }
+
+                if (roomResponse.State == RoomState.Active.ToString())
+                {
+                    btnTaken.Enabled = true;
+                }
+            }
+        }
     }
 }

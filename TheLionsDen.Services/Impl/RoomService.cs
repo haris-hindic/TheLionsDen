@@ -171,6 +171,17 @@ namespace TheLionsDen.Services.Impl
 
             return $"Room {entity.Name} has been set as taken successfully!";
         }
+        public async Task<RoomResponse> RemoveAmenity(int roomId, int amenityId)
+        {
+            validateRemoveAmenityRequest(roomId,amenityId);
+
+            var roomAmentiy = context.RoomAmenities.FirstOrDefault(x => x.RoomId == roomId && x.AmenityId == amenityId);
+
+            context.Remove(roomAmentiy);
+            await context.SaveChangesAsync();
+
+            return await GetById(roomId);
+        }
 
         #region VALIDATIONS
 
@@ -193,7 +204,8 @@ namespace TheLionsDen.Services.Impl
             validateRoomExist(id, errorMessage);
             validateAmenitiesExist(request.AmenityIds, errorMessage);
             validatRoomTypeExist(request.RoomTypeId, errorMessage);
-            //TO DO check existing amenities
+            validateIsActive(id, errorMessage);
+            validateAmenitiesAlreadyAssigned(request.AmenityIds, id, errorMessage);
 
             if (errorMessage.Length > 0)
                 throw new UserException(errorMessage.ToString());
@@ -246,10 +258,23 @@ namespace TheLionsDen.Services.Impl
                 throw new UserException(errorMessage.ToString());
         }
 
+        private void validateRemoveAmenityRequest(int roomId, int amenityId)
+        {
+            var errorMessage = new StringBuilder();
+
+            validateRoomExist(roomId, errorMessage);
+            validateAmenitiesExist(new List<int>(amenityId), errorMessage);
+            validateRoomAmenityExist(roomId, amenityId, errorMessage);
+            validateIsActive(roomId, errorMessage);
+
+            if (errorMessage.Length > 0)
+                throw new UserException(errorMessage.ToString());
+        }
+
         private void validateIsNotTaken(int id, StringBuilder errorMessage)
         {
             var room = context.Rooms.FirstOrDefault(x => x.RoomId == id);
-            if (room.State == RoomState.Taken.ToString())
+            if (room != null && room.State == RoomState.Taken.ToString())
                 errorMessage.Append("The room is already taken!\n");
         }
 
@@ -257,7 +282,13 @@ namespace TheLionsDen.Services.Impl
         {
             var amenities = context.Amenities.Where(x => amenityIds.Contains(x.AmenityId));
             if (amenities.Count() != amenityIds.Count)
-                errorMessage.Append("You entered non existent amenities!\n"); ;
+                errorMessage.Append("You entered non existent amenities!\n");
+        }
+        private void validateAmenitiesAlreadyAssigned(List<int> amenityIds, int roomId, StringBuilder errorMessage)
+        {
+            var amenities = context.RoomAmenities.Where(x => x.RoomId == roomId && amenityIds.Contains(x.AmenityId));
+            if (amenities.Count() > 0)
+                errorMessage.Append("You entered already assigned amenities!\n");
         }
 
         private void validatRoomTypeExist(int id, StringBuilder errorMessage)
@@ -276,15 +307,29 @@ namespace TheLionsDen.Services.Impl
         private void validateIsNotActive(int id, StringBuilder errorMessage)
         {
             var room = context.Rooms.FirstOrDefault(x => x.RoomId == id);
-            if (room.State == RoomState.Active.ToString())
+            if (room != null && room.State == RoomState.Active.ToString())
                 errorMessage.Append("The room is already active!\n");
+        }
+
+        private void validateIsActive(int id, StringBuilder errorMessage)
+        {
+            var room = context.Rooms.FirstOrDefault(x => x.RoomId == id);
+            if (room != null && room.State == RoomState.Active.ToString())
+                errorMessage.Append("You can't edit active rooms!\n");
         }
         private void validateIsNotHidden(int id, StringBuilder errorMessage)
         {
             var room = context.Rooms.FirstOrDefault(x => x.RoomId == id);
-            if (room.State == RoomState.Hidden.ToString())
+            if (room!=null && room.State == RoomState.Hidden.ToString())
                 errorMessage.Append("The room is already hidden!\n");
         }
+        private void validateRoomAmenityExist(int roomId, int amenityId, StringBuilder errorMessage)
+        {
+            var roomAmenity = context.RoomAmenities.FirstOrDefault(x => x.RoomId == roomId && x.AmenityId == amenityId);
+            if (roomAmenity == null)
+                errorMessage.Append("The room does't have this amenity!\n");
+        }
+
         #endregion
     }
 }

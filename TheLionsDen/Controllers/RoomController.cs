@@ -35,5 +35,11 @@ namespace TheLionsDen.Controllers
         {
             return await service.SetAsTaken(id);
         }
+
+        [HttpDelete("{roomId}/remove/{amenityId}")]
+        public async Task<RoomResponse> RemoveAmenity(int roomId, int amenityId)
+        {
+            return await service.RemoveAmenity(roomId,amenityId);
+        }
     }
 }
