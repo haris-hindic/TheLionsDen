@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnPreview = new System.Windows.Forms.Button();
             this.cmbRoomType = new System.Windows.Forms.ComboBox();
@@ -52,6 +53,7 @@
             this.btnTaken = new System.Windows.Forms.Button();
             this.btnHide = new System.Windows.Forms.Button();
             this.btnActivate = new System.Windows.Forms.Button();
+            this.error = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRoomNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFloor)).BeginInit();
@@ -59,6 +61,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAmenities)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.error)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -98,6 +101,7 @@
             this.cmbRoomType.Name = "cmbRoomType";
             this.cmbRoomType.Size = new System.Drawing.Size(385, 28);
             this.cmbRoomType.TabIndex = 18;
+            this.cmbRoomType.Validating += new System.ComponentModel.CancelEventHandler(this.cmbRoomType_Validating);
             // 
             // label5
             // 
@@ -170,6 +174,7 @@
             this.numPrice.Name = "numPrice";
             this.numPrice.Size = new System.Drawing.Size(226, 27);
             this.numPrice.TabIndex = 2;
+            this.numPrice.Validating += new System.ComponentModel.CancelEventHandler(this.numPrice_Validating);
             // 
             // label1
             // 
@@ -186,6 +191,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(766, 27);
             this.txtName.TabIndex = 0;
+            this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             // 
             // btnSave
             // 
@@ -313,6 +319,10 @@
             this.btnActivate.UseVisualStyleBackColor = true;
             this.btnActivate.Click += new System.EventHandler(this.btnActivate_Click);
             // 
+            // error
+            // 
+            this.error.ContainerControl = this;
+            // 
             // frmRoomAddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -333,6 +343,7 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAmenities)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.error)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -363,5 +374,6 @@
         private Button btnTaken;
         private Button btnHide;
         private Button btnActivate;
+        private ErrorProvider error;
     }
 }

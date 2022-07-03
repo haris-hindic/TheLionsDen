@@ -71,30 +71,33 @@ namespace WinUI.Forms.Rooms
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-
-            var request = populateRequest();
-
-            if (this.room == null)
+            if (ValidateChildren())
             {
 
-                var result = await roomAPI.Post(request);
+                var request = populateRequest();
 
-                if (result != null)
+                if (this.room == null)
                 {
-                    MessageBox.Show($"Room {result.Name} successfully added.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.room = result;
-                    populateFields();
+
+                    var result = await roomAPI.Post(request);
+
+                    if (result != null)
+                    {
+                        MessageBox.Show($"Room {result.Name} successfully added.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.room = result;
+                        populateFields();
+                    }
                 }
-            }
-            else
-            {
-                var result = await roomAPI.Put(this.room.RoomId, request);
-
-                if (result != null)
+                else
                 {
-                    MessageBox.Show($"Room {result.Name} successfully updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.room = result;
-                    populateFields();
+                    var result = await roomAPI.Put(this.room.RoomId, request);
+
+                    if (result != null)
+                    {
+                        MessageBox.Show($"Room {result.Name} successfully updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.room = result;
+                        populateFields();
+                    }
                 }
             }
         }
@@ -220,6 +223,48 @@ namespace WinUI.Forms.Rooms
                 {
                     btnTaken.Enabled = true;
                 }
+            }
+        }
+
+        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtName.Text))
+            {
+                e.Cancel = true;
+                error.SetError(txtName, "Name should not be left blank!");
+            }
+            else
+            {
+                e.Cancel = false;
+                error.SetError(txtName, "");
+            }
+        }
+
+        private void numPrice_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (numPrice.Value <= 0)
+            {
+                e.Cancel = true;
+                error.SetError(numPrice, "Price should not be left blank or equal/below zero!");
+            }
+            else
+            {
+                e.Cancel = false;
+                error.SetError(numPrice, "");
+            }
+        }
+
+        private void cmbRoomType_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cmbRoomType.SelectedValue == null)
+            {
+                e.Cancel = true;
+                error.SetError(cmbRoomType, "Please select a room type!");
+            }
+            else
+            {
+                e.Cancel = false;
+                error.SetError(cmbRoomType, "");
             }
         }
     }
