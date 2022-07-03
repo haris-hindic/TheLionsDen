@@ -43,6 +43,17 @@ namespace TheLionsDen.Services.Mapper
             CreateMap<RoomUpsertRequest, Room>();
             //RoomAmenity
             CreateMap<RoomAmenity, RoomAmenityResponse>();
+            //Reservation
+            CreateMap<Reservation, ReservationResponse>()
+                .ForMember(x=>x.RoomName, opts => opts.MapFrom(y=> $"{y.Room.Name} ({y.Room.RoomType.Name})"))
+                .ForMember(x=>x.UserFullName, opts => opts.MapFrom(y=> $"{y.User.FirstName} {y.User.LastName}"))
+                .ForMember(x=>x.FacilityNames, opts => opts.MapFrom(y=> String.Join(", ",y.ReservationFacilites.Select(z=>z.Facility.Name))));
+            CreateMap<ReservationInsertRequest, Reservation>();
+            //PaymentDetails
+            CreateMap<PaymentDetail, PaymentDetailResponse>();
+            CreateMap<PaymentDetailsInsertRequest, PaymentDetail>();
+            //Reservation Facilities
+            CreateMap<ReservationFacilite, ReservationFaciliteResponse>();
         }
     }
 }

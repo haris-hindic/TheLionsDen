@@ -68,12 +68,21 @@ namespace TheLionsDen.Services.Impl
             return await GetById(entity.RoomId);
         }
 
+        public override Task<string> Delete(int id)
+        {
+            var roomAmenities = context.RoomAmenities.Where(x => x.RoomId == id);
+
+            context.RemoveRange(roomAmenities);
+
+            return base.Delete(id);
+        }
+
         public override async Task<RoomResponse> GetById(int id)
         {
             validateGetByIdRequest(id);
             var entity = await context.Rooms.Include("RoomType").Include("RoomAmenities.Amenity").FirstOrDefaultAsync(x => x.RoomId == id);
 
-            return mapper.Map<RoomResponse>(entity); ;
+            return mapper.Map<RoomResponse>(entity);
         }
 
         public override IQueryable<Room> AddFilter(IQueryable<Room> query, RoomSearchObject searchObject = null)
@@ -227,10 +236,6 @@ namespace TheLionsDen.Services.Impl
 
             validateRoomExist(id, errorMessage);
             validateIsNotActive(id, errorMessage);
-            //TODO
-            //validate if it has a room type
-            //validate if it has at least one amenity
-            //validate if the assigned room type has images
 
             if (errorMessage.Length > 0)
                 throw new UserException(errorMessage.ToString());

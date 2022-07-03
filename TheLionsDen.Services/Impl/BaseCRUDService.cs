@@ -27,7 +27,7 @@ namespace TheLionsDen.Services.Impl
             this.mapper = mapper;
         }
 
-        public async Task<string> Delete(int id)
+        public virtual async Task<string> Delete(int id)
         {
             TDb entity = await dbSet.FindAsync(id);
 

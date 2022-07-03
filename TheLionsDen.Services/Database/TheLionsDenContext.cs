@@ -187,9 +187,6 @@ namespace TheLionsDen.Services.Database
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Status)
-                    .HasMaxLength(40)
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Reservation>(entity =>

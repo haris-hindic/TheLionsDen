@@ -13,7 +13,6 @@ namespace TheLionsDen.Services.Database
         public int PaymentDetailsId { get; set; }
         public DateTime Date { get; set; }
         public string PaymentType { get; set; } = null!;
-        public string Status { get; set; } = null!;
         public string? CardNumber { get; set; }
         public string? ExpDate { get; set; }
         public int? Cvc { get; set; }
