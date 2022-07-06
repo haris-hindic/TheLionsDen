@@ -7,11 +7,11 @@ using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
 
-namespace WinUI.Services
+namespace TheLionsDen.WinUI.Services
 {
     public class FacilityAPI : CRUDAPIService<FacilityResponse, FacilitySearchObject, FacilityUpsertRequest, FacilityUpsertRequest>
     {
-        public FacilityAPI(string resourceName="facility") : base(resourceName)
+        public FacilityAPI(string resourceName = "facility") : base(resourceName)
         {
         }
     }

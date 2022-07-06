@@ -1,7 +1,7 @@
 ﻿using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
-using WinUI.Helpers;
-using WinUI.Services;
+using TheLionsDen.WinUI.Helpers;
+using TheLionsDen.WinUI.Services;
 
 namespace WinUI.Forms.RoomTypes
 {

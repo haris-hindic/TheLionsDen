@@ -23,7 +23,7 @@ namespace TheLionsDen.Services.Database
         public virtual DbSet<JobType> JobTypes { get; set; } = null!;
         public virtual DbSet<PaymentDetail> PaymentDetails { get; set; } = null!;
         public virtual DbSet<Reservation> Reservations { get; set; } = null!;
-        public virtual DbSet<ReservationFacilite> ReservationFacilites { get; set; } = null!;
+        public virtual DbSet<ReservationFacilities> ReservationFacilities { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
         public virtual DbSet<RoomAmenity> RoomAmenities { get; set; } = null!;
@@ -236,7 +236,7 @@ namespace TheLionsDen.Services.Database
                     .HasConstraintName("FK_REFERENCE_9");
             });
 
-            modelBuilder.Entity<ReservationFacilite>(entity =>
+            modelBuilder.Entity<ReservationFacilities>(entity =>
             {
                 entity.HasKey(e => e.ReservaitonFacilityId)
                     .HasName("PK_13");
@@ -248,13 +248,13 @@ namespace TheLionsDen.Services.Database
                 entity.Property(e => e.ReservationId).HasColumnName("ReservationID");
 
                 entity.HasOne(d => d.Facility)
-                    .WithMany(p => p.ReservationFacilites)
+                    .WithMany(p => p.ReservationFacilities)
                     .HasForeignKey(d => d.FacilityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_12");
 
                 entity.HasOne(d => d.Reservation)
-                    .WithMany(p => p.ReservationFacilites)
+                    .WithMany(p => p.ReservationFacilities)
                     .HasForeignKey(d => d.ReservationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_11");

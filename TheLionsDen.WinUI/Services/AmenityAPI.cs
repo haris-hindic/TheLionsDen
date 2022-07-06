@@ -7,11 +7,11 @@ using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
 
-namespace WinUI.Services
+namespace TheLionsDen.WinUI.Services
 {
     public class AmenityAPI : CRUDAPIService<AmenityResponse, AmenitySearchObject, AmenityUpsertRequest, AmenityUpsertRequest>
     {
-        public AmenityAPI(string resourceName="amenity") : base(resourceName)
+        public AmenityAPI(string resourceName = "amenity") : base(resourceName)
         {
         }
     }

@@ -1,5 +1,5 @@
-﻿using WinUI.Helpers;
-using WinUI.Services;
+﻿using TheLionsDen.WinUI.Helpers;
+using TheLionsDen.WinUI.Services;
 
 namespace WinUI.Forms.Auth
 {

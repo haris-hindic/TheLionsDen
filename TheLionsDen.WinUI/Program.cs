@@ -1,6 +1,6 @@
 using WinUI.Forms.Auth;
 
-namespace WinUI
+namespace TheLionsDen.WinUI
 {
     internal static class Program
     {

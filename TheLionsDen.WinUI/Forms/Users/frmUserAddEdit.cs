@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
-using WinUI.Helpers;
-using WinUI.Services;
+using TheLionsDen.WinUI.Helpers;
+using TheLionsDen.WinUI.Services;
 
 namespace WinUI.Forms.Users
 {

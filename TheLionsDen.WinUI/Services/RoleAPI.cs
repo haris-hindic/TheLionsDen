@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
 
-namespace WinUI.Services
+namespace TheLionsDen.WinUI.Services
 {
     public class RoleAPI : BaseAPIService<RoleResponse, BaseSearchObject>
     {
-        public RoleAPI(string resourceName="role") : base(resourceName)
+        public RoleAPI(string resourceName = "role") : base(resourceName)
         {
         }
     }

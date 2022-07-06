@@ -28,5 +28,11 @@
 	  <ProjectReference Include="..\TheLionsDen.Model\TheLionsDen.Model.csproj" />
 	  <ProjectReference Include="..\TheLionsDen.Services\TheLionsDen.Services.csproj" />
 	</ItemGroup>
+	
+	<ItemGroup>
+		<None Update="DbSetup\database.sql">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

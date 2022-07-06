@@ -1,9 +1,9 @@
 ﻿using Flurl.Http;
 using System.Text;
 using System.Text.Json;
-using WinUI.Helpers;
+using TheLionsDen.WinUI.Helpers;
 
-namespace WinUI.Services
+namespace TheLionsDen.WinUI.Services
 {
     public class CRUDAPIService<T, TSearch, TInsert, TUpdate> : BaseAPIService<T, TSearch>
         where T : class where TSearch : class where TInsert : class where TUpdate : class
@@ -26,7 +26,7 @@ namespace WinUI.Services
 
                 var errors = errorResponse.First(x => x.Key == "errors");
 
-                string errorsJsonString = String.Join(",", errors.Value);
+                string errorsJsonString = string.Join(",", errors.Value);
 
                 Dictionary<string, string[]> errorsMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(errorsJsonString);
 
@@ -55,7 +55,7 @@ namespace WinUI.Services
 
                 var errors = errorResponse.First(x => x.Key == "errors");
 
-                string errorsJsonString = String.Join(",", errors.Value);
+                string errorsJsonString = string.Join(",", errors.Value);
 
                 Dictionary<string, string[]> errorsMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(errorsJsonString);
 
@@ -66,7 +66,7 @@ namespace WinUI.Services
                 }
 
                 MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(T);
+                return default;
             }
         }
 
@@ -85,7 +85,7 @@ namespace WinUI.Services
 
                 var errors = errorResponse.First(x => x.Key == "errors");
 
-                string errorsJsonString = String.Join(",", errors.Value);
+                string errorsJsonString = string.Join(",", errors.Value);
 
                 Dictionary<string, string[]> errorsMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(errorsJsonString);
 
@@ -96,7 +96,7 @@ namespace WinUI.Services
                 }
 
                 MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(T);
+                return default;
             }
         }
     }

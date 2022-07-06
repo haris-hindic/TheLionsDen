@@ -2,7 +2,7 @@
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
 
-namespace WinUI.Services
+namespace TheLionsDen.WinUI.Services
 {
     public class RoomImageAPI : CRUDAPIService<RoomImageResponse, RoomImageSearchObject, RoomImageInsertRequest, RoomImageInsertRequest>
     {

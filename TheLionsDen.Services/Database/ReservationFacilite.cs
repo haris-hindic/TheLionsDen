@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheLionsDen.Services.Database
 {
-    public partial class ReservationFacilite
+    public partial class ReservationFacilities
     {
         public int ReservaitonFacilityId { get; set; }
         public int ReservationId { get; set; }

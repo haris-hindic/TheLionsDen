@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinUI.Helpers
+namespace TheLionsDen.WinUI.Helpers
 {
     public static class AuthHelper
     {

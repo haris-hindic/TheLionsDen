@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TheLionsDen.Auth;
+using TheLionsDen.DbSetup;
 using TheLionsDen.Filters;
 using TheLionsDen.Services;
 using TheLionsDen.Services.Database;
@@ -73,5 +74,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var database = scope.ServiceProvider.GetService<TheLionsDenContext>();
+    new DbHelper().Init(database);
+    new DbHelper().InsertData(database);
+}
 
 app.Run();

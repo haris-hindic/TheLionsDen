@@ -26,6 +26,6 @@ namespace TheLionsDen.Model.Responses
         public virtual RoomResponse Room { get; set; }
         public virtual UserResponse User { get; set; }
         [JsonIgnore]
-        public virtual ICollection<ReservationFaciliteResponse> ReservationFacilites { get; set; }
+        public virtual ICollection<ReservationFaciliteResponse> ReservationFacilities { get; set; }
     }
 }

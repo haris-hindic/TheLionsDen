@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
-using WinUI.Helpers;
+using TheLionsDen.WinUI.Helpers;
 
-namespace WinUI.Services
+namespace TheLionsDen.WinUI.Services
 {
     public class UserAPI : CRUDAPIService<UserResponse, UserSearchObject, UserInsertRequest, UserUpdateRequest>
     {
-        public UserAPI(string resourceName="user") : base(resourceName)
+        public UserAPI(string resourceName = "user") : base(resourceName)
         {
         }
         public async Task<UserResponse> Login()
@@ -31,7 +31,7 @@ namespace WinUI.Services
 
                 var errors = errorResponse.First(x => x.Key == "errors");
 
-                string errorsJsonString = String.Join(",", errors.Value);
+                string errorsJsonString = string.Join(",", errors.Value);
 
                 Dictionary<string, string[]> errorsMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(errorsJsonString);
 
@@ -42,7 +42,7 @@ namespace WinUI.Services
                 }
 
                 MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(UserResponse);
+                return default;
             }
         }
     }

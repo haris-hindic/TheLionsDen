@@ -3,15 +3,15 @@ using Flurl.Http;
 using System.Text;
 using System.Text.Json;
 using TheLionsDen.Model;
-using WinUI.Helpers;
+using TheLionsDen.WinUI.Helpers;
 
-namespace WinUI.Services
+namespace TheLionsDen.WinUI.Services
 {
     public class BaseAPIService<T, TSearch>
-        where T : class where TSearch : class 
+        where T : class where TSearch : class
     {
         public readonly string resourceName;
-        public readonly string endpoint = "https://localhost:7070";
+        public readonly string endpoint = "http://localhost:5070";
 
         public BaseAPIService(string resourceName)
         {
@@ -37,7 +37,7 @@ namespace WinUI.Services
 
                 var errors = errorResponse.First(x => x.Key == "errors");
 
-                string errorsJsonString = String.Join(",", errors.Value);
+                string errorsJsonString = string.Join(",", errors.Value);
 
                 Dictionary<string, string[]> errorsMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(errorsJsonString);
 
@@ -48,7 +48,7 @@ namespace WinUI.Services
                 }
 
                 MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(IEnumerable<T>);
+                return default;
             }
 
         }
@@ -67,7 +67,7 @@ namespace WinUI.Services
 
                 var errors = errorResponse.First(x => x.Key == "errors");
 
-                string errorsJsonString = String.Join(",", errors.Value);
+                string errorsJsonString = string.Join(",", errors.Value);
 
                 Dictionary<string, string[]> errorsMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(errorsJsonString);
 
@@ -78,7 +78,7 @@ namespace WinUI.Services
                 }
 
                 MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(T);
+                return default;
             }
         }
     }

@@ -1,0 +1,36 @@
+version: '3'
+services:
+#mssql docker
+  thelionsden-sql:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=QWElkj132!
+      - MSSQL_PID=Developer
+    ports:
+      - 1401:1433
+    expose:
+        - 1433
+    networks:
+      - thelionsdennet
+
+  thelionsden-api:
+    restart: unless-stopped
+    build:
+      context: .
+    environment:
+      - ConnectionStrings:AppDb=Server=thelionsden-sql,1433;Database=TheLionsDen;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5070:5070
+    networks:
+      - thelionsdennet
+    links:
+      - thelionsden-sql
+    depends_on:
+      - thelionsden-sql
+      
+networks:
+  thelionsdennet:
+    driver: bridge      

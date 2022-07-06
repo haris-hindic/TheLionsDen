@@ -2,7 +2,7 @@
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
-using WinUI.Services;
+using TheLionsDen.WinUI.Services;
 
 namespace WinUI.Forms.Amenidies
 {

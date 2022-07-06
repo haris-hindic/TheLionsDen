@@ -1,8 +1,8 @@
 ﻿using TheLionsDen.Model.Enums;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
+using TheLionsDen.WinUI.Services;
 using WinUI.Forms.RoomTypes;
-using WinUI.Services;
 
 namespace WinUI.Forms.Rooms
 {

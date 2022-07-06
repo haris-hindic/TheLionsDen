@@ -10,8 +10,8 @@ using System.Windows.Forms;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
 using TheLionsDen.WinUI.Forms.Reservations;
+using TheLionsDen.WinUI.Helpers;
 using TheLionsDen.WinUI.Services;
-using WinUI.Helpers;
 
 namespace WinUI.Forms.Reservations
 {

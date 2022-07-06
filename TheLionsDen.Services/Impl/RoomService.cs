@@ -72,8 +72,8 @@ namespace TheLionsDen.Services.Impl
         {
             var roomAmenities = context.RoomAmenities.Where(x => x.RoomId == id);
             var favourites = context.Favourites.Where(x => x.RoomId == id);
-            var reservations = context.Reservations.Include("ReservationFacilites").Where(x => x.RoomId == id);
-            var reservationFacilities = reservations.Select(x => x.ReservationFacilites);
+            var reservations = context.Reservations.Include("ReservationFacilities").Where(x => x.RoomId == id);
+            var reservationFacilities = reservations.Select(x => x.ReservationFacilities);
 
             context.RemoveRange(roomAmenities);
             context.RemoveRange(favourites);

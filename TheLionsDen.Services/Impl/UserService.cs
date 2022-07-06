@@ -133,10 +133,10 @@ namespace TheLionsDen.Services.Impl
         public override Task<string> Delete(int id)
         {
             var reservations = context.Reservations.Where(x => x.UserId == id);
-            var reservationFacilites = context.Favourites.Where(x => x.UserId == id);
+            var reservationFacilities = context.Favourites.Where(x => x.UserId == id);
 
             context.RemoveRange(reservations);
-            context.RemoveRange(reservationFacilites);
+            context.RemoveRange(reservationFacilities);
 
             return base.Delete(id);
         }

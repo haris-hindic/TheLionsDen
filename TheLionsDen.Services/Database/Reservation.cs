@@ -7,7 +7,7 @@ namespace TheLionsDen.Services.Database
     {
         public Reservation()
         {
-            ReservationFacilites = new HashSet<ReservationFacilite>();
+            ReservationFacilities = new HashSet<ReservationFacilities>();
         }
 
         public int ReservationId { get; set; }
@@ -24,7 +24,7 @@ namespace TheLionsDen.Services.Database
         public virtual PaymentDetail PaymentDetails { get; set; } = null!;
         public virtual Room Room { get; set; } = null!;
         public virtual User User { get; set; } = null!;
-        public virtual ICollection<ReservationFacilite> ReservationFacilites { get; set; }
+        public virtual ICollection<ReservationFacilities> ReservationFacilities { get; set; }
 
         
     }

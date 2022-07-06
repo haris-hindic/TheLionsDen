@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
-using WinUI.Helpers;
+using TheLionsDen.WinUI.Helpers;
 
-namespace WinUI.Services
+namespace TheLionsDen.WinUI.Services
 {
     public class EmployeeAPI : CRUDAPIService<EmployeeResponse, EmployeeSearchObject, EmployeeInsertRequest, EmployeeUpdateRequest>
     {
-        public EmployeeAPI(string resourceName="employee") : base(resourceName)
+        public EmployeeAPI(string resourceName = "employee") : base(resourceName)
         {
         }
 
-        public async Task<string> AssignToFacility(int employeeId,int facilityId)
+        public async Task<string> AssignToFacility(int employeeId, int facilityId)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace WinUI.Services
 
                 var errors = errorResponse.First(x => x.Key == "errors");
 
-                string errorsJsonString = String.Join(",", errors.Value);
+                string errorsJsonString = string.Join(",", errors.Value);
 
                 Dictionary<string, string[]> errorsMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(errorsJsonString);
 
@@ -61,7 +61,7 @@ namespace WinUI.Services
 
                 var errors = errorResponse.First(x => x.Key == "errors");
 
-                string errorsJsonString = String.Join(",", errors.Value);
+                string errorsJsonString = string.Join(",", errors.Value);
 
                 Dictionary<string, string[]> errorsMap = JsonSerializer.Deserialize<Dictionary<string, string[]>>(errorsJsonString);
 

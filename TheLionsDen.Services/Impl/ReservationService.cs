@@ -27,17 +27,17 @@ namespace TheLionsDen.Services.Impl
         {
             var entity = await base.Insert(request);
 
-            var facilites = new List<ReservationFacilite>();
+            var facilites = new List<ReservationFacilities>();
             foreach (var id in request.FacilityIds)
             {
-                facilites.Add(new ReservationFacilite
+                facilites.Add(new ReservationFacilities
                 {
                     ReservationId = entity.ReservationId,
                     FacilityId = id
                 });
 
             }
-            await context.ReservationFacilites.AddRangeAsync(facilites);
+            await context.ReservationFacilities.AddRangeAsync(facilites);
             await context.SaveChangesAsync();
 
             return await GetById(entity.ReservationId);
@@ -45,9 +45,9 @@ namespace TheLionsDen.Services.Impl
 
         public override Task<string> Delete(int id)
         {
-            var reservationFacilites = context.ReservationFacilites.Where(x => x.ReservationId == id);
+            var reservationFacilities = context.ReservationFacilities.Where(x => x.ReservationId == id);
 
-            context.RemoveRange(reservationFacilites);
+            context.RemoveRange(reservationFacilities);
 
             return base.Delete(id);
         }
@@ -55,7 +55,7 @@ namespace TheLionsDen.Services.Impl
         public override async Task<ReservationResponse> GetById(int id)
         {
             validateGetByIdRequest(id);
-            var entity = await context.Reservations.Include("User").Include("ReservationFacilites.Facility")
+            var entity = await context.Reservations.Include("User").Include("ReservationFacilities.Facility")
                 .Include("Room.RoomType").Include("PaymentDetails").FirstOrDefaultAsync(x => x.ReservationId == id);
 
             return mapper.Map<ReservationResponse>(entity);
@@ -109,7 +109,7 @@ namespace TheLionsDen.Services.Impl
             }
             if (searchObject.IncludeFacilites)
             {
-                includedQuery = includedQuery.Include("ReservationFacilites.Facility");
+                includedQuery = includedQuery.Include("ReservationFacilities.Facility");
             }
 
             return includedQuery;

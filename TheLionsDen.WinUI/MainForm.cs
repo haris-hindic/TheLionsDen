@@ -1,4 +1,5 @@
-﻿using WinUI.Forms.Amenidies;
+﻿using TheLionsDen.WinUI.Helpers;
+using WinUI.Forms.Amenidies;
 using WinUI.Forms.Analytics;
 using WinUI.Forms.Auth;
 using WinUI.Forms.Employees;
@@ -7,7 +8,6 @@ using WinUI.Forms.Reservations;
 using WinUI.Forms.Rooms;
 using WinUI.Forms.RoomTypes;
 using WinUI.Forms.Users;
-using WinUI.Helpers;
 
 namespace WinUI
 {

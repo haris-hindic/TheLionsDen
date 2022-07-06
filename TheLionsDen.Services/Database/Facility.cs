@@ -8,7 +8,7 @@ namespace TheLionsDen.Services.Database
         public Facility()
         {
             Employees = new HashSet<Employee>();
-            ReservationFacilites = new HashSet<ReservationFacilite>();
+            ReservationFacilities = new HashSet<ReservationFacilities>();
         }
 
         public int FacilityId { get; set; }
@@ -19,6 +19,6 @@ namespace TheLionsDen.Services.Database
         public byte[]? Image { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }
-        public virtual ICollection<ReservationFacilite> ReservationFacilites { get; set; }
+        public virtual ICollection<ReservationFacilities> ReservationFacilities { get; set; }
     }
 }

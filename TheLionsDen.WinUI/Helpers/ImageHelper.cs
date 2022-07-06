@@ -1,4 +1,4 @@
-﻿namespace WinUI.Helpers
+﻿namespace TheLionsDen.WinUI.Helpers
 {
     public static class ImageHelper
     {

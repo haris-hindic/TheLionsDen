@@ -1,6 +1,6 @@
 ﻿using System.Data;
+using TheLionsDen.WinUI.Helpers;
 using TheLionsDen.WinUI.Services;
-using WinUI.Helpers;
 
 namespace WinUI.Forms.Analytics
 {

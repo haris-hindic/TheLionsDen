@@ -16,6 +16,6 @@ namespace TheLionsDen.Model.Responses
         public string PriceCurrency => $"{Price}$";
 
         public virtual ICollection<EmployeeResponse> Employees { get; set; }
-        //public virtual ICollection<ReservationFacilite> ReservationFacilites { get; set; }
+        //public virtual ICollection<ReservationFacilite> ReservationFacilities { get; set; }
     }
 }

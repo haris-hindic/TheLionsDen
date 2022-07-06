@@ -1,8 +1,8 @@
 ﻿using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
-using WinUI.Helpers;
-using WinUI.Services;
+using TheLionsDen.WinUI.Helpers;
+using TheLionsDen.WinUI.Services;
 
 namespace WinUI.Forms.RoomTypes
 {
@@ -252,6 +252,7 @@ namespace WinUI.Forms.RoomTypes
                 if (result != null)
                 {
                     MessageBox.Show(result);
+                    pbImages.Image = null;
                     loadData();
                 }
             }

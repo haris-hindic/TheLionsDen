@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
-using WinUI.Helpers;
-using WinUI.Services;
+using TheLionsDen.WinUI.Helpers;
 
 namespace TheLionsDen.WinUI.Services
 {
