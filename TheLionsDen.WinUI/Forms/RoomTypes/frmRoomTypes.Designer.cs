@@ -43,13 +43,12 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvRoomTypes = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtDesc = new System.Windows.Forms.TextBox();
             this.NameField = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Capacity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rules = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtDesc = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -203,8 +202,7 @@
             this.NameField,
             this.Capacity,
             this.Size,
-            this.Rules,
-            this.Delete});
+            this.Rules});
             this.dgvRoomTypes.Location = new System.Drawing.Point(9, 155);
             this.dgvRoomTypes.Name = "dgvRoomTypes";
             this.dgvRoomTypes.RowHeadersWidth = 51;
@@ -213,6 +211,25 @@
             this.dgvRoomTypes.TabIndex = 42;
             this.dgvRoomTypes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoomTypes_CellContentClick);
             this.dgvRoomTypes.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoomTypes_CellContentDoubleClick);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtDesc);
+            this.groupBox2.Location = new System.Drawing.Point(9, 431);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(272, 274);
+            this.groupBox2.TabIndex = 49;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Description";
+            // 
+            // txtDesc
+            // 
+            this.txtDesc.Location = new System.Drawing.Point(8, 26);
+            this.txtDesc.Multiline = true;
+            this.txtDesc.Name = "txtDesc";
+            this.txtDesc.ReadOnly = true;
+            this.txtDesc.Size = new System.Drawing.Size(258, 242);
+            this.txtDesc.TabIndex = 31;
             // 
             // NameField
             // 
@@ -247,36 +264,6 @@
             this.Rules.HeaderText = "Rules";
             this.Rules.MinimumWidth = 6;
             this.Rules.Name = "Rules";
-            // 
-            // Delete
-            // 
-            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Delete.HeaderText = "Delete";
-            this.Delete.MinimumWidth = 6;
-            this.Delete.Name = "Delete";
-            this.Delete.Text = "Delete";
-            this.Delete.ToolTipText = "Delete";
-            this.Delete.UseColumnTextForButtonValue = true;
-            this.Delete.Width = 59;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtDesc);
-            this.groupBox2.Location = new System.Drawing.Point(9, 431);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(272, 274);
-            this.groupBox2.TabIndex = 49;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Description";
-            // 
-            // txtDesc
-            // 
-            this.txtDesc.Location = new System.Drawing.Point(8, 26);
-            this.txtDesc.Multiline = true;
-            this.txtDesc.Name = "txtDesc";
-            this.txtDesc.ReadOnly = true;
-            this.txtDesc.Size = new System.Drawing.Size(258, 242);
-            this.txtDesc.TabIndex = 31;
             // 
             // frmRoomTypes
             // 
@@ -328,6 +315,5 @@
         private DataGridViewTextBoxColumn Capacity;
         private DataGridViewTextBoxColumn Size;
         private DataGridViewTextBoxColumn Rules;
-        private DataGridViewButtonColumn Delete;
     }
 }

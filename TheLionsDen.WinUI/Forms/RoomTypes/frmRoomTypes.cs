@@ -36,7 +36,7 @@ namespace WinUI.Forms.RoomTypes
             var response = await roomTypeAPI.Get(request);
 
             dgvRoomTypes.DataSource = response;
-            
+
         }
 
         private void btnClearForm_Click(object sender, EventArgs e)
@@ -51,25 +51,7 @@ namespace WinUI.Forms.RoomTypes
 
         private async void dgvRoomTypes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgvRoomTypes.Columns["Delete"].Index && e.RowIndex >= 0)
-            {
-                var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
-                {
-                    var item = dgvRoomTypes.Rows[e.RowIndex].DataBoundItem as RoomTypeResponse;
-                    var response = await roomTypeAPI.Delete(item.RoomTypeId);
-                    if (!String.IsNullOrEmpty(response))
-                    {
-                        loadData();
-                    }
-                }
-
-            }
-            else
-            {
-                populateFields(dgvRoomTypes.Rows[e.RowIndex].DataBoundItem as RoomTypeResponse);
-            }
+            populateFields(dgvRoomTypes.Rows[e.RowIndex].DataBoundItem as RoomTypeResponse);
         }
 
         private async void populateFields(RoomTypeResponse roomTypeResponse)
@@ -122,7 +104,6 @@ namespace WinUI.Forms.RoomTypes
         private void frmRoomTypes_Load(object sender, EventArgs e)
         {
             cmbComparator.DataSource = cmbHelper.comparator;
-
         }
 
         private void btnNew_Click(object sender, EventArgs e)

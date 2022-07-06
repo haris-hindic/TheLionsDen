@@ -8,7 +8,7 @@ namespace WinUI.Forms.Facilites
     public partial class frmFacilites : Form
     {
         private FacilityAPI facilityAPI;
-        
+
         public frmFacilites()
         {
             InitializeComponent();
@@ -38,30 +38,13 @@ namespace WinUI.Forms.Facilites
 
         private async void dgvFacilites_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dgvFacilites.Columns["Delete"].Index && e.RowIndex >= 0)
-            {
-                var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
-                {
-                    var item = dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse;
-                    var response = await facilityAPI.Delete(item.FacilityId);
-                    if (!String.IsNullOrEmpty(response))
-                    {
-                        loadData();
-                    }
-                }
-
-            }
-            else
-            {
-                populateFields(dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse);
-            }
+            populateFields(dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse);
         }
 
         private void populateFields(FacilityResponse? facilityResponse)
         {
-            if (pbImage.Image != null) pbImage.Image = null;
+            if (pbImage.Image != null)
+                pbImage.Image = null;
 
             pbImage.Image = ImageHelper.ByteArrayToImage(facilityResponse.Image);
             Employees.DataSource = facilityResponse.Employees;

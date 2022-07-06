@@ -14,5 +14,11 @@ namespace TheLionsDen.Controllers
         public FacilityController(IFacilityService service) : base(service)
         {
         }
+
+        [NonAction]
+        public override Task<string> Delete(int id)
+        {
+            return base.Delete(id);
+        }
     }
 }

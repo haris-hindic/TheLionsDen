@@ -130,6 +130,17 @@ namespace TheLionsDen.Services.Impl
             return mapper.Map<UserResponse>(entity);
         }
 
+        public override Task<string> Delete(int id)
+        {
+            var reservations = context.Reservations.Where(x => x.UserId == id);
+            var reservationFacilites = context.Favourites.Where(x => x.UserId == id);
+
+            context.RemoveRange(reservations);
+            context.RemoveRange(reservationFacilites);
+
+            return base.Delete(id);
+        }
+
         #region VALIDATIONS
 
         public override void validateInsertRequest(UserInsertRequest request)

@@ -46,7 +46,6 @@
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFacilites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
@@ -154,8 +153,7 @@
             this.NameField,
             this.Description,
             this.Price,
-            this.Status,
-            this.Delete});
+            this.Status});
             this.dgvFacilites.Location = new System.Drawing.Point(10, 167);
             this.dgvFacilites.Name = "dgvFacilites";
             this.dgvFacilites.RowHeadersWidth = 51;
@@ -237,17 +235,6 @@
             this.Status.Name = "Status";
             this.Status.Width = 125;
             // 
-            // Delete
-            // 
-            this.Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Delete.HeaderText = "Delete";
-            this.Delete.MinimumWidth = 6;
-            this.Delete.Name = "Delete";
-            this.Delete.Text = "Delete";
-            this.Delete.ToolTipText = "Delete";
-            this.Delete.UseColumnTextForButtonValue = true;
-            this.Delete.Width = 59;
-            // 
             // frmFacilites
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -294,6 +281,5 @@
         private DataGridViewTextBoxColumn Description;
         private DataGridViewTextBoxColumn Price;
         private DataGridViewTextBoxColumn Status;
-        private DataGridViewButtonColumn Delete;
     }
 }
