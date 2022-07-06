@@ -12,7 +12,7 @@ namespace WinUI.Services
         {
         }
 
-        public async Task<string> Delete(int id)
+        public virtual async Task<string> Delete(int id)
         {
             try
             {
@@ -45,7 +45,6 @@ namespace WinUI.Services
         {
             try
             {
-
                 var entity = await $"{endpoint}/{resourceName}".WithBasicAuth(AuthHelper.Username, AuthHelper.Password).PostJsonAsync(request).ReceiveJson<T>();
 
                 return entity;
@@ -71,7 +70,7 @@ namespace WinUI.Services
             }
         }
 
-        public async Task<T> Put(object id, TUpdate request)
+        public virtual async Task<T> Put(object id, TUpdate request)
         {
             try
             {

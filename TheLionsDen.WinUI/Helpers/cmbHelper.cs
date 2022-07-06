@@ -20,9 +20,21 @@ namespace WinUI.Helpers
         {
             "<",">","=",">=","<="
         };
+        public static List<string> comparatorLite = new List<string>()
+        {
+            "<",">","="
+        };
         public static List<string> roomState = new List<string>()
         {
             "New","Active","Hidden","Taken","Unavaliable"
+        };
+        public static List<string> reservationStatus = new List<string>()
+        {
+            "Active","Cancelled","Confirmed"
+        };
+        public static List<string> charts = new List<string>()
+        {
+            "Display Employees per Job Type","Display rooms per room type","Display last 5 years revenue", "Display revenue per room type"
         };
     }
 }

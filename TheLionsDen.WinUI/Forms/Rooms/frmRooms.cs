@@ -36,7 +36,6 @@ namespace WinUI.Forms.Rooms
             btnTaken.Enabled = false;
             btnActivate.Enabled = false;
             this.selectedRoom = null;
-
         }
 
         private async void loadRooms()

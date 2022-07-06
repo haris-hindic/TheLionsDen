@@ -10,6 +10,6 @@ namespace WinUI.Helpers
     {
         public static string Username = null;
         public static string Password = null;
-        public static string Roles = null;
+        public static string Role = null;
     }
 }

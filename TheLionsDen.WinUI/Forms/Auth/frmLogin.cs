@@ -27,7 +27,7 @@ namespace WinUI.Forms.Auth
             {
                 var result = await api.Login();
 
-                AuthHelper.Roles = result.RoleName;
+                AuthHelper.Role = result.RoleName;
 
                 this.Hide();
                 new MainForm().Show();

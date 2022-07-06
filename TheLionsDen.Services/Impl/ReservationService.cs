@@ -166,7 +166,7 @@ namespace TheLionsDen.Services.Impl
         {
             var errorMessage = new StringBuilder();
 
-            validateReservationExist(reservationId,errorMessage);   
+            validateReservationExist(reservationId, errorMessage);
             validateIsActive(reservationId, errorMessage);
 
             if (errorMessage.Length > 0)

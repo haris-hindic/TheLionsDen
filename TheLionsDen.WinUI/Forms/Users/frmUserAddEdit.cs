@@ -96,7 +96,7 @@ namespace WinUI.Forms.Users
                                 {
                                     AuthHelper.Username = null;
                                     AuthHelper.Password = null;
-                                    AuthHelper.Roles = null;
+                                    AuthHelper.Role = null;
                                     Application.Restart();
                                 }
                                 populateFields();

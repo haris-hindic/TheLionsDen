@@ -92,7 +92,7 @@ namespace WinUI
         {
             AuthHelper.Username = null;
             AuthHelper.Password = null;
-            AuthHelper.Roles = null;
+            AuthHelper.Role = null;
             this.Hide();
             new frmLogin().Show();
         }

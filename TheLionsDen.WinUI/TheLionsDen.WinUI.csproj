@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Flurl.Http" Version="3.2.2" />
+		<PackageReference Include="ScottPlot.WinForms" Version="4.1.46" />
 	</ItemGroup>
 
 	<ItemGroup>
