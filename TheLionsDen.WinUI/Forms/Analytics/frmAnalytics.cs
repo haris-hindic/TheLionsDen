@@ -40,7 +40,6 @@ namespace WinUI.Forms.Analytics
             formsPlot1.Plot.Legend();
             formsPlot1.Refresh();
 
-            //formsPlot1.Plot.Title("Employees per job type");
             formsPlot1.Plot.YLabel("");
             formsPlot1.Plot.XLabel("");
             groupBox2.Text = "Employees per Job Type";
@@ -63,7 +62,6 @@ namespace WinUI.Forms.Analytics
             pie.ShowValues = true;
             formsPlot1.Plot.Legend();
 
-            //formsPlot1.Plot.Title("Revenue per room type");
             formsPlot1.Plot.YLabel("");
             formsPlot1.Plot.XLabel("");
             formsPlot1.Refresh();
@@ -90,7 +88,6 @@ namespace WinUI.Forms.Analytics
             gauges.StartingAngle = 180;
             gauges.Font.Color = Color.Black;
 
-            //formsPlot1.Plot.Title("Rooms per room type");
             formsPlot1.Plot.YLabel("");
             formsPlot1.Plot.XLabel("");
 
@@ -117,7 +114,6 @@ namespace WinUI.Forms.Analytics
             formsPlot2.Plot.XAxis.TickLabelStyle(rotation: 45);
             formsPlot2.Plot.XAxis.SetSizeLimit(min: 50); 
 
-            //formsPlot2.Plot.Title("Yearly revenue");
             formsPlot2.Plot.YLabel("Revenue ($)");
             formsPlot2.Plot.XLabel("Timespan");
 
