@@ -75,7 +75,7 @@
             this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(868, 330);
+            this.groupBox1.Size = new System.Drawing.Size(887, 330);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Facility details";
@@ -107,7 +107,6 @@
             this.pbImage.Size = new System.Drawing.Size(375, 196);
             this.pbImage.TabIndex = 9;
             this.pbImage.TabStop = false;
-            this.pbImage.Validating += new System.ComponentModel.CancelEventHandler(this.pbImage_Validating);
             // 
             // label5
             // 
@@ -195,7 +194,7 @@
             this.groupBox2.Controls.Add(this.cmbAvaliableEmployees);
             this.groupBox2.Location = new System.Drawing.Point(12, 341);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(868, 331);
+            this.groupBox2.Size = new System.Drawing.Size(887, 331);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Employees";
@@ -281,7 +280,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 684);
+            this.ClientSize = new System.Drawing.Size(913, 684);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmFacilityAddEdit";

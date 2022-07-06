@@ -46,7 +46,8 @@ namespace WinUI.Forms.Facilites
             if (pbImage.Image != null)
                 pbImage.Image = null;
 
-            pbImage.Image = ImageHelper.ByteArrayToImage(facilityResponse.Image);
+            if(facilityResponse.Image.Length > 1)
+                pbImage.Image = ImageHelper.ByteArrayToImage(facilityResponse.Image);
             Employees.DataSource = facilityResponse.Employees;
             Employees.DisplayMember = "OutlineText";
         }

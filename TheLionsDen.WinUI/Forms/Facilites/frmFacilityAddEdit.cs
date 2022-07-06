@@ -81,9 +81,10 @@ namespace WinUI.Forms.Facilites
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren())
+            if (ValidateChildren() && ValidateImage())
             {
                 var request = populateRequest();
+                var img = pbImage.Image;
 
                 if (this.facility == null)
                 {
@@ -124,9 +125,11 @@ namespace WinUI.Forms.Facilites
             txtDescription.Text = this.facility.Description;
             txtName.Text = this.facility.Name;
             nudPrice.Value = (decimal)this.facility.Price;
-            pbImage.Image = ImageHelper.ByteArrayToImage(this.facility.Image);
+            if(this.facility.Image.Length>1)
+                pbImage.Image = ImageHelper.ByteArrayToImage(this.facility.Image);
             pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
             cmbStatus.SelectedItem = this.facility.Status;
+            loadEmployees();
         }
 
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -171,18 +174,15 @@ namespace WinUI.Forms.Facilites
             }
         }
 
-        private void pbImage_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        public bool ValidateImage()
         {
             if (pbImage.Image == null)
             {
-                e.Cancel = true;
-                error.SetError(pbImage, "Please select a image!");
+                error.SetError(pbImage, "Please upload an image!");
+                return false;
             }
-            else
-            {
-                e.Cancel = false;
-                error.SetError(pbImage, "");
-            }
+            error.Clear();
+            return true;
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
