@@ -50,20 +50,28 @@ namespace WinUI.Forms.Users
             if (e.ColumnIndex == dgvUsers.Columns["Delete"].Index && e.RowIndex >= 0)
             {
                 var item = dgvUsers.Rows[e.RowIndex].DataBoundItem as UserResponse;
-                if (item.Username.Equals(AuthHelper.Username))
+                if (item == null)
                 {
-                    MessageBox.Show("You can't delete your profile!", "Error");
+                    MessageBox.Show("Grid is currently empty, option DELETE is not available!", "Error!!");
                 }
                 else
                 {
-                    var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
 
-                    if (confirmResult == DialogResult.Yes)
+                    if (item.Username.Equals(AuthHelper.Username))
                     {
-                        var response = await api.Delete(item.UserId);
-                        if (!String.IsNullOrEmpty(response))
+                        MessageBox.Show("You can't delete your profile!", "Error");
+                    }
+                    else
+                    {
+                        var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+
+                        if (confirmResult == DialogResult.Yes)
                         {
-                            loadData();
+                            var response = await api.Delete(item.UserId);
+                            if (!String.IsNullOrEmpty(response))
+                            {
+                                loadData();
+                            }
                         }
                     }
                 }

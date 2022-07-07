@@ -21,15 +21,22 @@ namespace WinUI.Forms.Amenidies
         {
             if (e.ColumnIndex == dgvAmenities.Columns["Delete"].Index)
             {
-                var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
+                var item = dgvAmenities.Rows[e.RowIndex].DataBoundItem as AmenityResponse;
+                if (item == null)
                 {
-                    var item = dgvAmenities.Rows[e.RowIndex].DataBoundItem as AmenityResponse;
-                    var response = await api.Delete(item.AmenityId);
-                    if (!String.IsNullOrEmpty(response))
+                    MessageBox.Show("Grid is currently empty, option DELETE is not available!", "Error!!");
+                }
+                else
+                {
+                    var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        await LoadData();
+                        var response = await api.Delete(item.AmenityId);
+                        if (!String.IsNullOrEmpty(response))
+                        {
+                            await LoadData();
+                        }
                     }
                 }
 

@@ -25,7 +25,5 @@ namespace TheLionsDen.Services.Database
         public virtual Room Room { get; set; } = null!;
         public virtual User User { get; set; } = null!;
         public virtual ICollection<ReservationFacilities> ReservationFacilities { get; set; }
-
-        
     }
 }

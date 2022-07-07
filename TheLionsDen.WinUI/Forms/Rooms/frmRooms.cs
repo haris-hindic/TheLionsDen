@@ -149,15 +149,22 @@ namespace WinUI.Forms.Rooms
         {
             if (e.ColumnIndex == dgvRooms.Columns["Delete"].Index && e.RowIndex >= 0)
             {
-                var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
+                var item = dgvRooms.Rows[e.RowIndex].DataBoundItem as RoomResponse;
+                if (item == null)
                 {
-                    var item = dgvRooms.Rows[e.RowIndex].DataBoundItem as RoomResponse;
-                    var response = await roomAPI.Delete(item.RoomId);
-                    if (!String.IsNullOrEmpty(response))
+                    MessageBox.Show("Grid is currently empty, option DELETE is not available!", "Error!!");
+                }
+                else
+                {
+                    var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        loadRooms();
+                        var response = await roomAPI.Delete(item.RoomId);
+                        if (!String.IsNullOrEmpty(response))
+                        {
+                            loadRooms();
+                        }
                     }
                 }
 

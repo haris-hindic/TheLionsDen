@@ -38,6 +38,15 @@ namespace TheLionsDen.Services.Impl
             return filteredQuery;
         }
 
+        public override Task<string> Delete(int id)
+        {
+            var roomAmenities = context.RoomAmenities.Where(x => x.AmenityId == id);
+
+            context.RemoveRange(roomAmenities);
+
+            return base.Delete(id);
+        }
+
         #region VALIDATIONS
         public override void validateUpdateRequest(int id, AmenityUpsertRequest request)
         {

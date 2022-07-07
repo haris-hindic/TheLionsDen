@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using ScottPlot;
+using System.Data;
 using TheLionsDen.WinUI.Helpers;
 using TheLionsDen.WinUI.Services;
 
@@ -75,7 +76,6 @@ namespace WinUI.Forms.Analytics
             formsPlot1.Plot.Clear();
             var response = await analyticsAPI.RoomsPerRoomType();
 
-
             formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Aurora;
             double[] values = response.Select(x => (double)x.Value).ToArray();
 
@@ -84,13 +84,16 @@ namespace WinUI.Forms.Analytics
                                    .Select(i => $"{response[i].Label}\n({response[i].Value})")
                                    .ToArray();
             formsPlot1.Plot.Legend(true);
+            gauges.SpaceFraction = .1;
             gauges.CircularBackground = false;
             gauges.StartingAngle = 180;
             gauges.Font.Color = Color.Black;
+            gauges.ShowLevels = true;
+
+            formsPlot1.Plot.AxisZoom(0.4, 0.4);
 
             formsPlot1.Plot.YLabel("");
             formsPlot1.Plot.XLabel("");
-
 
             formsPlot1.Refresh();
             groupBox2.Text = "Rooms per room type";

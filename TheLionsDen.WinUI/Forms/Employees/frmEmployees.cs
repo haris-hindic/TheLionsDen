@@ -82,15 +82,22 @@ namespace WinUI.Forms.Employees
         {
             if (e.ColumnIndex == dgvEmployees.Columns["Delete"].Index && e.RowIndex >= 0)
             {
-                var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
+                var item = dgvEmployees.Rows[e.RowIndex].DataBoundItem as EmployeeResponse;
+                if (item == null)
                 {
-                    var item = dgvEmployees.Rows[e.RowIndex].DataBoundItem as EmployeeResponse;
-                    var response = await employeeAPI.Delete(item.EmployeeId);
-                    if (!String.IsNullOrEmpty(response))
+                    MessageBox.Show("Grid is currently empty, option DELETE is not available!", "Error!!");
+                }
+                else
+                {
+                    var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        loadData();
+                        var response = await employeeAPI.Delete(item.EmployeeId);
+                        if (!String.IsNullOrEmpty(response))
+                        {
+                            loadData();
+                        }
                     }
                 }
 

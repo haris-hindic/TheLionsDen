@@ -73,7 +73,7 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(10, 129);
+            this.groupBox1.Location = new System.Drawing.Point(8, 110);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1058, 111);
             this.groupBox1.TabIndex = 22;
@@ -187,7 +187,7 @@
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(365, 35);
+            this.btnNew.Location = new System.Drawing.Point(509, 20);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(149, 26);
             this.btnNew.TabIndex = 21;
@@ -205,11 +205,11 @@
             this.Amenities,
             this.State,
             this.Delete});
-            this.dgvRooms.Location = new System.Drawing.Point(10, 246);
+            this.dgvRooms.Location = new System.Drawing.Point(8, 227);
             this.dgvRooms.Name = "dgvRooms";
             this.dgvRooms.RowHeadersWidth = 51;
             this.dgvRooms.RowTemplate.Height = 29;
-            this.dgvRooms.Size = new System.Drawing.Size(1058, 384);
+            this.dgvRooms.Size = new System.Drawing.Size(1058, 407);
             this.dgvRooms.TabIndex = 20;
             this.dgvRooms.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRooms_CellContentClick);
             this.dgvRooms.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRooms_CellContentDoubleClick);
@@ -286,9 +286,9 @@
             this.groupBox2.Controls.Add(this.btnHide);
             this.groupBox2.Controls.Add(this.btnNew);
             this.groupBox2.Controls.Add(this.btnActivate);
-            this.groupBox2.Location = new System.Drawing.Point(531, 636);
+            this.groupBox2.Location = new System.Drawing.Point(402, 640);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(537, 84);
+            this.groupBox2.Size = new System.Drawing.Size(664, 61);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Actions";
@@ -297,9 +297,9 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(79)))), ((int)(((byte)(128)))));
-            this.panel2.Location = new System.Drawing.Point(326, 16);
+            this.panel2.Location = new System.Drawing.Point(478, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1, 62);
+            this.panel2.Size = new System.Drawing.Size(1, 26);
             this.panel2.TabIndex = 24;
             // 
             // btnTaken
@@ -314,7 +314,7 @@
             // 
             // btnHide
             // 
-            this.btnHide.Location = new System.Drawing.Point(83, 52);
+            this.btnHide.Location = new System.Drawing.Point(318, 20);
             this.btnHide.Name = "btnHide";
             this.btnHide.Size = new System.Drawing.Size(149, 26);
             this.btnHide.TabIndex = 23;
