@@ -29,13 +29,30 @@ namespace WinUI.Forms.Auth
 
                 AuthHelper.Role = result.RoleName;
 
-                this.Hide();
-                new MainForm().Show();
+                if (AuthHelper.Role == "Customer")
+                {
+                    MessageBox.Show("Access denied!");
+                    clearCredentials();
+                }
+                else
+                {
+                    this.Hide();
+                    new MainForm().Show();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Wrong username or password!");
             }
+        }
+
+        private void clearCredentials()
+        {
+            AuthHelper.Username = null;
+            AuthHelper.Password = null;
+            AuthHelper.Role = null;
+            txtUsername.Text = "";
+            txtPassword.Text = "";
         }
     }
 }

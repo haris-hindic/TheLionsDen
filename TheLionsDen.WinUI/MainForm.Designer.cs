@@ -42,8 +42,13 @@
             this.btnUsers = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.pbTitle = new System.Windows.Forms.PictureBox();
+            this.pbImg = new System.Windows.Forms.PictureBox();
             this.panelSide.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTitle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImg)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSide
@@ -205,11 +210,33 @@
             // panelMain
             // 
             this.panelMain.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panelMain.Controls.Add(this.pbTitle);
+            this.panelMain.Controls.Add(this.pbImg);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(290, 0);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1078, 717);
             this.panelMain.TabIndex = 1;
+            // 
+            // pbTitle
+            // 
+            this.pbTitle.Image = ((System.Drawing.Image)(resources.GetObject("pbTitle.Image")));
+            this.pbTitle.Location = new System.Drawing.Point(204, 14);
+            this.pbTitle.Name = "pbTitle";
+            this.pbTitle.Size = new System.Drawing.Size(670, 125);
+            this.pbTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbTitle.TabIndex = 1;
+            this.pbTitle.TabStop = false;
+            // 
+            // pbImg
+            // 
+            this.pbImg.Image = ((System.Drawing.Image)(resources.GetObject("pbImg.Image")));
+            this.pbImg.Location = new System.Drawing.Point(6, 145);
+            this.pbImg.Name = "pbImg";
+            this.pbImg.Size = new System.Drawing.Size(1060, 560);
+            this.pbImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbImg.TabIndex = 0;
+            this.pbImg.TabStop = false;
             // 
             // MainForm
             // 
@@ -225,6 +252,9 @@
             this.panelSide.ResumeLayout(false);
             this.panelSide.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbTitle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImg)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -244,5 +274,7 @@
         private Button btnUsers;
         private Button btnLogout;
         private Label lblLoggedUser;
+        private PictureBox pbImg;
+        private PictureBox pbTitle;
     }
 }

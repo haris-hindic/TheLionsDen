@@ -37,12 +37,8 @@ namespace TheLionsDen.Auth
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Username),
                 new Claim(ClaimTypes.Name, user.FirstName+" "+user.LastName),
+                new Claim(ClaimTypes.Role, user.Role.Name)
             };
-
-            //foreach (var role in user.UserRoles)
-            //{
-            //    claims.Add(new Claim(ClaimTypes.Role, role.Role.Name));
-            //}
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);
