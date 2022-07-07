@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
@@ -9,6 +10,7 @@ namespace TheLionsDen.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrator,Employee")]
     public class RoomController : BaseCRUDController<RoomResponse, RoomSearchObject, RoomUpsertRequest, RoomUpsertRequest>
     {
         private readonly IRoomService service;
@@ -40,6 +42,12 @@ namespace TheLionsDen.Controllers
         public async Task<RoomResponse> RemoveAmenity(int roomId, int amenityId)
         {
             return await service.RemoveAmenity(roomId,amenityId);
+        }
+
+        [AllowAnonymous]
+        public override Task<IEnumerable<RoomResponse>> Get([FromQuery] RoomSearchObject searchObject)
+        {
+            return base.Get(searchObject);
         }
     }
 }

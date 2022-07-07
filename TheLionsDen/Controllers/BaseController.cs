@@ -19,13 +19,13 @@ namespace TheLionsDen.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<T>> Get([FromQuery] TSearch searchObject)
+        public virtual async Task<IEnumerable<T>> Get([FromQuery] TSearch searchObject)
         {
             return await service.Get(searchObject);
         }
 
         [HttpGet("{id}")]
-        public async Task<T> GetById(int id)
+        public virtual async Task<T> GetById(int id)
         {
             return await service.GetById(id);
         }

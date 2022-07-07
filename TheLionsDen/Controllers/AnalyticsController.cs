@@ -9,7 +9,7 @@ namespace TheLionsDen.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Administrator,Employee")]
     public class AnalyticsController : ControllerBase
     {
         private readonly IAnalyticsService service;

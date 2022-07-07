@@ -8,6 +8,7 @@ namespace TheLionsDen.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrator,Employee")]
     public class RoomImageController : BaseCRUDController<RoomImageResponse, RoomImageSearchObject, RoomImageInsertRequest, RoomImageInsertRequest>
     {
         public RoomImageController(IRoomImageService service) : base(service)

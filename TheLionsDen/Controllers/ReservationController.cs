@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
@@ -28,7 +29,7 @@ namespace TheLionsDen.Controllers
         {
             return await service.Cancel(id);
         }
-
+        [Authorize(Roles = "Administrator,Employee")]
         [HttpPut("{id}/Confirm")]
         public async Task<string> Confirm(int id)
         {

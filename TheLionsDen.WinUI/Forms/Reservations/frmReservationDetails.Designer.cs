@@ -218,6 +218,11 @@
             // 
             this.numPrice.Enabled = false;
             this.numPrice.Location = new System.Drawing.Point(796, 128);
+            this.numPrice.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numPrice.Name = "numPrice";
             this.numPrice.Size = new System.Drawing.Size(150, 27);
             this.numPrice.TabIndex = 11;
@@ -260,6 +265,11 @@
             // 
             this.numRoomNo.Enabled = false;
             this.numRoomNo.Location = new System.Drawing.Point(796, 44);
+            this.numRoomNo.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.numRoomNo.Name = "numRoomNo";
             this.numRoomNo.Size = new System.Drawing.Size(150, 27);
             this.numRoomNo.TabIndex = 6;

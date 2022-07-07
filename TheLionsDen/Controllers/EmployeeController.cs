@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
@@ -9,6 +10,7 @@ namespace TheLionsDen.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrator")]
     public class EmployeeController : BaseCRUDController<EmployeeResponse, EmployeeSearchObject, EmployeeInsertRequest, EmployeeUpdateRequest>
     {
         private readonly IEmployeeService service;

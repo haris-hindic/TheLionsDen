@@ -9,6 +9,7 @@ namespace TheLionsDen.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrator,Employee")]
     public class RoomTypeController : BaseCRUDController<RoomTypeResponse, RoomTypeSearchObject, RoomTypeUpsertRequest, RoomTypeUpsertRequest>
     {
         public RoomTypeController(IRoomTypeService service) : base(service)

@@ -55,7 +55,7 @@ namespace TheLionsDen.Services.Impl
         public override async Task<ReservationResponse> GetById(int id)
         {
             validateGetByIdRequest(id);
-            var entity = await context.Reservations.Include("User").Include("ReservationFacilities.Facility")
+            var entity = await context.Reservations.Include("User.Role").Include("ReservationFacilities.Facility")
                 .Include("Room.RoomType").Include("PaymentDetails").FirstOrDefaultAsync(x => x.ReservationId == id);
 
             return mapper.Map<ReservationResponse>(entity);
@@ -97,7 +97,7 @@ namespace TheLionsDen.Services.Impl
 
             if (searchObject.IncludeUser)
             {
-                includedQuery = includedQuery.Include("User");
+                includedQuery = includedQuery.Include("User.Role");
             }
             if (searchObject.IncludeRoom)
             {
