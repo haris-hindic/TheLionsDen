@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TheLionsDen.Model.Responses;
+﻿using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
+using TheLionsDen.WinUI.Helpers;
 using TheLionsDen.WinUI.Services;
 
 namespace WinUI.Forms.Users
@@ -57,18 +49,24 @@ namespace WinUI.Forms.Users
         {
             if (e.ColumnIndex == dgvUsers.Columns["Delete"].Index && e.RowIndex >= 0)
             {
-                var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
+                var item = dgvUsers.Rows[e.RowIndex].DataBoundItem as UserResponse;
+                if (item.Username.Equals(AuthHelper.Username))
                 {
-                    var item = dgvUsers.Rows[e.RowIndex].DataBoundItem as UserResponse;
-                    var response = await api.Delete(item.UserId);
-                    if (!String.IsNullOrEmpty(response))
+                    MessageBox.Show("You can't delete your profile!", "Error");
+                }
+                else
+                {
+                    var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        loadData();
+                        var response = await api.Delete(item.UserId);
+                        if (!String.IsNullOrEmpty(response))
+                        {
+                            loadData();
+                        }
                     }
                 }
-
             }
         }
 

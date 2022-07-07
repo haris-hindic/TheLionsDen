@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheLionsDen.Auth;
+using TheLionsDen.Model;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
@@ -27,6 +28,16 @@ namespace TheLionsDen.Controllers
             var credentials = CredentialsHelper.extractCredentials(Request);
 
             return await service.Login(credentials.Username, credentials.Password);
+        }
+
+        public override async Task<string> Delete(int id)
+        {
+            var credentials = CredentialsHelper.extractCredentials(Request);
+            var user = await service.Login(credentials.Username, credentials.Password);
+            if (user.UserId == id)
+                throw new UserException("You can't delete your profile!");
+
+            return await service.Delete(id);
         }
     }
 }
