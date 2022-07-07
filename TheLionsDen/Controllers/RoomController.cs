@@ -49,5 +49,10 @@ namespace TheLionsDen.Controllers
         {
             return base.Get(searchObject);
         }
+        [AllowAnonymous]
+        public override Task<RoomResponse> GetById(int id)
+        {
+            return base.GetById(id);
+        }
     }
 }

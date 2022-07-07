@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TheLionsDen.Model.Requests;
 using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;

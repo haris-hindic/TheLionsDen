@@ -63,7 +63,7 @@ namespace WinUI.Forms.Users
                     }
                     else
                     {
-                        var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+                        var confirmResult = MessageBox.Show("Are you sure that you want to delete this user ??\n If you proceed all reservations from this user will be deleted.", "Confirm Delete!!", MessageBoxButtons.YesNo);
 
                         if (confirmResult == DialogResult.Yes)
                         {

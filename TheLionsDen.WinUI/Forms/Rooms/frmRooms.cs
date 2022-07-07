@@ -156,7 +156,7 @@ namespace WinUI.Forms.Rooms
                 }
                 else
                 {
-                    var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+                    var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??\n If you proceed all reservations and favourites containing this room will be deleted as well.", "Confirm Delete!!", MessageBoxButtons.YesNo);
 
                     if (confirmResult == DialogResult.Yes)
                     {
