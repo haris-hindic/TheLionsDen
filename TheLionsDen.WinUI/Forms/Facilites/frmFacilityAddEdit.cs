@@ -45,9 +45,15 @@ namespace WinUI.Forms.Facilites
             cmbStatus.DataSource = cmbHelper.facility;
             if (this.facility != null)
             {
+                btnAssign.Enabled = true;
                 populateFields();
                 loadEmployees();
             }
+            else
+            {
+                btnAssign.Enabled = false;
+            }
+
         }
 
         private async void loadEmployees()
@@ -122,10 +128,11 @@ namespace WinUI.Forms.Facilites
 
         private void populateFields()
         {
+            btnAssign.Enabled = true;
             txtDescription.Text = this.facility.Description;
             txtName.Text = this.facility.Name;
             nudPrice.Value = (decimal)this.facility.Price;
-            if(this.facility.Image.Length>1)
+            if (this.facility.Image.Length > 1)
                 pbImage.Image = ImageHelper.ByteArrayToImage(this.facility.Image);
             pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
             cmbStatus.SelectedItem = this.facility.Status;
@@ -211,18 +218,24 @@ namespace WinUI.Forms.Facilites
         {
             if (e.ColumnIndex == dgvEmployees.Columns["Remove"].Index && e.RowIndex >= 0)
             {
-                var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
+                var item = dgvEmployees.Rows[e.RowIndex].DataBoundItem as EmployeeResponse;
+                if (item == null)
                 {
-                    var item = dgvEmployees.Rows[e.RowIndex].DataBoundItem as EmployeeResponse;
-                    var response = await employeeAPI.RemoveFromFacility(item.EmployeeId);
-                    if (!String.IsNullOrEmpty(response))
+                    MessageBox.Show("Grid is currently empty, option DELETE is not available!", "Error!!");
+                }
+                else
+                {
+                    var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
+
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        loadEmployees();
+                        var response = await employeeAPI.RemoveFromFacility(item.EmployeeId);
+                        if (!String.IsNullOrEmpty(response))
+                        {
+                            loadEmployees();
+                        }
                     }
                 }
-
             }
         }
     }

@@ -44,17 +44,21 @@ namespace WinUI.Forms.Rooms
             cmbRoomType.SelectedIndex = -1;
 
 
-            if (this.room == null) loadAmenities();
+            if (this.room == null)
+                loadAmenities();
 
-            if (this.room != null) populateFields();
+            if (this.room != null)
+                populateFields();
 
-            if (this.room != null) setButtons(this.room);
+            if (this.room != null)
+                setButtons(this.room);
         }
 
         private async void loadAmenities()
         {
             var amenityRequest = new TheLionsDen.Model.SearchObjects.AmenitySearchObject();
-            if (room != null) amenityRequest.NotRoomId = room.RoomId;
+            if (room != null)
+                amenityRequest.NotRoomId = room.RoomId;
             clbAmenities.Refresh();
             clbAmenities.DataSource = await amenitiyAPI.Get(amenityRequest);
             clbAmenities.ValueMember = "AmenityId";
@@ -139,16 +143,24 @@ namespace WinUI.Forms.Rooms
         {
             if (e.ColumnIndex == dgvAmenities.Columns["Remove"].Index && e.RowIndex >= 0)
             {
-                var confirmResult = MessageBox.Show("Are you sure that you want to remove this item ??", "Confirm remove!!", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
+                var item = dgvAmenities.Rows[e.RowIndex].DataBoundItem as RoomAmenityResponse;
+                if (item == null)
                 {
-                    var item = dgvAmenities.Rows[e.RowIndex].DataBoundItem as RoomAmenityResponse;
-                    var response = await roomAPI.RemoveAmenity(this.room.RoomId, item.AmenityId);
-                    if (response != null)
+                    MessageBox.Show("Grid is currently empty, option DELETE is not available!", "Error!!");
+                }
+                else
+                {
+
+                    var confirmResult = MessageBox.Show("Are you sure that you want to remove this item ??", "Confirm remove!!", MessageBoxButtons.YesNo);
+
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        this.room = response;
-                        populateFields();
+                        var response = await roomAPI.RemoveAmenity(this.room.RoomId, item.AmenityId);
+                        if (response != null)
+                        {
+                            this.room = response;
+                            populateFields();
+                        }
                     }
                 }
 
