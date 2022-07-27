@@ -214,9 +214,20 @@ class _RegistrationState extends State<Registration> {
       request.passwordConfirmation = _passwordConfirmationController.text;
       request.roleId = 0;
 
-      await _userProvider.register(request);
+      var response = await _userProvider.register(request);
 
-      await await Navigator.pushNamed(context, Login.routeName);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                title: Text("Success"),
+                content: Text("Congrats! Now log in with your credentials."),
+                actions: [
+                  TextButton(
+                      onPressed: () async =>
+                          await Navigator.pushNamed(context, Login.routeName),
+                      child: Text("Ok"))
+                ],
+              ));
     } on Exception catch (e) {
       showDialog(
           context: context,
