@@ -17,6 +17,8 @@ namespace TheLionsDen.Model.Responses
 
         public string Amenities { get; set; } = "No amenities assigned.";
         public string RoomTypeName { get; set; }
+
+        public byte[] CoverImage { get; set; }
         [JsonIgnore]
         public virtual RoomTypeResponse RoomType { get; set; } 
 

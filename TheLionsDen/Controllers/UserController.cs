@@ -29,6 +29,12 @@ namespace TheLionsDen.Controllers
             return await service.Login(credentials.Username, credentials.Password);
         }
 
+        [HttpPost("register"), AllowAnonymous]
+        public async Task<UserResponse> Register([FromBody]UserInsertRequest request)
+        {
+            return await service.Register(request);
+        }
+
         [Authorize(Roles = "Employee,Customer")]
         public override Task<UserResponse> GetById(int id)
         {

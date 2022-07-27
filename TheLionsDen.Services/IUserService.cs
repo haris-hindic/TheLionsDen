@@ -12,5 +12,6 @@ namespace TheLionsDen.Services
     public interface IUserService : ICRUDService<UserResponse,UserSearchObject, UserInsertRequest, UserUpdateRequest>
     {
         public Task<UserResponse> Login(string username, string password);
+        public Task<UserResponse> Register(UserInsertRequest request);
     }
 }

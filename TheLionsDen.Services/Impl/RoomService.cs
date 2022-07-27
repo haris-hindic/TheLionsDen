@@ -143,7 +143,7 @@ namespace TheLionsDen.Services.Impl
             }
             if (searchObject.IncludeRoomType)
             {
-                includedQuery = includedQuery.Include("RoomType");
+                includedQuery = includedQuery.Include("RoomType.RoomImages");
             }
 
             return includedQuery;

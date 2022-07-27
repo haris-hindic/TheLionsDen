@@ -75,11 +75,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
-{
-    var database = scope.ServiceProvider.GetService<TheLionsDenContext>();
-    new DbHelper().Init(database);
-    new DbHelper().InsertData(database);
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var database = scope.ServiceProvider.GetService<TheLionsDenContext>();
+//    new DbHelper().Init(database);
+//    new DbHelper().InsertData(database);
+//}
 
 app.Run();

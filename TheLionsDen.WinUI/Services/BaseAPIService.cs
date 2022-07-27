@@ -11,7 +11,7 @@ namespace TheLionsDen.WinUI.Services
         where T : class where TSearch : class
     {
         public readonly string resourceName;
-        public readonly string endpoint = "http://localhost:5070";
+        public readonly string endpoint = "https://localhost:7070";
 
         public BaseAPIService(string resourceName)
         {
