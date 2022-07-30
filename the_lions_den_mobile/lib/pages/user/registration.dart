@@ -30,6 +30,8 @@ class _RegistrationState extends State<Registration> {
 
   late UserProvider _userProvider;
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     _dateOfBirthController.text = ""; //set the initial value of text field
@@ -65,93 +67,109 @@ class _RegistrationState extends State<Registration> {
             children: [
               Padding(
                 padding: EdgeInsets.all(10),
-                child: Column(children: [
-                  TextFormField(
-                    controller: _firstNameController,
-                    decoration: InputDecoration(
-                        labelText: "First Name", icon: Icon(Icons.person)),
-                    // validator: (String? value) {
-                    //   if (value == null || value.isEmpty) {
-                    //     return 'This field is required!';
-                    //   }
-                    //   return null;
-                    // },
-                  ),
-                  const SizedBox(height: 5.0),
-                  TextField(
-                    decoration: InputDecoration(
-                        labelText: "Last Name", icon: Icon(Icons.person)),
-                    controller: _lastNameController,
-                  ),
-                  const SizedBox(height: 5.0),
-                  TextField(
-                    decoration: InputDecoration(
-                        labelText: "Email", icon: Icon(Icons.mail)),
-                    controller: _emailController,
-                  ),
-                  const SizedBox(height: 5.0),
-                  TextField(
-                    decoration: InputDecoration(
-                        labelText: "Phone Number", icon: Icon(Icons.phone)),
-                    controller: _phoneNumberController,
-                  ),
-                  const SizedBox(height: 5.0),
-                  TextField(
-                    decoration: InputDecoration(
-                        labelText: "Username", icon: Icon(Icons.person)),
-                    controller: _usernameController,
-                  ),
-                  const SizedBox(height: 5.0),
-                  TextField(
-                    decoration: InputDecoration(
-                        labelText: "Password", icon: Icon(Icons.password)),
-                    obscureText: true,
-                    controller: _passwordController,
-                  ),
-                  const SizedBox(height: 5.0),
-                  TextField(
-                    decoration: InputDecoration(
-                        labelText: "Password Confirmation",
-                        icon: Icon(Icons.password)),
-                    obscureText: true,
-                    controller: _passwordConfirmationController,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                        labelText: "Gender", icon: Icon(Icons.female_sharp)),
-                    controller: _genderController,
-                  ),
-                  TextField(
-                    controller: _dateOfBirthController,
-                    decoration: InputDecoration(
-                        labelText: "Date of birth",
-                        icon: Icon(Icons.calendar_today)),
-                    onTap: () async {
-                      DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1950),
-                          lastDate: DateTime(2100));
+                child: Form(
+                    key: _formKey,
+                    child: Column(children: [
+                      TextFormField(
+                        controller: _firstNameController,
+                        decoration: InputDecoration(
+                            labelText: "First Name", icon: Icon(Icons.person)),
+                        validator: (String? value) {
+                          return requiredFieldValidation(value);
+                        },
+                      ),
+                      const SizedBox(height: 5.0),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Last Name", icon: Icon(Icons.person)),
+                        controller: _lastNameController,
+                        validator: (String? value) {
+                          return requiredFieldValidation(value);
+                        },
+                      ),
+                      const SizedBox(height: 5.0),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Email", icon: Icon(Icons.mail)),
+                        controller: _emailController,
+                        validator: (String? value) {
+                          return requiredFieldValidation(value);
+                        },
+                      ),
+                      const SizedBox(height: 5.0),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Phone Number", icon: Icon(Icons.phone)),
+                        controller: _phoneNumberController,
+                      ),
+                      const SizedBox(height: 5.0),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Username", icon: Icon(Icons.person)),
+                        controller: _usernameController,
+                        validator: (String? value) {
+                          return requiredFieldValidation(value);
+                        },
+                      ),
+                      const SizedBox(height: 5.0),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Password", icon: Icon(Icons.password)),
+                        obscureText: true,
+                        controller: _passwordController,
+                        validator: (String? value) {
+                          return requiredFieldValidation(value);
+                        },
+                      ),
+                      const SizedBox(height: 5.0),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Password Confirmation",
+                            icon: Icon(Icons.password)),
+                        obscureText: true,
+                        controller: _passwordConfirmationController,
+                        validator: (String? value) {
+                          return requiredFieldValidation(value);
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Gender",
+                            icon: Icon(Icons.female_sharp)),
+                        controller: _genderController,
+                      ),
+                      TextFormField(
+                        controller: _dateOfBirthController,
+                        decoration: InputDecoration(
+                            labelText: "Date of birth",
+                            icon: Icon(Icons.calendar_today)),
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1950),
+                              lastDate: DateTime(2100));
 
-                      if (pickedDate != null) {
-                        String formattedDate =
-                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                          if (pickedDate != null) {
+                            String formattedDate =
+                                DateFormat('yyyy-MM-dd').format(pickedDate);
 
-                        setState(() {
-                          _dateOfBirthController.text = formattedDate;
-                        });
-                      }
-                    },
-                  ),
-                ]),
+                            setState(() {
+                              _dateOfBirthController.text = formattedDate;
+                            });
+                          }
+                        },
+                      ),
+                    ])),
               )
             ],
           ),
           const SizedBox(height: 60.0),
           GestureDetector(
             onTap: (() {
-              //main button register
-              register();
+              if (_formKey.currentState!.validate()) {
+                register();
+              }
             }),
             child: Container(
               width: double.infinity,
@@ -196,6 +214,13 @@ class _RegistrationState extends State<Registration> {
     ));
   }
 
+  String? requiredFieldValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'This field is required!';
+    }
+    return null;
+  }
+
   double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
       MediaQuery.of(context).size.width * percentage;
 
@@ -206,10 +231,15 @@ class _RegistrationState extends State<Registration> {
       request.firstName = _firstNameController.text;
       request.lastName = _lastNameController.text;
       request.email = _emailController.text;
-      request.phoneNumber = _phoneNumberController.text;
-      request.gender = _genderController.text;
+      request.phoneNumber = _phoneNumberController.text.isEmpty
+          ? null
+          : _phoneNumberController.text;
+      request.gender =
+          _genderController.text.isEmpty ? null : _genderController.text;
       request.username = _usernameController.text;
-      request.dateOfBirth = _dateOfBirthController.text;
+      request.dateOfBirth = _dateOfBirthController.text.isEmpty
+          ? null
+          : _dateOfBirthController.text;
       request.password = _passwordController.text;
       request.passwordConfirmation = _passwordConfirmationController.text;
       request.roleId = 0;
