@@ -125,6 +125,10 @@ namespace TheLionsDen.Services.Impl
             {
                 filteredQuery = filteredQuery.Where(x => x.RoomTypeId == searchObject.RoomTypeId);
             }
+            if (searchObject.Capacity > 0)
+            {
+                filteredQuery = filteredQuery.Include("RoomType").Where(x => x.RoomType.Capacity >= searchObject.Capacity);
+            }
             if (!String.IsNullOrEmpty(searchObject.State))
             {
                 filteredQuery = filteredQuery.Where(x => x.State.ToLower().Equals(searchObject.State.ToLower()));

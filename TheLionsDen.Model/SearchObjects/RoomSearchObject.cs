@@ -11,6 +11,7 @@ namespace TheLionsDen.Model.SearchObjects
         public string Comparator { get; set; }
         public string State { get; set; }
         public int RoomTypeId { get; set; }
+        public int Capacity { get; set; }
 
         public bool IncludeRoomType { get; set; }
         public bool IncludeAmenities { get; set; }
