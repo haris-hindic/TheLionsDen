@@ -1,10 +1,6 @@
-import 'dart:html';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/room/room_response.dart';
 import 'package:the_lions_den_mobile/model/room_type/room_type_response.dart';
@@ -32,6 +28,7 @@ class _RoomOverviewState extends State<RoomOverview> {
   TextEditingController _capacitySearchController = new TextEditingController();
   TextEditingController _roomTypeSearchController = new TextEditingController();
   int? selectedRoomTypeValue;
+  final _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -62,57 +59,35 @@ class _RoomOverviewState extends State<RoomOverview> {
     return Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
-      child: Container(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          _buildHeader(),
-          _buildRoomSearch(),
-          Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: ListView(
-                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 1,
-                //     childAspectRatio: 1,
-                //     crossAxisSpacing: 5,
-                //     mainAxisSpacing: 5),
-                scrollDirection: Axis.vertical,
-                children: _buildRoomCardList2()),
+      //child: Container(
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _buildAll() //[
+          // _buildHeader(),
+          // _buildRoomSearch(),
+          // SizedBox(
+          //   height: MediaQuery.of(context).size.height,
+          //   width: MediaQuery.of(context).size.width,
+          //   child: ListView(
+          //       scrollDirection: Axis.vertical, children: _buildRoomCardList2()),
+          // ),
+          //]
           ),
-        ]),
-      ),
+      //),
     )));
   }
 
-  List<Widget> _buildRoomCardList() {
-    if (data.length == 0) {
-      return [Text("Loading.....")];
-    }
-
-    List<Widget> list = data
-        .map((x) => Container(
-              width: 200,
-              height: 200,
-              child: Column(
-                children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    child: imageFromBase64String(x.coverImage!),
-                  ),
-                  Text(x.name ?? ""),
-                  Text(formatNumber(x.price))
-                ],
-              ),
-            ))
-        .cast<Widget>()
-        .toList();
-
+  List<Widget> _buildAll() {
+    List<Widget> list = <Widget>[];
+    list.add(_buildHeader());
+    list.add(_buildRoomSearch());
+    list.addAll(_buildRoomCardList());
     return list;
   }
 
   Widget _buildHeader() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: const Text(
         "Rooms",
         style: TextStyle(
@@ -219,7 +194,7 @@ class _RoomOverviewState extends State<RoomOverview> {
                     _capacitySearchController.text = "";
                     _nameSearchController.text = "";
                     _priceSearchController.text = "";
-                    selectedRoomTypeValue = -1;
+                    selectedRoomTypeValue = null;
                   },
                 ),
               ),
@@ -256,83 +231,7 @@ class _RoomOverviewState extends State<RoomOverview> {
     );
   }
 
-  List<Widget> _buildRoomList2() {
-    if (data.length == 0) {
-      return [Text("Loading.....")];
-    }
-
-    List<Widget> list = data
-        .map((x) => Container(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Card(
-                    color: Colors.grey,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                      child: Column(
-                        children: <Widget>[
-                          AspectRatio(
-                            aspectRatio: 1.5,
-                            child: Container(
-                              child: imageFromBase64String(x.coverImage!),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    x.name!, textAlign: TextAlign.left,
-                                    //style: TextStyles(context).getBoldStyle(),
-                                  ),
-                                  Text(
-                                    x.roomTypeName!, textAlign: TextAlign.left,
-                                    // Helper.getRoomText(hotelInfo.roomData!),
-                                    // style:
-                                    //     TextStyles(context).getRegularStyle().copyWith(
-                                    //           fontWeight: FontWeight.w100,
-                                    //           fontSize: 12,
-                                    //           color: Theme.of(context)
-                                    //               .disabledColor
-                                    //               .withOpacity(0.6),
-                                    //         ),
-                                  ),
-                                  Text("${formatNumber(x.price)}\$",
-                                      textAlign: TextAlign.right
-                                      // Helper.getRoomText(hotelInfo.roomData!),
-                                      // style:
-                                      //     TextStyles(context).getRegularStyle().copyWith(
-                                      //           fontWeight: FontWeight.w100,
-                                      //           fontSize: 12,
-                                      //           color: Theme.of(context)
-                                      //               .disabledColor
-                                      //               .withOpacity(0.6),
-                                      //         ),
-                                      ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ))
-        .cast<Widget>()
-        .toList();
-
-    return list;
-  }
-
-  List<Widget> _buildRoomCardList2() {
+  List<Widget> _buildRoomCardList() {
     if (data.length == 0) {
       return [const Text("Loading.....")];
     }
@@ -435,6 +334,15 @@ class _RoomOverviewState extends State<RoomOverview> {
             ))
         .cast<Widget>()
         .toList();
+
+    // list.add(Container(
+    //   height: 320,
+    //   child: Text("© 2022 The Lion's Den, L.L.C. All rights reserved.",
+    //       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+    //       textAlign: TextAlign.center),
+    // ));
+
+    //list.add(SizedBox(height: 300));
 
     return list;
   }
