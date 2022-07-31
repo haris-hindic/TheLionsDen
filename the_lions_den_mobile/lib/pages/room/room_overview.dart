@@ -59,21 +59,8 @@ class _RoomOverviewState extends State<RoomOverview> {
     return Scaffold(
         body: SafeArea(
             child: SingleChildScrollView(
-      //child: Container(
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: _buildAll() //[
-          // _buildHeader(),
-          // _buildRoomSearch(),
-          // SizedBox(
-          //   height: MediaQuery.of(context).size.height,
-          //   width: MediaQuery.of(context).size.width,
-          //   child: ListView(
-          //       scrollDirection: Axis.vertical, children: _buildRoomCardList2()),
-          // ),
-          //]
-          ),
-      //),
+          crossAxisAlignment: CrossAxisAlignment.start, children: _buildAll()),
     )));
   }
 
@@ -158,7 +145,6 @@ class _RoomOverviewState extends State<RoomOverview> {
                   icon: Icon(Icons.bed_outlined),
                   hint: Text("Room Type"),
                   onChanged: (dynamic value) {
-                    //if (mounted) {
                     setState(() {
                       selectedRoomTypeValue = value;
                     });
@@ -194,7 +180,9 @@ class _RoomOverviewState extends State<RoomOverview> {
                     _capacitySearchController.text = "";
                     _nameSearchController.text = "";
                     _priceSearchController.text = "";
-                    selectedRoomTypeValue = null;
+                    setState(() {
+                      selectedRoomTypeValue = -1;
+                    });
                   },
                 ),
               ),
@@ -351,12 +339,21 @@ class _RoomOverviewState extends State<RoomOverview> {
     if (roomTypes.isEmpty) {
       return [];
     }
-    List<DropdownMenuItem> list = roomTypes
+    List<DropdownMenuItem> list = <DropdownMenuItem>[];
+
+    list.add(DropdownMenuItem(
+      child: Text("Room Type", style: TextStyle(color: Colors.black)),
+      enabled: false,
+      value: -1,
+    ));
+
+    list.addAll(roomTypes
         .map((x) => DropdownMenuItem(
               child: Text(x.name!, style: TextStyle(color: Colors.black)),
               value: x.roomTypeId,
             ))
-        .toList();
+        .toList());
+
     return list;
   }
 }
