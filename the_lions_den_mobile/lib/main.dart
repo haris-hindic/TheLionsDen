@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:the_lions_den_mobile/pages/room/room_details.dart';
 import 'package:the_lions_den_mobile/pages/room/room_overview.dart';
 import 'package:the_lions_den_mobile/pages/user/login.dart';
 import 'package:the_lions_den_mobile/pages/user/registration.dart';
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         }
         if (settings.name == Login.routeName) {
           return MaterialPageRoute(builder: (context) => Login());
+        }
+        if (settings.name == RoomDetails.routeName) {
+          return MaterialPageRoute(builder: (context) => RoomDetails());
         }
       },
     );

@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/room/room_response.dart';
 import 'package:the_lions_den_mobile/model/room_type/room_type_response.dart';
+import 'package:the_lions_den_mobile/pages/room/room_details.dart';
 import 'package:the_lions_den_mobile/providers/room_provider.dart';
 import 'package:the_lions_den_mobile/providers/room_type_provider.dart';
 import 'package:the_lions_den_mobile/utils/number_formatter.dart';
@@ -28,7 +29,6 @@ class _RoomOverviewState extends State<RoomOverview> {
   TextEditingController _capacitySearchController = new TextEditingController();
   TextEditingController _roomTypeSearchController = new TextEditingController();
   int? selectedRoomTypeValue;
-  final _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -236,12 +236,16 @@ class _RoomOverviewState extends State<RoomOverview> {
                     child: Stack(children: [
                       Column(
                         children: [
-                          Container(
-                            height: 115,
-                            width: 500,
-                            child: Image.memory(
-                              dataFromBase64String(x.coverImage!),
-                              fit: BoxFit.cover,
+                          GestureDetector(
+                            onTap: () => Navigator.pushNamed(
+                                context, RoomDetails.routeName),
+                            child: Container(
+                              height: 115,
+                              width: 500,
+                              child: Image.memory(
+                                dataFromBase64String(x.coverImage!),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           Row(

@@ -11,7 +11,7 @@ class RoomTypeResponse {
   int? size;
   int? capacity;
 
-  List<RoomImageResponse>? images;
+  List<RoomImageResponse>? roomImages;
 
   RoomTypeResponse();
 

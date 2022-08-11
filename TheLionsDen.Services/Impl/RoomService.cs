@@ -87,7 +87,7 @@ namespace TheLionsDen.Services.Impl
         public override async Task<RoomResponse> GetById(int id)
         {
             validateGetByIdRequest(id);
-            var entity = await context.Rooms.Include("RoomType").Include("RoomAmenities.Amenity").FirstOrDefaultAsync(x => x.RoomId == id);
+            var entity = await context.Rooms.Include("RoomType.RoomImages").Include("RoomAmenities.Amenity").FirstOrDefaultAsync(x => x.RoomId == id);
 
             return mapper.Map<RoomResponse>(entity);
         }

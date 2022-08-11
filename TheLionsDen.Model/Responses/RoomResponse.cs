@@ -19,7 +19,7 @@ namespace TheLionsDen.Model.Responses
         public string RoomTypeName { get; set; }
 
         public byte[] CoverImage { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual RoomTypeResponse RoomType { get; set; } 
 
         //public virtual ICollection<Favourite> Favourites { get; set; }

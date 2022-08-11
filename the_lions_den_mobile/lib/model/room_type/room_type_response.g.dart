@@ -14,7 +14,7 @@ RoomTypeResponse _$RoomTypeResponseFromJson(Map<String, dynamic> json) =>
       ..rules = json['rules'] as String?
       ..size = json['size'] as int?
       ..capacity = json['capacity'] as int?
-      ..images = (json['images'] as List<dynamic>?)
+      ..roomImages = (json['roomImages'] as List<dynamic>?)
           ?.map((e) => RoomImageResponse.fromJson(e as Map<String, dynamic>))
           .toList();
 
@@ -26,5 +26,5 @@ Map<String, dynamic> _$RoomTypeResponseToJson(RoomTypeResponse instance) =>
       'rules': instance.rules,
       'size': instance.size,
       'capacity': instance.capacity,
-      'images': instance.images,
+      'roomImages': instance.roomImages,
     };
