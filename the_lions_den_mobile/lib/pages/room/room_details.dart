@@ -52,7 +52,7 @@ class _RoomDetailsState extends State<RoomDetails> {
             options: CarouselOptions(
               height: 350,
               autoPlay: true,
-              autoPlayInterval: Duration(seconds: 2),
+              autoPlayInterval: Duration(seconds: 1),
               autoPlayAnimationDuration: Duration(milliseconds: 800),
               autoPlayCurve: Curves.fastOutSlowIn,
               enableInfiniteScroll: true,
@@ -175,7 +175,27 @@ class _RoomDetailsState extends State<RoomDetails> {
                         textAlign: TextAlign.justify,
                         style: TextStyle(
                             fontWeight: FontWeight.w300, fontSize: 14.0),
-                      )
+                      ),
+                      const SizedBox(height: 30.0),
+                      Text(
+                        "Amenities".toUpperCase(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 14.0),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Container(
+                        height: 75,
+                        child: GridView(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1,
+                                  childAspectRatio: 1,
+                                  crossAxisSpacing: 20,
+                                  mainAxisSpacing: 30),
+                          scrollDirection: Axis.horizontal,
+                          children: _buildAmenitesGrid(),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -199,5 +219,61 @@ class _RoomDetailsState extends State<RoomDetails> {
         ],
       ),
     );
+  }
+
+  List<Widget> _buildAmenitesGrid() {
+    if (data.amenities!.isEmpty) {
+      return [const Text("No amenities...")];
+    }
+
+    List<Widget> list = data.roomAmenities!
+        .map(
+          (e) => Container(
+            child: ClipOval(
+              child: Material(
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Icon(
+                        Icons.add_reaction_outlined,
+                        color: Color.fromARGB(255, 10, 158, 227),
+                      ),
+                      Text(e.amenityName!),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        )
+        .cast<Widget>()
+        .toList();
+
+    list.addAll(data.roomAmenities!
+        .map(
+          (e) => Container(
+            child: ClipOval(
+              child: Material(
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Icon(
+                        Icons.add_reaction_outlined,
+                        color: Color.fromARGB(255, 10, 158, 227),
+                      ),
+                      Text(e.amenityName!),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        )
+        .cast<Widget>()
+        .toList());
+
+    return list;
   }
 }

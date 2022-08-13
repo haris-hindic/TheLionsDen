@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:the_lions_den_mobile/model/amenity/amenity_response.dart';
+import 'package:the_lions_den_mobile/model/room_amenity/room_amenity_response.dart';
 import 'package:the_lions_den_mobile/model/room_type/room_type_response.dart';
 part 'room_response.g.dart';
 
@@ -11,6 +13,7 @@ class RoomResponse {
   String? roomTypeName;
   String? coverImage;
   RoomTypeResponse? roomType;
+  List<RoomAmenityResponse>? roomAmenities;
 
   RoomResponse();
 
