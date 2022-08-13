@@ -38,8 +38,15 @@ class MyApp extends StatelessWidget {
         if (settings.name == Login.routeName) {
           return MaterialPageRoute(builder: (context) => Login());
         }
-        if (settings.name == RoomDetails.routeName) {
-          return MaterialPageRoute(builder: (context) => RoomDetails());
+        // if (settings.name == RoomDetails.routeName) {
+        //   return MaterialPageRoute(builder: (context) => RoomDetails());
+        // }
+
+        var uri = Uri.parse(settings.name!);
+        if (uri.pathSegments.length == 2 &&
+            "/${uri.pathSegments.first}" == RoomDetails.routeName) {
+          var id = uri.pathSegments[1];
+          return MaterialPageRoute(builder: (context) => RoomDetails(id));
         }
       },
     );

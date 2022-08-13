@@ -9,18 +9,22 @@ import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
 import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
 
 class RoomDetails extends StatefulWidget {
-  static const String routeName = "/room/{id}";
+  static const String routeName = "/roomDetails";
+  String id;
 
-  const RoomDetails({Key? key}) : super(key: key);
+  RoomDetails(this.id, {Key? key}) : super(key: key);
 
   @override
-  State<RoomDetails> createState() => _RoomDetailsState();
+  State<RoomDetails> createState() => _RoomDetailsState(this.id);
 }
 
 class _RoomDetailsState extends State<RoomDetails> {
   RoomProvider? _roomProvider;
   RoomResponse data = RoomResponse();
   List<RoomImageResponse> images = [];
+  String id;
+
+  _RoomDetailsState(this.id);
 
   @override
   void initState() {
@@ -30,7 +34,7 @@ class _RoomDetailsState extends State<RoomDetails> {
   }
 
   Future loadData() async {
-    var tempData = await _roomProvider?.getById(4);
+    var tempData = await _roomProvider?.getById(int.parse(id));
     setState(() {
       data = tempData!;
       images = tempData.roomType!.roomImages!;
@@ -58,7 +62,7 @@ class _RoomDetailsState extends State<RoomDetails> {
               height: 350,
               autoPlay: true,
               autoPlayInterval: Duration(seconds: 1),
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              autoPlayAnimationDuration: Duration(milliseconds: 1500),
               autoPlayCurve: Curves.fastOutSlowIn,
               enableInfiniteScroll: true,
             ),

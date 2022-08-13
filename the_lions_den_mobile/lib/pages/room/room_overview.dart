@@ -245,8 +245,8 @@ class _RoomOverviewState extends State<RoomOverview> {
                       Column(
                         children: [
                           GestureDetector(
-                            onTap: () => Navigator.pushNamed(
-                                context, RoomDetails.routeName),
+                            onTap: () => Navigator.pushNamed(context,
+                                "${RoomDetails.routeName}/${x.roomId}"),
                             child: Container(
                               height: 115,
                               width: 500,
@@ -277,12 +277,18 @@ class _RoomOverviewState extends State<RoomOverview> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            Text(
-                                              x.name!,
-                                              textAlign: TextAlign.left,
-                                              style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold),
+                                            GestureDetector(
+                                              onTap: () => Navigator.pushNamed(
+                                                  context,
+                                                  "${RoomDetails.routeName}/${x.roomId}"),
+                                              child: Text(
+                                                x.name!,
+                                                textAlign: TextAlign.left,
+                                                style: const TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
                                             const Icon(
                                               Icons.favorite_border_outlined,
@@ -334,15 +340,6 @@ class _RoomOverviewState extends State<RoomOverview> {
             ))
         .cast<Widget>()
         .toList();
-
-    // list.add(Container(
-    //   height: 320,
-    //   child: Text("© 2022 The Lion's Den, L.L.C. All rights reserved.",
-    //       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-    //       textAlign: TextAlign.center),
-    // ));
-
-    //list.add(SizedBox(height: 300));
 
     return list;
   }
