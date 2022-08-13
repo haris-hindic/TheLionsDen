@@ -96,7 +96,8 @@ class Login extends StatelessWidget {
 
                     await _userProvider.login();
 
-                    await Navigator.pushNamed(context, RoomOverview.routeName);
+                    await Navigator.popAndPushNamed(
+                        context, RoomOverview.routeName);
                   } on Exception catch (e) {
                     showDialog(
                         context: context,

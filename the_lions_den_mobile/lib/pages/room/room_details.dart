@@ -5,6 +5,8 @@ import 'package:the_lions_den_mobile/model/room/room_response.dart';
 import 'package:the_lions_den_mobile/model/room_image/room_image_response.dart';
 import 'package:the_lions_den_mobile/providers/room_provider.dart';
 import 'package:the_lions_den_mobile/utils/util.dart';
+import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
+import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
 
 class RoomDetails extends StatefulWidget {
   static const String routeName = "/room/{id}";
@@ -37,7 +39,10 @@ class _RoomDetailsState extends State<RoomDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildDetails());
+    return Scaffold(
+      body: _buildDetails(),
+      drawer: TLDDrawer(),
+    );
   }
 
   _buildDetails() {
@@ -202,20 +207,7 @@ class _RoomDetailsState extends State<RoomDetails> {
               ],
             ),
           ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              title: Text(
-                "ROOM DETAILS",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal),
-              ),
-            ),
-          ),
+          TLDAppbar(title: "ROOM DETAILS"),
         ],
       ),
     );
@@ -249,30 +241,6 @@ class _RoomDetailsState extends State<RoomDetails> {
         )
         .cast<Widget>()
         .toList();
-
-    list.addAll(data.roomAmenities!
-        .map(
-          (e) => Container(
-            child: ClipOval(
-              child: Material(
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Icon(
-                        Icons.add_reaction_outlined,
-                        color: Color.fromARGB(255, 10, 158, 227),
-                      ),
-                      Text(e.amenityName!),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        )
-        .cast<Widget>()
-        .toList());
 
     return list;
   }

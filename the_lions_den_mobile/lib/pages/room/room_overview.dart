@@ -9,6 +9,9 @@ import 'package:the_lions_den_mobile/providers/room_provider.dart';
 import 'package:the_lions_den_mobile/providers/room_type_provider.dart';
 import 'package:the_lions_den_mobile/utils/number_formatter.dart';
 import 'package:the_lions_den_mobile/utils/util.dart';
+import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
+import 'package:the_lions_den_mobile/widgets/tld_bottom_navigation.dart';
+import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
 
 class RoomOverview extends StatefulWidget {
   static const String routeName = "/room-overview";
@@ -57,15 +60,21 @@ class _RoomOverviewState extends State<RoomOverview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: TLDDrawer(),
+        // appBar: AppBar(
+        //   title: Text("Rooms"),
+        // ),
         body: SafeArea(
             child: SingleChildScrollView(
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, children: _buildAll()),
-    )));
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _buildAll()),
+        )));
   }
 
   List<Widget> _buildAll() {
     List<Widget> list = <Widget>[];
+    list.add(TLDAppbar(title: "ROOM OVERVIEW"));
     list.add(_buildHeader());
     list.add(_buildRoomSearch());
     list.addAll(_buildRoomCardList());
@@ -76,10 +85,10 @@ class _RoomOverviewState extends State<RoomOverview> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: const Text(
-        "Rooms",
+        "Search rooms",
         style: TextStyle(
             color: Color.fromARGB(255, 66, 129, 160),
-            fontSize: 40,
+            fontSize: 20,
             fontWeight: FontWeight.bold),
       ),
     );
@@ -97,7 +106,7 @@ class _RoomOverviewState extends State<RoomOverview> {
                   child: TextField(
                     controller: _nameSearchController,
                     decoration: InputDecoration(
-                      hintText: "Search Rooms",
+                      hintText: "Name",
                       prefixIcon: Icon(Icons.search),
                       // border: OutlineInputBorder(
                       //     borderRadius: BorderRadius.circular(10),
@@ -232,7 +241,6 @@ class _RoomOverviewState extends State<RoomOverview> {
                 child: Card(
                   color: const Color.fromARGB(255, 98, 161, 193),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
                     child: Stack(children: [
                       Column(
                         children: [
