@@ -11,7 +11,6 @@ namespace TheLionsDen.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize(Roles = "Administrator")]
     public class UserController : BaseCRUDController<UserResponse, UserSearchObject, UserInsertRequest, UserUpdateRequest>
     {
         private readonly IUserService service;
@@ -35,10 +34,10 @@ namespace TheLionsDen.Controllers
             return await service.Register(request);
         }
 
-        [Authorize(Roles = "Employee,Customer,Administrator")]
-        public override Task<UserResponse> GetById(int id)
+        [HttpPut("customer/{id}"),Authorize(Roles = "Customer,Administrator")]
+        public async Task<UserResponse> CustomerUpdate(int id,[FromBody] UserUpdateRequest request)
         {
-            return base.GetById(id);
+            return await service.CustomerUpdate(id,request);
         }
 
         public override async Task<string> Delete(int id)

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/user/user_response.dart';
+import 'package:the_lions_den_mobile/pages/user/edit_profile.dart';
 import 'package:the_lions_den_mobile/providers/user_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
 import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
@@ -39,6 +41,7 @@ class _UserProfileState extends State<UserProfile> {
     return Scaffold(
       body: _buildUserDetails(),
       drawer: TLDDrawer(),
+      appBar: TLDAppbar(title: "MY PROFILE", appBar: AppBar()),
     );
   }
 
@@ -51,7 +54,6 @@ class _UserProfileState extends State<UserProfile> {
       padding: EdgeInsets.symmetric(horizontal: 25),
       child: ListView(
         children: [
-          TLDAppbar(title: "USER PROFILE"),
           const SizedBox(height: 20.0),
           Container(
             height: 100,
@@ -150,7 +152,8 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                     TextFormField(
                       enabled: false,
-                      initialValue: data.dateOfBirth.toString() ?? "N/A",
+                      initialValue:
+                          DateFormat('yyyy-MM-dd').format(data.dateOfBirth!),
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           labelText: "Date of birth",
@@ -161,7 +164,9 @@ class _UserProfileState extends State<UserProfile> {
           ),
           const SizedBox(height: 60.0),
           GestureDetector(
-            onTap: (() {}),
+            onTap: (() {
+              Navigator.pushNamed(context, EditProfile.routeName);
+            }),
             child: Container(
               width: double.infinity,
               height: 50,

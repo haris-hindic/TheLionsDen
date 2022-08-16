@@ -61,9 +61,7 @@ class _RoomOverviewState extends State<RoomOverview> {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: TLDDrawer(),
-        // appBar: AppBar(
-        //   title: Text("Rooms"),
-        // ),
+        appBar: TLDAppbar(title: "ROOM OVERVIEW", appBar: AppBar()),
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
@@ -74,7 +72,7 @@ class _RoomOverviewState extends State<RoomOverview> {
 
   List<Widget> _buildAll() {
     List<Widget> list = <Widget>[];
-    list.add(TLDAppbar(title: "ROOM OVERVIEW"));
+    //list.add(TLDAppbar(title: "ROOM OVERVIEW"));
     list.add(_buildHeader());
     list.add(_buildRoomSearch());
     list.addAll(_buildRoomCardList());

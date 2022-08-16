@@ -84,6 +84,15 @@ namespace TheLionsDen.Services.Impl
             return await Insert(request);
         }
 
+
+        public async Task<UserResponse> CustomerUpdate(int id, UserUpdateRequest request)
+        {
+            var custmoerRole = context.Roles.First(x => x.Name == "Customer");
+            request.RoleId = custmoerRole.RoleId;
+            request.Status = "Modified";
+            return await Update(id,request);
+        }
+
         public override void BeforeUpdate(UserUpdateRequest request, User entity)
         {
             entity.Status = "Modified";
@@ -195,7 +204,7 @@ namespace TheLionsDen.Services.Impl
                 errorMessage.Append("You entered a non existent role!\n");
         }
 
-    
+
         #endregion
     }
 }

@@ -13,5 +13,6 @@ namespace TheLionsDen.Services
     {
         public Task<UserResponse> Login(string username, string password);
         public Task<UserResponse> Register(UserInsertRequest request);
+        public Task<UserResponse> CustomerUpdate(int id,UserUpdateRequest request);
     }
 }

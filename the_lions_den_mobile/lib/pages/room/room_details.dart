@@ -46,6 +46,7 @@ class _RoomDetailsState extends State<RoomDetails> {
     return Scaffold(
       body: _buildDetails(),
       drawer: TLDDrawer(),
+      appBar: TLDAppbar(title: "ROOM DETAILS", appBar: AppBar()),
     );
   }
 
@@ -211,7 +212,6 @@ class _RoomDetailsState extends State<RoomDetails> {
               ],
             ),
           ),
-          TLDAppbar(title: "ROOM DETAILS"),
         ],
       ),
     );

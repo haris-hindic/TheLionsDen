@@ -22,5 +22,10 @@ namespace TheLionsDen.Controllers
         {
             return base.Delete(id);
         }
+        [AllowAnonymous]
+        public override Task<IEnumerable<RoomTypeResponse>> Get([FromQuery] RoomTypeSearchObject searchObject)
+        {
+            return base.Get(searchObject);
+        }
     }
 }

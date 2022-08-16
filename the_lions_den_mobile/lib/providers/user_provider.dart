@@ -40,4 +40,19 @@ class UserProvider extends BaseProvider<UserResponse> {
       return null;
     }
   }
+
+  Future<UserResponse?> customerUpdate(int id, dynamic request) async {
+    var url = Uri.parse("$fullUrl/customer/$id");
+
+    Map<String, String> headers = createHeaders();
+    var jsonRequest = jsonEncode(request);
+    var response = await http!.put(url, headers: headers, body: jsonRequest);
+
+    if (isValidResponseCode(response)) {
+      var data = jsonDecode(response.body);
+      return fromJson(data);
+    } else {
+      return null;
+    }
+  }
 }
