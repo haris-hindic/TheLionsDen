@@ -94,10 +94,9 @@ class Login extends StatelessWidget {
                     AuthHelper.username = _usernameController.text;
                     AuthHelper.password = _passwordController.text;
 
-                    await _userProvider.login();
+                    AuthHelper.user = await _userProvider.login();
 
-                    await Navigator.popAndPushNamed(
-                        context, RoomOverview.routeName);
+                    await Navigator.pushNamed(context, RoomOverview.routeName);
                   } on Exception catch (e) {
                     showDialog(
                         context: context,

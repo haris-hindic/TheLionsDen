@@ -35,7 +35,7 @@ namespace TheLionsDen.Controllers
             return await service.Register(request);
         }
 
-        [Authorize(Roles = "Employee,Customer")]
+        [Authorize(Roles = "Employee,Customer,Administrator")]
         public override Task<UserResponse> GetById(int id)
         {
             return base.GetById(id);
