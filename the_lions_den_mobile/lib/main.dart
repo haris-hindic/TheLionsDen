@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:the_lions_den_mobile/pages/reservation/user_reservation_overview.dart';
 import 'package:the_lions_den_mobile/pages/room/room_details.dart';
 import 'package:the_lions_den_mobile/pages/room/room_overview.dart';
 import 'package:the_lions_den_mobile/pages/user/edit_profile.dart';
 import 'package:the_lions_den_mobile/pages/user/login.dart';
 import 'package:the_lions_den_mobile/pages/user/registration.dart';
 import 'package:the_lions_den_mobile/pages/user/user_profile.dart';
+import 'package:the_lions_den_mobile/providers/reservation_provider.dart';
 import 'package:the_lions_den_mobile/providers/room_provider.dart';
 import 'package:the_lions_den_mobile/providers/room_type_provider.dart';
 import 'package:the_lions_den_mobile/providers/user_provider.dart';
@@ -15,6 +17,7 @@ void main() {
     ChangeNotifierProvider(create: (_) => RoomProvider()),
     ChangeNotifierProvider(create: (_) => UserProvider()),
     ChangeNotifierProvider(create: (_) => RoomTypeProvider()),
+    ChangeNotifierProvider(create: (_) => ReservationProvider()),
   ], child: const MyApp()));
 }
 
@@ -45,6 +48,10 @@ class MyApp extends StatelessWidget {
         }
         if (settings.name == EditProfile.routeName) {
           return MaterialPageRoute(builder: (context) => EditProfile());
+        }
+        if (settings.name == UserReservationOverview.routeName) {
+          return MaterialPageRoute(
+              builder: (context) => UserReservationOverview());
         }
         // if (settings.name == RoomDetails.routeName) {
         //   return MaterialPageRoute(builder: (context) => RoomDetails());

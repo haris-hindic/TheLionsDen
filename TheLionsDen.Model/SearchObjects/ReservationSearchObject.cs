@@ -9,6 +9,7 @@ namespace TheLionsDen.Model.SearchObjects
         public DateTime Date { get; set; }
         public string Comparator { get; set; }
         public string Status { get; set; }
+        public int UserId { get; set; }
 
         public bool IncludeUser { get; set; }
         public bool IncludeRoom { get; set; }

@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/user/user_response.dart';
+import 'package:the_lions_den_mobile/pages/reservation/user_reservation_overview.dart';
 import 'package:the_lions_den_mobile/pages/user/edit_profile.dart';
 import 'package:the_lions_den_mobile/providers/user_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
@@ -81,7 +82,10 @@ class _UserProfileState extends State<UserProfile> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
-                    onTap: (() {}),
+                    onTap: (() {
+                      Navigator.pushNamed(
+                          context, UserReservationOverview.routeName);
+                    }),
                     child: Container(
                       height: 30,
                       width: 150,

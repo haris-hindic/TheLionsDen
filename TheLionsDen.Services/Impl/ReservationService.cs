@@ -87,6 +87,10 @@ namespace TheLionsDen.Services.Impl
             {
                 filteredQuery = filteredQuery.Where(x => x.Status.ToLower().Equals(searchObject.Status.ToLower()));
             }
+            if (searchObject.UserId>0)
+            {
+                filteredQuery = filteredQuery.Where(x => x.UserId == searchObject.UserId);
+            }
 
             return filteredQuery;
         }

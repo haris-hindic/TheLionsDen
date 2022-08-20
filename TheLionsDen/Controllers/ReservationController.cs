@@ -29,6 +29,7 @@ namespace TheLionsDen.Controllers
         {
             return await service.Cancel(id);
         }
+
         [Authorize(Roles = "Administrator,Employee")]
         [HttpPut("{id}/Confirm")]
         public async Task<string> Confirm(int id)
