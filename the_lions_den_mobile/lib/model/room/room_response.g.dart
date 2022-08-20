@@ -13,6 +13,7 @@ RoomResponse _$RoomResponseFromJson(Map<String, dynamic> json) => RoomResponse()
   ..amenities = json['amenities'] as String?
   ..roomTypeName = json['roomTypeName'] as String?
   ..coverImage = json['coverImage'] as String?
+  ..isSaved = json['isSaved'] as bool?
   ..roomType = json['roomType'] == null
       ? null
       : RoomTypeResponse.fromJson(json['roomType'] as Map<String, dynamic>)
@@ -28,6 +29,7 @@ Map<String, dynamic> _$RoomResponseToJson(RoomResponse instance) =>
       'amenities': instance.amenities,
       'roomTypeName': instance.roomTypeName,
       'coverImage': instance.coverImage,
+      'isSaved': instance.isSaved,
       'roomType': instance.roomType,
       'roomAmenities': instance.roomAmenities,
     };

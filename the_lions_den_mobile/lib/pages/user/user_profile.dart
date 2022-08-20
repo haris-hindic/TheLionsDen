@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/user/user_response.dart';
 import 'package:the_lions_den_mobile/pages/reservation/user_reservation_overview.dart';
+import 'package:the_lions_den_mobile/pages/room/room_saved.dart';
 import 'package:the_lions_den_mobile/pages/user/edit_profile.dart';
 import 'package:the_lions_den_mobile/providers/user_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
@@ -102,7 +103,9 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (() {}),
+                    onTap: (() {
+                      Navigator.pushNamed(context, SavedRooms.routeName);
+                    }),
                     child: Container(
                       width: 150,
                       height: 30,

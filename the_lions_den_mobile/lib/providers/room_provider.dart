@@ -13,4 +13,34 @@ class RoomProvider extends BaseProvider<RoomResponse> {
   RoomResponse fromJson(data) {
     return RoomResponse.fromJson(data);
   }
+
+  Future<String> save(int userId, int roomId) async {
+    var url = Uri.parse("$fullUrl/$userId/save/$roomId");
+
+    Map<String, String> headers = createHeaders();
+
+    var response = await http!.put(url, headers: headers);
+
+    if (isValidResponseCode(response)) {
+      var data = response.body;
+      return data;
+    } else {
+      throw Exception("An error occured!");
+    }
+  }
+
+  Future<String> removeSaved(int userId, int roomId) async {
+    var url = Uri.parse("$fullUrl/$userId/remove-save/$roomId");
+
+    Map<String, String> headers = createHeaders();
+
+    var response = await http!.delete(url, headers: headers);
+
+    if (isValidResponseCode(response)) {
+      var data = response.body;
+      return data;
+    } else {
+      throw Exception("An error occured!");
+    }
+  }
 }

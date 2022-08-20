@@ -92,6 +92,14 @@ namespace TheLionsDen.Services.Impl
             return mapper.Map<RoomResponse>(entity);
         }
 
+        public async Task<RoomResponse> GetWithSavedInd(int roomId, int userId)
+        {
+            var response = await GetById(roomId);
+            var fav = context.Favourites.FirstOrDefault(x => x.UserId == userId && x.RoomId == roomId);
+            response.isSaved = fav != null;
+            return response;
+        }
+
         public override IQueryable<Room> AddFilter(IQueryable<Room> query, RoomSearchObject searchObject = null)
         {
             var filteredQuery = base.AddFilter(query, searchObject);
@@ -153,6 +161,29 @@ namespace TheLionsDen.Services.Impl
             return includedQuery;
         }
 
+        public override async Task<IEnumerable<RoomResponse>> Get(RoomSearchObject searchObject = null)
+        {
+            var rooms = await base.Get(searchObject);
+
+            if (searchObject.UserId > 0)
+            {
+                List<int> favorites = context.Favourites.Where(x => x.UserId == searchObject.UserId).Select(x => x.RoomId).ToList();
+
+                foreach (var r in rooms)
+                    if (favorites.Contains(r.RoomId))
+                        r.isSaved = true;
+
+
+            }
+
+            if (searchObject.UserId > 0 && searchObject.SavedOnly)
+            {
+                rooms = rooms.Where(x => x.isSaved == true).ToList();
+            }
+
+            return rooms;
+        }
+
         public async Task<string> Activate(int id)
         {
             validateActivateRequest(id);
@@ -193,7 +224,7 @@ namespace TheLionsDen.Services.Impl
         }
         public async Task<RoomResponse> RemoveAmenity(int roomId, int amenityId)
         {
-            validateRemoveAmenityRequest(roomId,amenityId);
+            validateRemoveAmenityRequest(roomId, amenityId);
 
             var roomAmentiy = context.RoomAmenities.FirstOrDefault(x => x.RoomId == roomId && x.AmenityId == amenityId);
 
@@ -201,6 +232,29 @@ namespace TheLionsDen.Services.Impl
             await context.SaveChangesAsync();
 
             return await GetById(roomId);
+        }
+
+        public async Task<string> SaveRoom(int userId, int roomId)
+        {
+            Favourite favourite = new Favourite()
+            {
+                UserId = userId,
+                RoomId = roomId,
+                Added = DateTime.Now
+            };
+            context.Favourites.Add(favourite);
+            context.SaveChanges();
+
+            return "The Room has been asved successfully!";
+        }
+
+        public async Task<string> RemoveSavedRoom(int userId, int roomId)
+        {
+            Favourite favourite = context.Favourites.FirstOrDefault(x => x.UserId == userId && x.RoomId == roomId);
+            context.Favourites.Remove(favourite);
+            context.SaveChanges();
+
+            return "Successfully deleted favourite item!";
         }
 
         #region VALIDATIONS
@@ -336,7 +390,7 @@ namespace TheLionsDen.Services.Impl
         private void validateIsNotHidden(int id, StringBuilder errorMessage)
         {
             var room = context.Rooms.FirstOrDefault(x => x.RoomId == id);
-            if (room!=null && room.State == RoomState.Hidden.ToString())
+            if (room != null && room.State == RoomState.Hidden.ToString())
                 errorMessage.Append("The room is already hidden!\n");
         }
         private void validateRoomAmenityExist(int roomId, int amenityId, StringBuilder errorMessage)

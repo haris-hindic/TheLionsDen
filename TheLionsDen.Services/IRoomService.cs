@@ -9,6 +9,9 @@ namespace TheLionsDen.Services
         Task<string> Activate(int id);
         Task<string> Hide(int id);
         Task<string> SetAsTaken(int id);
+        Task<string> SaveRoom(int userId, int roomId);
+        Task<string> RemoveSavedRoom(int userId, int roomId);
         Task<RoomResponse> RemoveAmenity(int roomId,int amenityId);
+        Task<RoomResponse> GetWithSavedInd(int roomId,int userId);
     }
 }

@@ -13,6 +13,9 @@ namespace TheLionsDen.Model.SearchObjects
         public int RoomTypeId { get; set; }
         public int Capacity { get; set; }
 
+        public int UserId { get; set; }
+        public bool SavedOnly { get; set; }
+
         public bool IncludeRoomType { get; set; }
         public bool IncludeAmenities { get; set; }
     }

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:the_lions_den_mobile/model/amenity/amenity_response.dart';
 import 'package:the_lions_den_mobile/model/room_amenity/room_amenity_response.dart';
@@ -12,6 +14,7 @@ class RoomResponse {
   String? amenities;
   String? roomTypeName;
   String? coverImage;
+  bool? isSaved;
   RoomTypeResponse? roomType;
   List<RoomAmenityResponse>? roomAmenities;
 

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/room/room_response.dart';
 import 'package:the_lions_den_mobile/model/room_image/room_image_response.dart';
 import 'package:the_lions_den_mobile/providers/room_provider.dart';
+import 'package:the_lions_den_mobile/utils/auth_helper.dart';
 import 'package:the_lions_den_mobile/utils/util.dart';
 import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
 import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
@@ -112,11 +113,7 @@ class _RoomDetailsState extends State<RoomDetails> {
                       ),
                     ),
                     Spacer(),
-                    IconButton(
-                      color: Colors.white,
-                      icon: Icon(Icons.favorite_border),
-                      onPressed: () {},
-                    )
+                    isSaved(data)
                   ],
                 ),
                 Container(
@@ -247,5 +244,36 @@ class _RoomDetailsState extends State<RoomDetails> {
         .toList();
 
     return list;
+  }
+
+  isSaved(RoomResponse x) {
+    if (!x.isSaved!) {
+      return GestureDetector(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(Icons.favorite_border_outlined,
+              size: 34, color: Colors.white),
+        ),
+        onTap: () async {
+          String response = await _roomProvider!
+              .save(AuthHelper.user!.userId!, x.roomId!.toInt());
+
+          if (response.isNotEmpty) await loadData();
+        },
+      );
+    } else {
+      return GestureDetector(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(Icons.favorite, size: 34, color: Colors.white),
+        ),
+        onTap: () async {
+          var response = await _roomProvider!
+              .removeSaved(AuthHelper.user!.userId!, x.roomId!.toInt());
+
+          if (response.isNotEmpty) await loadData();
+        },
+      );
+    }
   }
 }

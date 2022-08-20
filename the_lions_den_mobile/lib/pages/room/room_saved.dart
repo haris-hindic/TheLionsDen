@@ -3,57 +3,36 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/room/room_response.dart';
-import 'package:the_lions_den_mobile/model/room_type/room_type_response.dart';
 import 'package:the_lions_den_mobile/pages/room/room_details.dart';
 import 'package:the_lions_den_mobile/providers/room_provider.dart';
-import 'package:the_lions_den_mobile/providers/room_type_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
-import 'package:the_lions_den_mobile/utils/number_formatter.dart';
 import 'package:the_lions_den_mobile/utils/util.dart';
 import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
-import 'package:the_lions_den_mobile/widgets/tld_bottom_navigation.dart';
 import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
 
-class RoomOverview extends StatefulWidget {
-  static const String routeName = "/room-overview";
-
-  const RoomOverview({Key? key}) : super(key: key);
+class SavedRooms extends StatefulWidget {
+  static const String routeName = "/room-saved";
+  const SavedRooms({Key? key}) : super(key: key);
 
   @override
-  State<RoomOverview> createState() => _RoomOverviewState();
+  State<SavedRooms> createState() => _SavedRoomsState();
 }
 
-class _RoomOverviewState extends State<RoomOverview> {
+class _SavedRoomsState extends State<SavedRooms> {
   RoomProvider? _roomProvider;
-  RoomTypeProvider? _roomTypeProvider;
   List<RoomResponse> data = [];
-  List<RoomTypeResponse> roomTypes = [];
-  TextEditingController _nameSearchController = new TextEditingController();
-  TextEditingController _priceSearchController = new TextEditingController();
-  TextEditingController _capacitySearchController = new TextEditingController();
-  TextEditingController _roomTypeSearchController = new TextEditingController();
-  int? selectedRoomTypeValue;
 
   @override
   void initState() {
     super.initState();
     _roomProvider = context.read<RoomProvider>();
-    _roomTypeProvider = context.read<RoomTypeProvider>();
     loadData();
-    loadRoomTypes();
   }
 
   Future loadData() async {
     var search = {
-      "name": _nameSearchController.text,
       "userId": AuthHelper.user!.userId,
-      "capacity": _capacitySearchController.text.isEmpty
-          ? 0
-          : _capacitySearchController.text,
-      "price":
-          _priceSearchController.text.isEmpty ? 0 : _priceSearchController.text,
-      "comparator": "<=",
-      "roomTypeId": selectedRoomTypeValue ?? 0,
+      "savedOnly": "true",
       "IncludeRoomType": "true",
       "IncludeAmenities": "true"
     };
@@ -63,18 +42,11 @@ class _RoomOverviewState extends State<RoomOverview> {
     });
   }
 
-  Future loadRoomTypes() async {
-    var _roomTypes = await _roomTypeProvider?.get(null);
-    setState(() {
-      roomTypes = _roomTypes!;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: TLDDrawer(),
-        appBar: TLDAppbar(title: "ROOM OVERVIEW", appBar: AppBar()),
+        appBar: TLDAppbar(title: "SAVED ROOMS", appBar: AppBar()),
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
@@ -87,7 +59,6 @@ class _RoomOverviewState extends State<RoomOverview> {
     List<Widget> list = <Widget>[];
     //list.add(TLDAppbar(title: "ROOM OVERVIEW"));
     list.add(_buildHeader());
-    list.add(_buildRoomSearch());
     list.addAll(_buildRoomCardList());
     return list;
   }
@@ -96,7 +67,7 @@ class _RoomOverviewState extends State<RoomOverview> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: const Text(
-        "Search rooms",
+        "Saved rooms",
         style: TextStyle(
             color: Color.fromARGB(255, 66, 129, 160),
             fontSize: 20,
@@ -105,145 +76,14 @@ class _RoomOverviewState extends State<RoomOverview> {
     );
   }
 
-  Widget _buildRoomSearch() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(
-              child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: TextField(
-                    controller: _nameSearchController,
-                    decoration: InputDecoration(
-                      hintText: "Name",
-                      prefixIcon: Icon(Icons.search),
-                      // border: OutlineInputBorder(
-                      //     borderRadius: BorderRadius.circular(10),
-                      //     borderSide: BorderSide(color: Colors.grey))
-                    ),
-                    onSubmitted: (value) async {
-                      var tmpData = await _roomProvider?.get({
-                        "name": value,
-                        "userId": AuthHelper.user!.userId,
-                        "IncludeRoomType": "true",
-                        "IncludeAmenities": "true"
-                      });
-                      setState(() {
-                        data = tmpData!;
-                      });
-                    },
-                  )),
-            ),
-            Expanded(
-              child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: TextField(
-                    controller: _priceSearchController,
-                    decoration: InputDecoration(
-                      hintText: "Price",
-                      prefixIcon: Icon(Icons.money),
-                      // border: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(10),
-                      //   borderSide: BorderSide(color: Colors.grey)
-                      // )
-                    ),
-                    keyboardType: TextInputType.number,
-                  )),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(
-                child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: DropdownButton(
-                  items: _buildRoomTypesDownList(),
-                  value: selectedRoomTypeValue,
-                  icon: Icon(Icons.bed_outlined),
-                  hint: Text("Room Type"),
-                  onChanged: (dynamic value) {
-                    setState(() {
-                      selectedRoomTypeValue = value;
-                    });
-                  }),
-            )),
-            Expanded(
-              child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: TextField(
-                    controller: _capacitySearchController,
-                    decoration: InputDecoration(
-                      hintText: "Capacity",
-                      prefixIcon: Icon(Icons.person_outlined),
-                      // border: OutlineInputBorder(
-                      //     borderRadius: BorderRadius.circular(10),
-                      //     borderSide: BorderSide(color: Colors.grey)
-                      //     )
-                    ),
-                    keyboardType: TextInputType.number,
-                  )),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                child: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () async {
-                    _capacitySearchController.text = "";
-                    _nameSearchController.text = "";
-                    _priceSearchController.text = "";
-                    setState(() {
-                      selectedRoomTypeValue = -1;
-                    });
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                child: IconButton(
-                  icon: Icon(Icons.filter_list_alt),
-                  onPressed: () async {
-                    var tmpData = await _roomProvider?.get({
-                      "name": _nameSearchController.text,
-                      "userId": AuthHelper.user!.userId,
-                      "capacity": _capacitySearchController.text.isEmpty
-                          ? 0
-                          : _capacitySearchController.text,
-                      "price": _priceSearchController.text.isEmpty
-                          ? 0
-                          : _priceSearchController.text,
-                      "comparator": "<=",
-                      "roomTypeId": selectedRoomTypeValue ?? 0,
-                      "IncludeRoomType": "true",
-                      "IncludeAmenities": "true"
-                    });
-                    setState(() {
-                      data = tmpData!;
-                    });
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   List<Widget> _buildRoomCardList() {
     if (data.length == 0) {
-      return [const Text("Loading.....")];
+      return [
+        SizedBox(
+          height: 50,
+        ),
+        Center(child: const Text("No rooms saved."))
+      ];
     }
 
     List<Widget> list = data
@@ -350,28 +190,6 @@ class _RoomOverviewState extends State<RoomOverview> {
             ))
         .cast<Widget>()
         .toList();
-
-    return list;
-  }
-
-  List<DropdownMenuItem> _buildRoomTypesDownList() {
-    if (roomTypes.isEmpty) {
-      return [];
-    }
-    List<DropdownMenuItem> list = <DropdownMenuItem>[];
-
-    list.add(DropdownMenuItem(
-      child: Text("Room Type", style: TextStyle(color: Colors.black)),
-      enabled: false,
-      value: -1,
-    ));
-
-    list.addAll(roomTypes
-        .map((x) => DropdownMenuItem(
-              child: Text(x.name!, style: TextStyle(color: Colors.black)),
-              value: x.roomTypeId,
-            ))
-        .toList());
 
     return list;
   }
