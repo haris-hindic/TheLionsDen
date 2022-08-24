@@ -191,6 +191,9 @@ class _RoomReservationState extends State<RoomReservation> {
                       String pickedDeparture =
                           DateFormat('yyyy-MM-dd').format(pickedDate.end);
 
+                      isAvaliable = await _roomProvider!.checkAvailabilty(
+                          data.roomId!, pickedDate.start, pickedDate.end);
+
                       setState(() {
                         _departureController.text = pickedDeparture;
                         _arrivalController.text = pickedArrival;
@@ -687,7 +690,7 @@ class _RoomReservationState extends State<RoomReservation> {
         ),
         Container(
           height: 50,
-          width: 300,
+          width: 350,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               gradient: const LinearGradient(colors: [
@@ -696,7 +699,8 @@ class _RoomReservationState extends State<RoomReservation> {
               ])),
           child: InkWell(
             child: const Center(
-                child: Text("Room not avaliable for selected time period.")),
+                child: Text(
+                    "Room is not avaliable for the selected time period.")),
             onTap: () async {},
           ),
         ),

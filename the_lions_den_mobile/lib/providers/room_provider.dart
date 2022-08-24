@@ -43,4 +43,26 @@ class RoomProvider extends BaseProvider<RoomResponse> {
       throw Exception("An error occured!");
     }
   }
+
+  Future<bool> checkAvailabilty(
+      int roomId, DateTime arrival, DateTime deparutre) async {
+    var url = "$fullUrl/$roomId/check-availability";
+
+    String queryString =
+        getQueryString({'arrival': arrival, 'departure': deparutre});
+    url = url + "?" + queryString;
+
+    var uri = Uri.parse(url);
+
+    Map<String, String> headers = createHeaders();
+
+    var response = await http!.get(uri, headers: headers);
+
+    if (isValidResponseCode(response)) {
+      var data = response.body;
+      return data.toLowerCase() == 'true';
+    } else {
+      throw Exception("An error occured!");
+    }
+  }
 }
