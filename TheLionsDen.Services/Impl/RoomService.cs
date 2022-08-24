@@ -172,8 +172,6 @@ namespace TheLionsDen.Services.Impl
                 foreach (var r in rooms)
                     if (favorites.Contains(r.RoomId))
                         r.isSaved = true;
-
-
             }
 
             if (searchObject.UserId > 0 && searchObject.SavedOnly)
@@ -255,6 +253,30 @@ namespace TheLionsDen.Services.Impl
             context.SaveChanges();
 
             return "Successfully deleted favourite item!";
+        }
+        public async Task<bool> CheckRoomAvailability(int id, CheckAvailabilityRequest request)
+        {
+            var allReservations = await context.Reservations.Where(x => x.RoomId == id).ToListAsync();
+
+            var bookedDates = new List<DateTime>();
+            foreach (var r in allReservations)
+            {
+                bookedDates.AddRange(Enumerable.Range(0, 1 + r.Departure.Subtract(r.Arrival).Days)
+                           .Select(offset => r.Arrival.AddDays(offset).Date)
+                           .ToList());
+            }
+
+            var requestedDates = Enumerable.Range(0, 1 + request.Departure.Subtract(request.Arrival).Days)
+                          .Select(offset => request.Arrival.AddDays(offset).Date)
+                          .ToList();
+
+            foreach (var rd in requestedDates)
+            {
+                if (bookedDates.Contains(rd))
+                    return false;
+            }
+
+            return true;
         }
 
         #region VALIDATIONS

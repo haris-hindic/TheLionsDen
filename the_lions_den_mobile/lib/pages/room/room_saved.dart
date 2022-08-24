@@ -79,10 +79,11 @@ class _SavedRoomsState extends State<SavedRooms> {
   List<Widget> _buildRoomCardList() {
     if (data.length == 0) {
       return [
-        SizedBox(
-          height: 50,
-        ),
-        Center(child: const Text("No rooms saved."))
+        const Center(
+          child: CircularProgressIndicator(
+            color: Colors.black,
+          ),
+        )
       ];
     }
 

@@ -11,5 +11,6 @@ namespace TheLionsDen.Services
 {
     public interface IFacilityService : ICRUDService<FacilityResponse,FacilitySearchObject,FacilityUpsertRequest, FacilityUpsertRequest>
     {
+        Task<List<FacilityResponse>> Recommend(int id);
     }
 }

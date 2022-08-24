@@ -71,5 +71,11 @@ namespace TheLionsDen.Controllers
             var user = await userService.Login(creds.Username,creds.Password);
             return await service.GetWithSavedInd(userId: user.UserId, roomId: id);
         }
+
+        [HttpGet("{id}/check-availability")]
+        public async Task<bool> CheckRoomAvailability(int id, [FromQuery] CheckAvailabilityRequest request)
+        {
+            return await service.CheckRoomAvailability(id,request);
+        }
     }
 }

@@ -74,7 +74,11 @@ class _EditProfileState extends State<EditProfile> {
 
   _buildEditProfile() {
     if (data.username == null) {
-      return const Text("Loading.....");
+      return Center(
+        child: const CircularProgressIndicator(
+          color: Colors.black,
+        ),
+      );
     }
 
     return Padding(

@@ -49,7 +49,11 @@ class _UserProfileState extends State<UserProfile> {
 
   _buildUserDetails() {
     if (data.fullName == null) {
-      return const Text("Loading.....");
+      return Center(
+        child: const CircularProgressIndicator(
+          color: Colors.black,
+        ),
+      );
     }
 
     return Padding(

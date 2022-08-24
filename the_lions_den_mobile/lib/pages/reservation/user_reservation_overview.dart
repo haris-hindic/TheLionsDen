@@ -167,7 +167,13 @@ class _UserReservationOverviewState extends State<UserReservationOverview> {
 
   List<Widget> _buildReservationCardList() {
     if (data.length == 0) {
-      return [Center(child: const Text("Loading....."))];
+      return [
+        const Center(
+          child: CircularProgressIndicator(
+            color: Colors.black,
+          ),
+        )
+      ];
     }
 
     List<Widget> list = data

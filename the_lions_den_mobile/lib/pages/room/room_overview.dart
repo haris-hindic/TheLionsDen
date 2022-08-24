@@ -85,7 +85,6 @@ class _RoomOverviewState extends State<RoomOverview> {
 
   List<Widget> _buildAll() {
     List<Widget> list = <Widget>[];
-    //list.add(TLDAppbar(title: "ROOM OVERVIEW"));
     list.add(_buildHeader());
     list.add(_buildRoomSearch());
     list.addAll(_buildRoomCardList());
@@ -243,7 +242,13 @@ class _RoomOverviewState extends State<RoomOverview> {
 
   List<Widget> _buildRoomCardList() {
     if (data.length == 0) {
-      return [const Text("Loading.....")];
+      return [
+        const Center(
+          child: CircularProgressIndicator(
+            color: Colors.black,
+          ),
+        )
+      ];
     }
 
     List<Widget> list = data

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/room/room_response.dart';
 import 'package:the_lions_den_mobile/model/room_image/room_image_response.dart';
+import 'package:the_lions_den_mobile/pages/reservation/room_reservaton.dart';
 import 'package:the_lions_den_mobile/providers/room_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
 import 'package:the_lions_den_mobile/utils/util.dart';
@@ -53,7 +54,11 @@ class _RoomDetailsState extends State<RoomDetails> {
 
   _buildDetails() {
     if (data.coverImage == null) {
-      return const Text("Loading.....");
+      return const Center(
+        child: CircularProgressIndicator(
+          color: Colors.black,
+        ),
+      );
     }
 
     return SafeArea(
@@ -154,6 +159,10 @@ class _RoomDetailsState extends State<RoomDetails> {
                               Color.fromARGB(255, 10, 158, 227)
                             ])),
                         child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context,
+                                "${RoomReservation.routeName}/${data.roomId}");
+                          },
                           child: const Center(child: Text("Book Now!")),
                         ),
                       ),
