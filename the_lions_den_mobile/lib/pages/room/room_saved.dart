@@ -7,6 +7,7 @@ import 'package:the_lions_den_mobile/pages/room/room_details.dart';
 import 'package:the_lions_den_mobile/providers/room_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
 import 'package:the_lions_den_mobile/utils/util.dart';
+import 'package:the_lions_den_mobile/widgets/master_screen.dart';
 import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
 import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
 
@@ -44,10 +45,10 @@ class _SavedRoomsState extends State<SavedRooms> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: TLDDrawer(),
-        appBar: TLDAppbar(title: "SAVED ROOMS", appBar: AppBar()),
-        body: SafeArea(
+    return MasterScreenWidget(
+        selectedIndex: 3,
+        title: "SAVED ROOMS",
+        child: SafeArea(
             child: SingleChildScrollView(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +58,6 @@ class _SavedRoomsState extends State<SavedRooms> {
 
   List<Widget> _buildAll() {
     List<Widget> list = <Widget>[];
-    //list.add(TLDAppbar(title: "ROOM OVERVIEW"));
     list.add(_buildHeader());
     list.addAll(_buildRoomCardList());
     return list;

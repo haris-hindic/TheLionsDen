@@ -258,6 +258,9 @@ namespace TheLionsDen.Services.Impl
         {
             var allReservations = await context.Reservations.Where(x => x.RoomId == id).ToListAsync();
 
+            if (allReservations.Count == 0)
+                return true;
+
             var bookedDates = new List<DateTime>();
             foreach (var r in allReservations)
             {

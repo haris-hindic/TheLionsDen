@@ -15,7 +15,6 @@ namespace TheLionsDen.Services.Database
         public DateTime Departure { get; set; }
         public float TotalPrice { get; set; }
         public string Status { get; set; } = null!;
-        public string? SpecialRequests { get; set; }
         public string? EstimatedArrivalTime { get; set; }
         public int UserId { get; set; }
         public int RoomId { get; set; }

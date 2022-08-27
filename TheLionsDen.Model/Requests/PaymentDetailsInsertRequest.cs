@@ -11,8 +11,7 @@ namespace TheLionsDen.Model.Requests
         public DateTime Date { get; set; }
         [Required]
         public string PaymentType { get; set; }
-        public string CardNumber { get; set; }
-        public string ExpDate { get; set; }
-        public int Cvc { get; set; }
+        public string Currency { get; set; }
+        public string StripeId { get; set; }
     }
 }

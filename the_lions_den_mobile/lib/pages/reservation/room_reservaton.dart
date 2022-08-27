@@ -7,8 +7,12 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/facility/facility_response.dart';
+import 'package:the_lions_den_mobile/model/reservation/payment_details_insert_request.dart';
+import 'package:the_lions_den_mobile/model/reservation/reservation_insert_request.dart';
 import 'package:the_lions_den_mobile/model/room/room_response.dart';
+import 'package:the_lions_den_mobile/pages/user/user_profile.dart';
 import 'package:the_lions_den_mobile/providers/facility_provider.dart';
+import 'package:the_lions_den_mobile/providers/reservation_provider.dart';
 import 'package:the_lions_den_mobile/providers/room_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
 import 'package:the_lions_den_mobile/utils/number_formatter.dart';
@@ -33,6 +37,7 @@ class _RoomReservationState extends State<RoomReservation> {
   List<FacilityResponse> facilities = <FacilityResponse>[];
   List<FacilityResponse> selectedFacilites = <FacilityResponse>[];
   List<FacilityResponse> recommendedFacilities = <FacilityResponse>[];
+  ReservationProvider? _reservationProvider;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -49,7 +54,7 @@ class _RoomReservationState extends State<RoomReservation> {
     "10:00am - 11:00am",
     "11:00am - 12:00am"
   ];
-  int selectedReservationStatusIndex = 99;
+  int selectedArrivalTime = 99;
   int selectedFacility = 99;
 
   DateFormat dt = DateFormat('EEE, M/d/y');
@@ -69,6 +74,7 @@ class _RoomReservationState extends State<RoomReservation> {
     super.initState();
     _roomProvider = context.read<RoomProvider>();
     _facilityProvider = context.read<FacilityProvider>();
+    _reservationProvider = context.read<ReservationProvider>();
     Stripe.publishableKey =
         "pk_test_51KR05DIwNGlyHmAKnz8PDxOojJ1pXkmGAek19LTK4XY8oR6XAkpQgoZHE0ESAAdMjuFsT2QFV1NXSFAaW1XrLTdb00G3xxz2CI";
     fillTextFields();
@@ -228,13 +234,13 @@ class _RoomReservationState extends State<RoomReservation> {
                 const SizedBox(height: 15.0),
                 DropdownButton(
                     items: _buildEstimatedArrivalTimeDownList(),
-                    value: selectedReservationStatusIndex,
+                    value: selectedArrivalTime,
                     icon: Icon(Icons.share_arrival_time),
                     hint: Text("Estimated arrival time"),
                     //hint: Text("Room Type"),
                     onChanged: (dynamic value) {
                       setState(() {
-                        selectedReservationStatusIndex = value;
+                        selectedArrivalTime = value;
                       });
                     }),
                 const SizedBox(height: 35.0),
@@ -565,7 +571,8 @@ class _RoomReservationState extends State<RoomReservation> {
               height: 10,
             ),
             Column(
-              children: _buildAddedFacilitesList(),
+              children: _buildAddedFacilitesList(
+                  departureDate.difference(arrivalDate).inDays),
             ),
             const SizedBox(
               height: 15,
@@ -593,7 +600,7 @@ class _RoomReservationState extends State<RoomReservation> {
     );
   }
 
-  _buildAddedFacilitesList() {
+  _buildAddedFacilitesList(int days) {
     if (selectedFacilites.isEmpty) return [const SizedBox()];
 
     List<Widget> list = selectedFacilites
@@ -630,7 +637,7 @@ class _RoomReservationState extends State<RoomReservation> {
                   ],
                 ),
                 Text(
-                  "${e.price}\$",
+                  "${e.price! * days}\$",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w400),
@@ -647,11 +654,12 @@ class _RoomReservationState extends State<RoomReservation> {
     double totalPrice = 0;
     var arrivalDate = DateTime.parse(_arrivalController.text);
     var departureDate = DateTime.parse(_departureController.text);
+    var days = departureDate.difference(arrivalDate).inDays;
 
-    totalPrice += departureDate.difference(arrivalDate).inDays * data.price!;
+    totalPrice += days * data.price!;
 
     selectedFacilites.forEach((element) {
-      totalPrice += element.price!;
+      totalPrice += element.price! * days;
     });
 
     return totalPrice;
@@ -759,7 +767,7 @@ class _RoomReservationState extends State<RoomReservation> {
         throw Exception(error);
       });
 
-      //createReservationPayment();
+      createReservationPayment();
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Payment successful")));
     } on Exception catch (e) {
@@ -794,5 +802,44 @@ class _RoomReservationState extends State<RoomReservation> {
     } catch (err) {
       print('Error: ${err.toString()}');
     }
+  }
+
+  void createReservationPayment() async {
+    var request = _prepareInsertRequest();
+
+    var response = await _reservationProvider!.insert(request);
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text("Success"),
+              content: const Text("Room reserved successfully."),
+              actions: [
+                TextButton(
+                    onPressed: () async => await Navigator.popAndPushNamed(
+                        context, UserProfile.routeName),
+                    child: const Text("Ok"))
+              ],
+            ));
+  }
+
+  _prepareInsertRequest() {
+    var req = ReservationInsertRequest();
+    req.arrival = DateTime.parse(_arrivalController.text);
+    req.departure = DateTime.parse(_departureController.text);
+    req.totalPrice = _calculateTotalPrice();
+    req.estimatedArrivalTime =
+        selectedArrivalTime == 99 ? null : arrivalTimes[selectedArrivalTime];
+    req.roomId = data.roomId;
+    req.userId = AuthHelper.user!.userId!;
+    var paymentDetails = PaymetDetailsInsertRequest();
+    paymentDetails.currency = paymentIntentData!['currency'];
+    paymentDetails.stripeId = paymentIntentData!['id'];
+    paymentDetails.date = DateTime.now();
+    paymentDetails.paymentType = "Stripe payment";
+    req.paymentDetails = paymentDetails;
+    req.facilityIds =
+        selectedFacilites.map((e) => e.facilityId).cast<int>().toList();
+    return req;
   }
 }

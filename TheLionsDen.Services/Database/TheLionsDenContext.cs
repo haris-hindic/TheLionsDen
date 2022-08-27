@@ -171,15 +171,13 @@ namespace TheLionsDen.Services.Database
 
                 entity.Property(e => e.PaymentDetailsId).HasColumnName("PaymentDetailsID");
 
-                entity.Property(e => e.CardNumber)
+                entity.Property(e => e.StripeId)
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Cvc).HasColumnName("CVC");
-
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
-                entity.Property(e => e.ExpDate)
+                entity.Property(e => e.Currency)
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
@@ -206,10 +204,6 @@ namespace TheLionsDen.Services.Database
                 entity.Property(e => e.PaymentDetailsId).HasColumnName("PaymentDetailsID");
 
                 entity.Property(e => e.RoomId).HasColumnName("RoomID");
-
-                entity.Property(e => e.SpecialRequests)
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(40)

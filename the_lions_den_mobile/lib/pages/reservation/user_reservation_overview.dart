@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:the_lions_den_mobile/model/reservation/reservation_response.dart';
 import 'package:the_lions_den_mobile/providers/reservation_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
+import 'package:the_lions_den_mobile/widgets/master_screen.dart';
 import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
 import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
 
@@ -48,10 +49,10 @@ class _UserReservationOverviewState extends State<UserReservationOverview> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: TLDDrawer(),
-        appBar: TLDAppbar(title: "RESERVATION OVERVIEW", appBar: AppBar()),
-        body: SafeArea(
+    return MasterScreenWidget(
+        selectedIndex: 2,
+        title: "RESERVATION OVERVIEW",
+        child: SafeArea(
             child: SingleChildScrollView(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

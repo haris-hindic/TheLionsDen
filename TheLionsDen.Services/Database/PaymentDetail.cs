@@ -13,9 +13,8 @@ namespace TheLionsDen.Services.Database
         public int PaymentDetailsId { get; set; }
         public DateTime Date { get; set; }
         public string PaymentType { get; set; } = null!;
-        public string? CardNumber { get; set; }
-        public string? ExpDate { get; set; }
-        public int? Cvc { get; set; }
+        public string? Currency { get; set; }
+        public string? StripeId { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; }
     }

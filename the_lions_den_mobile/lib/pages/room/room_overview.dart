@@ -10,6 +10,7 @@ import 'package:the_lions_den_mobile/providers/room_type_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
 import 'package:the_lions_den_mobile/utils/number_formatter.dart';
 import 'package:the_lions_den_mobile/utils/util.dart';
+import 'package:the_lions_den_mobile/widgets/master_screen.dart';
 import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
 import 'package:the_lions_den_mobile/widgets/tld_bottom_navigation.dart';
 import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
@@ -72,10 +73,10 @@ class _RoomOverviewState extends State<RoomOverview> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: TLDDrawer(),
-        appBar: TLDAppbar(title: "ROOM OVERVIEW", appBar: AppBar()),
-        body: SafeArea(
+    return MasterScreenWidget(
+        selectedIndex: 0,
+        title: "ROOM OVERVIEW",
+        child: SafeArea(
             child: SingleChildScrollView(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

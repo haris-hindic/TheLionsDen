@@ -13,7 +13,6 @@ namespace TheLionsDen.Model.Requests
         public DateTime Departure { get; set; }
         [Required]
         public float TotalPrice { get; set; }
-        public string SpecialRequests { get; set; }
         public string EstimatedArrivalTime { get; set; }
         [Required]
         public int UserId { get; set; }

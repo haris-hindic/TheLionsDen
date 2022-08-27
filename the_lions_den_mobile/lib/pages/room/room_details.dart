@@ -8,6 +8,7 @@ import 'package:the_lions_den_mobile/providers/room_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
 import 'package:the_lions_den_mobile/utils/util.dart';
 import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
+import 'package:the_lions_den_mobile/widgets/tld_bottom_navigation.dart';
 import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
 
 class RoomDetails extends StatefulWidget {
