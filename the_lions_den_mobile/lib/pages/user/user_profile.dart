@@ -10,9 +10,6 @@ import 'package:the_lions_den_mobile/pages/user/edit_profile.dart';
 import 'package:the_lions_den_mobile/providers/user_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
 import 'package:the_lions_den_mobile/widgets/master_screen.dart';
-import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
-import 'package:the_lions_den_mobile/widgets/tld_bottom_navigation.dart';
-import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
 
 class UserProfile extends StatefulWidget {
   static const routeName = "/myProfile";
@@ -45,7 +42,7 @@ class _UserProfileState extends State<UserProfile> {
     return MasterScreenWidget(
       title: "MY PROFILE",
       child: _buildUserDetails(),
-      selectedIndex: 1,
+      selectedIndex: 3,
     );
   }
 

@@ -7,7 +7,7 @@ namespace TheLionsDen.Model.Requests
 {
     public class RoomTypeUpsertRequest
     {
-        [Required(AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false),MaxLength(40)]
         public string Name { get; set; }
         [Required, Range(1, 100)]
         public int Capacity { get; set; }

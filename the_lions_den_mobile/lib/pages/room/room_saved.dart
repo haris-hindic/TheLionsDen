@@ -46,7 +46,7 @@ class _SavedRoomsState extends State<SavedRooms> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-        selectedIndex: 3,
+        selectedIndex: 2,
         title: "SAVED ROOMS",
         child: SafeArea(
             child: SingleChildScrollView(

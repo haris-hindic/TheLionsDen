@@ -8,12 +8,8 @@ import 'package:the_lions_den_mobile/pages/room/room_details.dart';
 import 'package:the_lions_den_mobile/providers/room_provider.dart';
 import 'package:the_lions_den_mobile/providers/room_type_provider.dart';
 import 'package:the_lions_den_mobile/utils/auth_helper.dart';
-import 'package:the_lions_den_mobile/utils/number_formatter.dart';
 import 'package:the_lions_den_mobile/utils/util.dart';
 import 'package:the_lions_den_mobile/widgets/master_screen.dart';
-import 'package:the_lions_den_mobile/widgets/tld_appbar.dart';
-import 'package:the_lions_den_mobile/widgets/tld_bottom_navigation.dart';
-import 'package:the_lions_den_mobile/widgets/tld_drawer.dart';
 
 class RoomOverview extends StatefulWidget {
   static const String routeName = "/room-overview";

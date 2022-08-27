@@ -50,7 +50,7 @@ class _UserReservationOverviewState extends State<UserReservationOverview> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-        selectedIndex: 2,
+        selectedIndex: 1,
         title: "RESERVATION OVERVIEW",
         child: SafeArea(
             child: SingleChildScrollView(

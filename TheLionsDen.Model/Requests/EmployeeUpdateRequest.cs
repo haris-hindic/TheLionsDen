@@ -7,18 +7,20 @@ namespace TheLionsDen.Model.Requests
 {
     public class EmployeeUpdateRequest
     {
-        [Required(AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false), MaxLength(40)]
         public string FirstName { get; set; }
-        [Required(AllowEmptyStrings = false)]
-
+        [Required(AllowEmptyStrings = false), MaxLength(40)]
         public string LastName { get; set; }
-        public string Address { get; set; }
         public DateTime? BirthDate { get; set; }
+        [MaxLength(40)]
+        public string Address { get; set; }
+        [MaxLength(40)]
         public string PhoneNumber { get; set; }
-        [Required(AllowEmptyStrings = false), EmailAddress]
+        [Required(AllowEmptyStrings = false), EmailAddress, MaxLength(40)]
         public string Email { get; set; }
+        [MaxLength(40)]
         public string Gender { get; set; }
-        [Required(AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false), MaxLength(40)]
         public string Status { get; set; }
         [Required]
         public int JobTypeId { get; set; }

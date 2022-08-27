@@ -7,7 +7,7 @@ namespace TheLionsDen.Model.Requests
 {
     public class AmenityUpsertRequest
     {
-        [Required(AllowEmptyStrings = false), MinLength(2)]
+        [Required(AllowEmptyStrings = false), MinLength(2),MaxLength(40)]
         public string Name { get; set; }
         public string Description { get; set; }
     }
