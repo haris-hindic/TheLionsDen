@@ -27,7 +27,6 @@ namespace TheLionsDen.Model.Responses
 
         [JsonIgnore]
         public virtual FacilityResponse Facility { get; set; }
-        //[JsonIgnore]
         public virtual JobTypeResponse JobType { get; set; }
 
     }

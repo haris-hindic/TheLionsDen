@@ -11,6 +11,5 @@ namespace TheLionsDen.Model.Responses
         public int FacilityId { get; set; }
 
         public virtual FacilityResponse Facility { get; set; }
-        //public virtual Reservation Reservation { get; set; } 
     }
 }

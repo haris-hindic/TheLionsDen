@@ -23,11 +23,8 @@ namespace TheLionsDen.Model.Responses
         public string FacilityNames { get; set; }
 
         public virtual PaymentDetailResponse PaymentDetails { get; set; }
-        [JsonIgnore]
         public virtual RoomResponse Room { get; set; }
-        [JsonIgnore]
         public virtual UserResponse User { get; set; }
-        [JsonIgnore]
         public virtual ICollection<ReservationFaciliteResponse> ReservationFacilities { get; set; }
     }
 }

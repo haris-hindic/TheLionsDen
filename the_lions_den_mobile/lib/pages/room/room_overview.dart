@@ -52,7 +52,8 @@ class _RoomOverviewState extends State<RoomOverview> {
       "comparator": "<=",
       "roomTypeId": selectedRoomTypeValue ?? 0,
       "IncludeRoomType": "true",
-      "IncludeAmenities": "true"
+      "IncludeAmenities": "true",
+      "state": "Active"
     };
     var tempData = await _roomProvider?.get(search);
     setState(() {

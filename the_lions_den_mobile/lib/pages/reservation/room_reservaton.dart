@@ -83,7 +83,7 @@ class _RoomReservationState extends State<RoomReservation> {
 
   Future loadData() async {
     var tempData = await _roomProvider?.getById(int.parse(id));
-    var tempFac = await _facilityProvider?.get();
+    var tempFac = await _facilityProvider?.get({"status": "Active"});
     setState(() {
       data = tempData!;
       facilities = tempFac!;

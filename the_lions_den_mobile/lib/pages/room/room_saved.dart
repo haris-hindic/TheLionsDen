@@ -35,7 +35,8 @@ class _SavedRoomsState extends State<SavedRooms> {
       "userId": AuthHelper.user!.userId,
       "savedOnly": "true",
       "IncludeRoomType": "true",
-      "IncludeAmenities": "true"
+      "IncludeAmenities": "true",
+      "state": "Active"
     };
     var tempData = await _roomProvider?.get(search);
     setState(() {

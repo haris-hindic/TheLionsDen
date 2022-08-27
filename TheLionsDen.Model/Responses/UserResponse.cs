@@ -18,8 +18,6 @@ namespace TheLionsDen.Model.Responses
         public int RoleId { get; set; }
 
         public virtual RoleResponse Role { get; set; }
-        //public virtual ICollection<Favourite> Favourites { get; set; }
-        //public virtual ICollection<Reservation> Reservations { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";
         public string RoleName => Role.Name;

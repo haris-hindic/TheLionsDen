@@ -16,6 +16,5 @@ namespace TheLionsDen.Model.Responses
         public string SizeM2 => $"{Size}m2";
 
         public virtual ICollection<RoomImageResponse> RoomImages { get; set; }
-        //public virtual ICollection<Room> Rooms { get; set; }
     }
 }
