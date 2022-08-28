@@ -60,6 +60,7 @@ namespace TheLionsDen.Controllers
             return await service.CustomerUpdate(id,request);
         }
 
+        [Authorize(Roles = "Administrator")]
         public override async Task<string> Delete(int id)
         {
             var credentials = CredentialsHelper.extractCredentials(Request);
