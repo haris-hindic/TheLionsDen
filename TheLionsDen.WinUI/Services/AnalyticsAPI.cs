@@ -14,7 +14,7 @@ namespace TheLionsDen.WinUI.Services
     public class AnalyticsAPI
     {
         public readonly string resourceName;
-        public readonly string endpoint = "https://localhost:7070";
+        public readonly string endpoint = "http://localhost:5070";
 
         public AnalyticsAPI(string resourceName="analytics")
         {
