@@ -34,7 +34,7 @@ namespace TheLionsDen.Controllers
         {
             return base.Get(searchObject);
         }
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,Customer")]
         public override Task<UserResponse> GetById(int id)
         {
             return base.GetById(id);
