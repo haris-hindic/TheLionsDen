@@ -93,7 +93,7 @@ class _UserProfileState extends State<UserProfile> {
                     child: Container(
                       height: 30,
                       width: 150,
-                      child: Text("Reservation history",
+                      child: Text("Reservatios",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold)),
                       alignment: Alignment.center,

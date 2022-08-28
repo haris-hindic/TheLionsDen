@@ -158,7 +158,7 @@ class _RoomOverviewState extends State<RoomOverview> {
                 child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: DropdownButton(
-                  iconSize: 15,
+                  iconSize: 10,
                   items: _buildRoomTypesDownList(),
                   value: selectedRoomTypeValue,
                   icon: Icon(Icons.bed_outlined),
@@ -262,7 +262,7 @@ class _RoomOverviewState extends State<RoomOverview> {
 
     List<Widget> list = data!
         .map((x) => Container(
-              height: 225,
+              height: 230,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Card(

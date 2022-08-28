@@ -187,7 +187,7 @@ class _RoomReservationState extends State<RoomReservation> {
                     DateTimeRange? pickedDate = await showDateRangePicker(
                         context: context,
                         initialDateRange: dateTimeRange,
-                        firstDate: DateTime(1950),
+                        firstDate: DateTime.now(),
                         lastDate: DateTime(2100));
 
                     if (pickedDate != null) {

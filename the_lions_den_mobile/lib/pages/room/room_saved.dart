@@ -100,7 +100,7 @@ class _SavedRoomsState extends State<SavedRooms> {
 
     List<Widget> list = data!
         .map((x) => Container(
-              height: 225,
+              height: 230,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Card(
