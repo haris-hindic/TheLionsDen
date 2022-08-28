@@ -733,7 +733,7 @@ class _RoomReservationState extends State<RoomReservation> {
                   applePay: true,
                   googlePay: true,
                   testEnv: true,
-                  style: ThemeMode.dark,
+                  style: ThemeMode.light,
                   merchantCountryCode: 'Curacao',
                   merchantDisplayName: 'The Lion\' Den'))
           .then((value) {});
