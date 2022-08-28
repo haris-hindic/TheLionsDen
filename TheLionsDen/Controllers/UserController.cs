@@ -19,6 +19,26 @@ namespace TheLionsDen.Controllers
         {
             this.service = service;
         }
+        [Authorize(Roles = "Administrator")]
+        public override Task<UserResponse> Insert([FromBody] UserInsertRequest request)
+        {
+            return base.Insert(request);
+        }
+        [Authorize(Roles = "Administrator")]
+        public override Task<UserResponse> Update(int id, [FromBody] UserUpdateRequest request)
+        {
+            return base.Update(id, request);
+        }
+        [Authorize(Roles = "Administrator")]
+        public override Task<IEnumerable<UserResponse>> Get([FromQuery] UserSearchObject searchObject)
+        {
+            return base.Get(searchObject);
+        }
+        [Authorize(Roles = "Administrator")]
+        public override Task<UserResponse> GetById(int id)
+        {
+            return base.GetById(id);
+        }
 
         [HttpGet("login"), AllowAnonymous]
         public async Task<UserResponse> Login()

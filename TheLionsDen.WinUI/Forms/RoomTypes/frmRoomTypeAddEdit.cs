@@ -106,7 +106,8 @@ namespace WinUI.Forms.RoomTypes
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (images.Count() == 0) MessageBox.Show("No images!");
+            if (images.Count() == 0)
+                MessageBox.Show("No images!");
 
             if (images.Count() > (imageIndex + 1))
             {
@@ -121,7 +122,8 @@ namespace WinUI.Forms.RoomTypes
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            if (images.Count() == 0) MessageBox.Show("No images!");
+            if (images.Count() == 0)
+                MessageBox.Show("No images!");
 
             if (imageIndex > 0)
             {
@@ -203,12 +205,21 @@ namespace WinUI.Forms.RoomTypes
 
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.png;)|*.jpg;*.jpeg;.*.png";
-            if (opnfd.ShowDialog() == DialogResult.OK)
+            try
             {
-                pbNewImage.SizeMode = PictureBoxSizeMode.StretchImage;
-                pbNewImage.Image = new Bitmap(opnfd.FileName);
+
+                OpenFileDialog opnfd = new OpenFileDialog();
+                opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.png;)|*.jpg;*.jpeg;.*.png";
+                if (opnfd.ShowDialog() == DialogResult.OK)
+                {
+                    pbNewImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pbNewImage.Image = new Bitmap(opnfd.FileName);
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Invalid image.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -240,7 +251,8 @@ namespace WinUI.Forms.RoomTypes
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            if (images.Count() == 0) MessageBox.Show("No images!");
+            if (images.Count() == 0)
+                MessageBox.Show("No images!");
 
             var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
 

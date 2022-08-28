@@ -89,7 +89,9 @@ namespace TheLionsDen.Services.Impl
             validateGetByIdRequest(id);
             var entity = await context.Rooms.Include("RoomType.RoomImages").Include("RoomAmenities.Amenity").FirstOrDefaultAsync(x => x.RoomId == id);
 
-            return mapper.Map<RoomResponse>(entity);
+            var response = mapper.Map<RoomResponse>(entity);
+            response.CoverImage = null;
+            return response;
         }
 
         public async Task<RoomResponse> GetWithSavedInd(int roomId, int userId)
@@ -170,13 +172,20 @@ namespace TheLionsDen.Services.Impl
                 List<int> favorites = context.Favourites.Where(x => x.UserId == searchObject.UserId).Select(x => x.RoomId).ToList();
 
                 foreach (var r in rooms)
+                {
                     if (favorites.Contains(r.RoomId))
                         r.isSaved = true;
+                }
             }
 
             if (searchObject.UserId > 0 && searchObject.SavedOnly)
             {
                 rooms = rooms.Where(x => x.isSaved == true).ToList();
+            }
+
+            foreach (var r in rooms)
+            {
+                r.RoomType = null;
             }
 
             return rooms;

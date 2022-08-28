@@ -44,6 +44,7 @@ namespace WinUI.Forms.RoomTypes
             txtName.Text = "";
             txtDesc.Text = "";
             cmbComparator.SelectedIndex = -1;
+            numCapacity.Value = 0;
             pbImage.Image = null;
             images = new List<RoomImageResponse>();
             imageIndex = 0;

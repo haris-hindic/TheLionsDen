@@ -21,7 +21,7 @@ class UserReservationOverview extends StatefulWidget {
 
 class _UserReservationOverviewState extends State<UserReservationOverview> {
   ReservationProvider? _reservationProvider;
-  List<ReservationResponse> data = [];
+  List<ReservationResponse>? data;
   var reservationStatus = ["Active", "Cancelled", "Confirmed"];
   int selectedReservationStatusIndex = 99;
   TextEditingController _reservationStatusController =
@@ -167,7 +167,7 @@ class _UserReservationOverviewState extends State<UserReservationOverview> {
   }
 
   List<Widget> _buildReservationCardList() {
-    if (data.length == 0) {
+    if (data == null) {
       return [
         const Center(
           child: CircularProgressIndicator(
@@ -177,7 +177,17 @@ class _UserReservationOverviewState extends State<UserReservationOverview> {
       ];
     }
 
-    List<Widget> list = data
+    if (data!.length == 0) {
+      return [
+        const Center(
+          child: Text(
+            "No reservations.",
+          ),
+        )
+      ];
+    }
+
+    List<Widget> list = data!
         .map((x) => Container(
               //height: 225,
               child: Padding(

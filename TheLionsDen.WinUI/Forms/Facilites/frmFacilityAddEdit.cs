@@ -31,13 +31,22 @@ namespace WinUI.Forms.Facilites
 
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.png;)|*.jpg;*.jpeg;.*.png";
-            if (opnfd.ShowDialog() == DialogResult.OK)
+            try
             {
-                pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
-                pbImage.Image = new Bitmap(opnfd.FileName);
+                OpenFileDialog opnfd = new OpenFileDialog();
+                opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.png;)|*.jpg;*.jpeg;.*.png";
+                if (opnfd.ShowDialog() == DialogResult.OK)
+                {
+                    pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pbImage.Image = new Bitmap(opnfd.FileName);
+                }
             }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Invalid image.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void frmFacilityAddEdit_Load(object sender, EventArgs e)

@@ -11,7 +11,6 @@ namespace TheLionsDen.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize(Roles = "Administrator,Employee")]
     public class RoomController : BaseCRUDController<RoomResponse, RoomSearchObject, RoomUpsertRequest, RoomUpsertRequest>
     {
         private readonly IRoomService service;
@@ -23,24 +22,44 @@ namespace TheLionsDen.Controllers
             this.userService = userService;
         }
 
+        [Authorize(Roles = "Administrator,Employee")]
+        public override Task<RoomResponse> Insert([FromBody] RoomUpsertRequest request)
+        {
+            return base.Insert(request);
+        }
+
+        [Authorize(Roles = "Administrator,Employee")]
+        public override Task<RoomResponse> Update(int id, [FromBody] RoomUpsertRequest request)
+        {
+            return base.Update(id, request);
+        }
+
+        [Authorize(Roles = "Administrator,Employee")]
+        public override Task<string> Delete(int id)
+        {
+            return base.Delete(id);
+        }
+
+        [Authorize(Roles = "Administrator,Employee")]
         [HttpPut("{id}/Activate")]
         public async Task<string> ActivateAsync(int id)
         {
             return await service.Activate(id);
         }
 
+        [Authorize(Roles = "Administrator,Employee")]
         [HttpPut("{id}/Hide")]
         public async Task<string> Hide(int id)
         {
             return await service.Hide(id);
         }
-
+        [Authorize(Roles = "Administrator,Employee")]
         [HttpPut("{id}/Taken")]
         public async Task<string> SetAsTaken(int id)
         {
             return await service.SetAsTaken(id);
         }
-
+        [Authorize(Roles = "Administrator,Employee")]
         [HttpDelete("{roomId}/remove/{amenityId}")]
         public async Task<RoomResponse> RemoveAmenity(int roomId, int amenityId)
         {
@@ -48,12 +67,14 @@ namespace TheLionsDen.Controllers
         }
 
         [HttpPut("{userId}/save/{roomId}")]
+        [Authorize(Roles = "Customer,Administrator")]
         public async Task<string> SaveRoom(int roomId, int userId)
         {
             return await service.SaveRoom(userId: userId, roomId: roomId);
         }
 
         [HttpDelete("{userId}/remove-save/{roomId}")]
+        [Authorize(Roles = "Customer,Administrator")]
         public async Task<string> RemoveSavedRoom(int roomId, int userId)
         {
             return await service.RemoveSavedRoom(userId:userId, roomId: roomId);
@@ -72,7 +93,7 @@ namespace TheLionsDen.Controllers
             return await service.GetWithSavedInd(userId: user.UserId, roomId: id);
         }
 
-        [HttpGet("{id}/check-availability")]
+        [HttpGet("{id}/check-availability"),AllowAnonymous]
         public async Task<bool> CheckRoomAvailability(int id, [FromQuery] CheckAvailabilityRequest request)
         {
             return await service.CheckRoomAvailability(id,request);

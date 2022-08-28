@@ -5,13 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace TheLionsDen.Model.Responses
 {
-    public class RoomResponse
+    public class RoomResponseBasic
     {
         public int RoomId { get; set; }
         public string Name { get; set; } 
         public float Price { get; set; }
-        public int? Number { get; set; }
-        public int? Floor { get; set; }
         public string State { get; set; } 
         public int RoomTypeId { get; set; }
 
@@ -21,11 +19,5 @@ namespace TheLionsDen.Model.Responses
         public bool isSaved { get; set; }
 
         public byte[] CoverImage { get; set; }
-        public virtual RoomTypeResponse RoomType { get; set; }
-
-        //public virtual ICollection<Favourite> Favourites { get; set; }
-        //public virtual ICollection<Reservation> Reservations { get; set; }
-        //[JsonIgnore]
-        public virtual ICollection<RoomAmenityResponse> RoomAmenities { get; set; }
     }
 }

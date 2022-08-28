@@ -23,7 +23,7 @@ class RoomOverview extends StatefulWidget {
 class _RoomOverviewState extends State<RoomOverview> {
   RoomProvider? _roomProvider;
   RoomTypeProvider? _roomTypeProvider;
-  List<RoomResponse> data = [];
+  List<RoomResponse>? data;
   List<RoomTypeResponse> roomTypes = [];
   TextEditingController _nameSearchController = new TextEditingController();
   TextEditingController _priceSearchController = new TextEditingController();
@@ -158,6 +158,7 @@ class _RoomOverviewState extends State<RoomOverview> {
                 child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: DropdownButton(
+                  iconSize: 15,
                   items: _buildRoomTypesDownList(),
                   value: selectedRoomTypeValue,
                   icon: Icon(Icons.bed_outlined),
@@ -239,7 +240,7 @@ class _RoomOverviewState extends State<RoomOverview> {
   }
 
   List<Widget> _buildRoomCardList() {
-    if (data.length == 0) {
+    if (data == null) {
       return [
         const Center(
           child: CircularProgressIndicator(
@@ -249,7 +250,17 @@ class _RoomOverviewState extends State<RoomOverview> {
       ];
     }
 
-    List<Widget> list = data
+    if (data!.length == 0) {
+      return [
+        const Center(
+          child: Text(
+            "No rooms available.",
+          ),
+        )
+      ];
+    }
+
+    List<Widget> list = data!
         .map((x) => Container(
               height: 225,
               child: Padding(

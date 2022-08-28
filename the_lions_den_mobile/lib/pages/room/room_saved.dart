@@ -21,7 +21,7 @@ class SavedRooms extends StatefulWidget {
 
 class _SavedRoomsState extends State<SavedRooms> {
   RoomProvider? _roomProvider;
-  List<RoomResponse> data = [];
+  List<RoomResponse>? data;
 
   @override
   void initState() {
@@ -78,7 +78,7 @@ class _SavedRoomsState extends State<SavedRooms> {
   }
 
   List<Widget> _buildRoomCardList() {
-    if (data.length == 0) {
+    if (data == null) {
       return [
         const Center(
           child: CircularProgressIndicator(
@@ -88,7 +88,17 @@ class _SavedRoomsState extends State<SavedRooms> {
       ];
     }
 
-    List<Widget> list = data
+    if (data!.isEmpty) {
+      return [
+        const Center(
+          child: Text(
+            "No rooms saved.",
+          ),
+        )
+      ];
+    }
+
+    List<Widget> list = data!
         .map((x) => Container(
               height: 225,
               child: Padding(

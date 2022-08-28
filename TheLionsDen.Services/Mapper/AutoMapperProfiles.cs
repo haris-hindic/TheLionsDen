@@ -42,6 +42,7 @@ namespace TheLionsDen.Services.Mapper
                 .ForMember(x => x.RoomTypeName, opts => opts.MapFrom(y => $"{y.RoomType.Name} ({y.RoomType.Capacity} persons, {y.RoomType.Size} m2)" ))
                 .ForMember(x => x.CoverImage, opts => opts.MapFrom(y => y.RoomType.RoomImages.FirstOrDefault().Image));
             CreateMap<RoomUpsertRequest, Room>();
+            CreateMap<RoomResponse, RoomResponseBasic>();
             //RoomAmenity
             CreateMap<RoomAmenity, RoomAmenityResponse>();
             //Reservation

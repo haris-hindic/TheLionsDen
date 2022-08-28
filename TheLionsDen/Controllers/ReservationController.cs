@@ -16,6 +16,16 @@ namespace TheLionsDen.Controllers
         {
             this.service = service;
         }
+        [Authorize(Roles = "Administrator,Employee")]
+        public override Task<ReservationResponse> Insert([FromBody] ReservationInsertRequest request)
+        {
+            return base.Insert(request);
+        }
+        [NonAction]
+        public override Task<string> Delete(int id)
+        {
+            return base.Delete(id);
+        }
 
         [NonAction]
         public override Task<ReservationResponse> Update(int id, [FromBody] object request)

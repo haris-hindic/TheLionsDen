@@ -96,7 +96,26 @@ class Login extends StatelessWidget {
 
                     AuthHelper.user = await _userProvider.login();
 
-                    await Navigator.pushNamed(context, RoomOverview.routeName);
+                    if (AuthHelper.user!.roleName == "Employee") {
+                      AuthHelper.username = null;
+                      AuthHelper.password = null;
+
+                      AuthHelper.user = null;
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                                title: Text("Error"),
+                                content: Text("Access denied!"),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text("Ok"))
+                                ],
+                              ));
+                    } else {
+                      await Navigator.pushNamed(
+                          context, RoomOverview.routeName);
+                    }
                   } on Exception catch (e) {
                     showDialog(
                         context: context,

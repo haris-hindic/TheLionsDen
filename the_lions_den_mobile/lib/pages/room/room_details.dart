@@ -53,7 +53,7 @@ class _RoomDetailsState extends State<RoomDetails> {
   }
 
   _buildDetails() {
-    if (data.coverImage == null) {
+    if (data.name == null) {
       return const Center(
         child: CircularProgressIndicator(
           color: Colors.black,
@@ -68,8 +68,8 @@ class _RoomDetailsState extends State<RoomDetails> {
             options: CarouselOptions(
               height: 350,
               autoPlay: true,
-              autoPlayInterval: Duration(seconds: 1),
-              autoPlayAnimationDuration: Duration(milliseconds: 1500),
+              autoPlayInterval: Duration(seconds: 3),
+              autoPlayAnimationDuration: Duration(milliseconds: 2000),
               autoPlayCurve: Curves.fastOutSlowIn,
               enableInfiniteScroll: true,
             ),
@@ -200,12 +200,12 @@ class _RoomDetailsState extends State<RoomDetails> {
                       ),
                       const SizedBox(height: 10.0),
                       Container(
-                        height: 75,
+                        height: 150,
                         child: GridView(
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 1,
-                                  childAspectRatio: 1,
+                                  childAspectRatio: 4 / 3,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 30),
                           scrollDirection: Axis.horizontal,
@@ -231,12 +231,17 @@ class _RoomDetailsState extends State<RoomDetails> {
     List<Widget> list = data.roomAmenities!
         .map(
           (e) => Container(
-            child: ClipOval(
-              child: Material(
-                child: Container(
-                  child: Row(
+            width: 250,
+            // child: ClipOval(
+            //child: Material(
+            child: Container(
+              //width: 250,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
+                    children: [
                       Icon(
                         Icons.add_reaction_outlined,
                         color: Color.fromARGB(255, 10, 158, 227),
@@ -244,9 +249,11 @@ class _RoomDetailsState extends State<RoomDetails> {
                       Text(e.amenityName!),
                     ],
                   ),
-                ),
+                ],
               ),
+              // ),
             ),
+            // ),
           ),
         )
         .cast<Widget>()
