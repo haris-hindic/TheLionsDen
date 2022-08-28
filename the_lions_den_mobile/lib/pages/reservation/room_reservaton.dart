@@ -48,6 +48,8 @@ class _RoomReservationState extends State<RoomReservation> {
 
   final _formKey = GlobalKey<FormState>();
 
+  var bookedDates = [];
+
   var arrivalTimes = [
     "08:00am - 09:00am",
     "09:00am - 10:00am",
@@ -84,9 +86,11 @@ class _RoomReservationState extends State<RoomReservation> {
   Future loadData() async {
     var tempData = await _roomProvider?.getById(int.parse(id));
     var tempFac = await _facilityProvider?.get({"status": "Active"});
+    var bookedDateTmp = await _roomProvider?.getBookedDates(int.parse(id));
     setState(() {
       data = tempData!;
       facilities = tempFac!;
+      bookedDates = bookedDateTmp!;
     });
   }
 
@@ -230,6 +234,23 @@ class _RoomReservationState extends State<RoomReservation> {
                       });
                     }
                   },
+                ),
+                const SizedBox(height: 15.0),
+                Container(
+                  height: 30,
+                  width: 150,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: const LinearGradient(colors: [
+                        Color.fromARGB(255, 0, 69, 189),
+                        Color.fromARGB(255, 10, 158, 227)
+                      ])),
+                  child: InkWell(
+                    child: const Center(child: Text("Booked dates")),
+                    onTap: () {
+                      _showBookedDates();
+                    },
+                  ),
                 ),
                 const SizedBox(height: 15.0),
                 DropdownButton(
@@ -402,7 +423,7 @@ class _RoomReservationState extends State<RoomReservation> {
               ),
               recommendedFacilities.isNotEmpty
                   ? Text(
-                      "Users also bought:",
+                      "Frequently reserved together:",
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontSize: 14, fontWeight: FontWeight.w400),
@@ -493,7 +514,7 @@ class _RoomReservationState extends State<RoomReservation> {
               child: Column(
                 children: [
                   Container(
-                    height: 100,
+                    height: 150,
                     width: 100,
                     child: imageFromBase64String(x.image!),
                   ),
@@ -841,5 +862,52 @@ class _RoomReservationState extends State<RoomReservation> {
     req.facilityIds =
         selectedFacilites.map((e) => e.facilityId).cast<int>().toList();
     return req;
+  }
+
+  void _showBookedDates() {
+    if (bookedDates.isEmpty) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                title: Text("Booked dates"),
+                content: Container(
+                    width: 100,
+                    height: 100,
+                    child: Center(child: Text("Not future reservations."))),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text("Ok"))
+                ],
+              ));
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                title: Text("Booked dates"),
+                content: Container(
+                    width: 100,
+                    height: 100,
+                    child: GridView(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            childAspectRatio: 4 / 3,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 20),
+                        scrollDirection: Axis.vertical,
+                        children: bookedDates
+                            .map((e) => Container(
+                                  child: Text(e),
+                                  height: 20,
+                                ))
+                            .cast<Widget>()
+                            .toList())),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text("Ok"))
+                ],
+              ));
+    }
   }
 }

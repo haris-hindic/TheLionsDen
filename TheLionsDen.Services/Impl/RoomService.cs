@@ -290,6 +290,11 @@ namespace TheLionsDen.Services.Impl
 
             return true;
         }
+        public async Task<List<string>> GetBookedDates(int id)
+        {
+            return await context.Reservations.Where(x => x.RoomId == id && x.Departure>DateTime.Now)
+                .Select(x=> $"{x.Arrival.ToShortDateString()} - {x.Departure.ToShortDateString()}").ToListAsync();
+        }
 
         #region VALIDATIONS
 

@@ -65,4 +65,19 @@ class RoomProvider extends BaseProvider<RoomResponse> {
       throw Exception("An error occured!");
     }
   }
+
+  Future<List<dynamic>> getBookedDates(int roomId) async {
+    var url = Uri.parse("$fullUrl/$roomId/booked-dates");
+
+    Map<String, String> headers = createHeaders();
+
+    var response = await http!.get(url, headers: headers);
+
+    if (isValidResponseCode(response)) {
+      var a = jsonDecode(response.body);
+      return a;
+    } else {
+      throw Exception("An error occured!");
+    }
+  }
 }

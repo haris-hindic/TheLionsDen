@@ -98,5 +98,11 @@ namespace TheLionsDen.Controllers
         {
             return await service.CheckRoomAvailability(id,request);
         }
+
+        [HttpGet("{id}/booked-dates"), AllowAnonymous]
+        public async Task<List<string>> GetBookedDates(int id)
+        {
+            return await service.GetBookedDates(id);
+        }
     }
 }
