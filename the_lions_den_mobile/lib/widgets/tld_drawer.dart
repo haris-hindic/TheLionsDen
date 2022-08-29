@@ -28,8 +28,6 @@ class TLDDrawer extends StatelessWidget {
           ListTile(
             title: Text('Log out'),
             onTap: () {
-              AuthHelper.password = null;
-              AuthHelper.username = null;
               Navigator.popAndPushNamed(context, Login.routeName);
             },
           ),

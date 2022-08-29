@@ -15,8 +15,6 @@ namespace TheLionsDen.Model.Requests
         public string Email { get; set; }
         [MaxLength(40)]
         public string PhoneNumber { get; set; }
-        [Required(AllowEmptyStrings = false), MinLength(4), MaxLength(50)]
-        public string Username { get; set; }
         [MaxLength(100)]
         public string Password { get; set; }
         [MaxLength(100)]

@@ -230,6 +230,7 @@ class _EditProfileState extends State<EditProfile> {
       var response = await _userProvider!
           .customerUpdate(AuthHelper.user!.userId!, request);
 
+      AuthHelper.password = _passwordController.text;
       showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
