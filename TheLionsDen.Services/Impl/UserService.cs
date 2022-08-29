@@ -66,6 +66,9 @@ namespace TheLionsDen.Services.Impl
 
         public override async Task<UserResponse> Insert(UserInsertRequest request)
         {
+            if(context.Users.Any(x=>x.Username.Equals(request.Username)))
+                throw new Model.UserException("Username already taken!");
+
             if (request.PasswordConfirmation != request.Password)
                 throw new Model.UserException("Password and Confirmation must be the same!");
 
