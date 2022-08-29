@@ -1,5 +1,4 @@
 # The Lion's Den
-=====================================
 
 Credentials
 Desktop app
