@@ -37,6 +37,9 @@ Mobile app:
     flutter pub get
     flutter run
 
+Stripe test card number:
+
+    4242 4242 4242 4242
 
 Start the windows app inside visual studio IDE.
 
