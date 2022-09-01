@@ -36,6 +36,7 @@ namespace WinUI.Forms.Amenidies
                         if (!String.IsNullOrEmpty(response))
                         {
                             await LoadData();
+                            clearFields();
                         }
                     }
                 }
@@ -43,7 +44,8 @@ namespace WinUI.Forms.Amenidies
             }
             else
             {
-                populateFields(dgvAmenities.Rows[e.RowIndex].DataBoundItem as AmenityResponse);
+                if(e.RowIndex >= 0)
+                    populateFields(dgvAmenities.Rows[e.RowIndex].DataBoundItem as AmenityResponse);
             }
         }
 

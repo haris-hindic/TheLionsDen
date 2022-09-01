@@ -38,7 +38,8 @@ namespace WinUI.Forms.Facilites
 
         private async void dgvFacilites_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            populateFields(dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse);
+            if (e.RowIndex >= 0)
+                populateFields(dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse);
         }
 
         private void populateFields(FacilityResponse? facilityResponse)
@@ -46,7 +47,7 @@ namespace WinUI.Forms.Facilites
             if (pbImage.Image != null)
                 pbImage.Image = null;
 
-            if(facilityResponse.Image.Length > 1)
+            if (facilityResponse.Image.Length > 1)
                 pbImage.Image = ImageHelper.ByteArrayToImage(facilityResponse.Image);
             Employees.DataSource = facilityResponse.Employees;
             Employees.DisplayMember = "OutlineText";
@@ -79,8 +80,11 @@ namespace WinUI.Forms.Facilites
 
         private void dgvFacilites_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            clearImageEmployees();
-            new frmFacilityAddEdit(dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse).ShowDialog();
+            if (e.RowIndex >= 0)
+            {
+                clearImageEmployees();
+                new frmFacilityAddEdit(dgvFacilites.Rows[e.RowIndex].DataBoundItem as FacilityResponse).ShowDialog();
+            }
         }
     }
 }

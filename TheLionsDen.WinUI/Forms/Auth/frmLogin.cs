@@ -27,7 +27,8 @@ namespace WinUI.Forms.Auth
             {
                 var result = await api.Login();
 
-                AuthHelper.Role = result.RoleName;
+                if(result != null)
+                    AuthHelper.Role = result.RoleName;
 
                 if (AuthHelper.Role == "Customer")
                 {

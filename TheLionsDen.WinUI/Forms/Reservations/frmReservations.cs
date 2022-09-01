@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TheLionsDen.Model.Responses;
+﻿using TheLionsDen.Model.Responses;
 using TheLionsDen.Model.SearchObjects;
 using TheLionsDen.WinUI.Forms.Reservations;
 using TheLionsDen.WinUI.Helpers;
@@ -74,7 +65,8 @@ namespace WinUI.Forms.Reservations
 
         private void dgvReservations_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            new frmReservationDetails(dgvReservations.Rows[e.RowIndex].DataBoundItem as ReservationResponse).ShowDialog();
+            if (e.RowIndex >= 0)
+                new frmReservationDetails(dgvReservations.Rows[e.RowIndex].DataBoundItem as ReservationResponse).ShowDialog();
         }
     }
 }

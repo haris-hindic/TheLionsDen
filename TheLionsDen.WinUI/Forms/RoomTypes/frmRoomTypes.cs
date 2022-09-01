@@ -52,7 +52,8 @@ namespace WinUI.Forms.RoomTypes
 
         private async void dgvRoomTypes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            populateFields(dgvRoomTypes.Rows[e.RowIndex].DataBoundItem as RoomTypeResponse);
+            if (e.RowIndex >= 0)
+                populateFields(dgvRoomTypes.Rows[e.RowIndex].DataBoundItem as RoomTypeResponse);
         }
 
         private async void populateFields(RoomTypeResponse roomTypeResponse)
@@ -114,7 +115,8 @@ namespace WinUI.Forms.RoomTypes
 
         private void dgvRoomTypes_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            new frmRoomTypeAddEdit(dgvRoomTypes.Rows[e.RowIndex].DataBoundItem as RoomTypeResponse).ShowDialog();
+            if (e.RowIndex >= 0)
+                new frmRoomTypeAddEdit(dgvRoomTypes.Rows[e.RowIndex].DataBoundItem as RoomTypeResponse).ShowDialog();
         }
     }
 }

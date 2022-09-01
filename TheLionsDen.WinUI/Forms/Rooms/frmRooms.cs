@@ -171,7 +171,12 @@ namespace WinUI.Forms.Rooms
             }
             else
             {
-                setButtons(dgvRooms.Rows[e.RowIndex].DataBoundItem as RoomResponse);
+                if (e.RowIndex >= 0)
+                {
+                    var item = dgvRooms.Rows[e.RowIndex].DataBoundItem as RoomResponse;
+                    if (item == null)
+                        setButtons(dgvRooms.Rows[e.RowIndex].DataBoundItem as RoomResponse);
+                }
             }
         }
 
@@ -208,7 +213,8 @@ namespace WinUI.Forms.Rooms
 
         private void dgvRooms_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            new frmRoomAddEdit(dgvRooms.Rows[e.RowIndex].DataBoundItem as RoomResponse).ShowDialog();
+            if (e.RowIndex >= 0)
+                new frmRoomAddEdit(dgvRooms.Rows[e.RowIndex].DataBoundItem as RoomResponse).ShowDialog();
         }
     }
 }
