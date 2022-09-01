@@ -70,17 +70,18 @@ namespace TheLionsDen.Services.Impl
 
         public override Task<string> Delete(int id)
         {
-            var roomAmenities = context.RoomAmenities.Where(x => x.RoomId == id);
-            var favourites = context.Favourites.Where(x => x.RoomId == id);
-            var reservations = context.Reservations.Include("ReservationFacilities").Include("PaymentDetails").Where(x => x.RoomId == id);
+            var roomAmenities = context.RoomAmenities.Where(x => x.RoomId == id).ToList();
+            var favourites = context.Favourites.Where(x => x.RoomId == id).ToList();
+            var reservations = context.Reservations.Include("ReservationFacilities").Include("PaymentDetails").Where(x => x.RoomId == id).ToList();
             var reservationFacilities = reservations.Select(x => x.ReservationFacilities);
-            var reservationPayments = reservations.Select(x => x.PaymentDetails);
 
             context.RemoveRange(roomAmenities);
             context.RemoveRange(favourites);
-            context.RemoveRange(reservationFacilities);
+            foreach (var item in reservationFacilities)
+            {
+                context.ReservationFacilities.RemoveRange(item);
+            }
             context.RemoveRange(reservations);
-            context.RemoveRange(reservationPayments);
             context.SaveChanges();
 
 

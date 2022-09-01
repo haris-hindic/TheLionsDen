@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
 using System.Text;
 using TheLionsDen.Model;
 using TheLionsDen.Model.Requests;
@@ -21,7 +20,7 @@ namespace TheLionsDen.Services.Impl
         {
             var filteredQuery = base.AddFilter(query, searchObject);
 
-            if(!String.IsNullOrWhiteSpace(searchObject.Name))
+            if (!String.IsNullOrWhiteSpace(searchObject.Name))
             {
                 filteredQuery = filteredQuery.Where(x => x.FirstName.ToLower().Contains(searchObject.Name.ToLower()) ||
                                                        x.LastName.ToLower().Contains(searchObject.Name.ToLower()));
@@ -66,7 +65,7 @@ namespace TheLionsDen.Services.Impl
 
         public override async Task<UserResponse> Insert(UserInsertRequest request)
         {
-            if(context.Users.Any(x=>x.Username.Equals(request.Username)))
+            if (context.Users.Any(x => x.Username.Equals(request.Username)))
                 throw new Model.UserException("Username already taken!");
 
             if (request.PasswordConfirmation != request.Password)
@@ -93,14 +92,14 @@ namespace TheLionsDen.Services.Impl
             var custmoerRole = context.Roles.First(x => x.Name == "Customer");
             request.RoleId = custmoerRole.RoleId;
             request.Status = "Modified";
-            return await Update(id,request);
+            return await Update(id, request);
         }
 
         public override void BeforeUpdate(UserUpdateRequest request, User entity)
         {
             entity.Status = "Modified";
 
-            if(!String.IsNullOrEmpty(request.Password) && !String.IsNullOrEmpty(request.PasswordConfirmation))
+            if (!String.IsNullOrEmpty(request.Password) && !String.IsNullOrEmpty(request.PasswordConfirmation))
             {
                 if (request.PasswordConfirmation != request.Password)
                     throw new Model.UserException("Password and Confirmation must be the same!");
@@ -152,15 +151,18 @@ namespace TheLionsDen.Services.Impl
 
         public override Task<string> Delete(int id)
         {
-            var reservations = context.Reservations.Include("ReservationFacilities").Include("PaymentDetails").Where(x => x.UserId == id);
-            var reservationFacilities = reservations.Select(x => x.ReservationFacilities);
-            var reservationPayments = reservations.Select(x => x.PaymentDetails);
-            var favourites = context.Favourites.Where(x => x.UserId == id);
+            var reservations = context.Reservations.Include("ReservationFacilities").Include("PaymentDetails").Where(x => x.UserId == id).ToList();
+            var reservationFacilities = reservations.Select(x => x.ReservationFacilities.ToList()).ToList();
+            var reservationPayments = reservations.Select(x => x.PaymentDetails).ToList();
+            var favourites = context.Favourites.Where(x => x.UserId == id).ToList();
 
-            context.RemoveRange(reservations);
-            context.RemoveRange(reservationFacilities);
-            context.RemoveRange(favourites);
-            context.RemoveRange(reservationPayments);
+            foreach (var item in reservationFacilities)
+            {
+                context.ReservationFacilities.RemoveRange(item);
+            }
+            context.Reservations.RemoveRange(reservations);
+            context.PaymentDetails.RemoveRange(reservationPayments);
+            context.Favourites.RemoveRange(favourites);
             context.SaveChanges();
 
 
@@ -183,7 +185,7 @@ namespace TheLionsDen.Services.Impl
         {
             var errorMessage = new StringBuilder();
 
-            validateUserExist(id,errorMessage);
+            validateUserExist(id, errorMessage);
             validateRoleExist(request.RoleId, errorMessage);
 
             if (errorMessage.Length > 0)
