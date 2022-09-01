@@ -154,9 +154,13 @@ namespace TheLionsDen.Services.Impl
         {
             var reservations = context.Reservations.Include("ReservationFacilities").Where(x => x.UserId == id);
             var reservationFacilities = reservations.Select(x => x.ReservationFacilities);
+            var reservationPayments = reservations.Select(x => x.PaymentDetails);
+            var favourites = context.Favourites.Where(x => x.UserId == id);
 
             context.RemoveRange(reservations);
             context.RemoveRange(reservationFacilities);
+            context.RemoveRange(favourites);
+            context.RemoveRange(reservationPayments);
 
             return base.Delete(id);
         }
