@@ -161,6 +161,8 @@ namespace TheLionsDen.Services.Impl
             context.RemoveRange(reservationFacilities);
             context.RemoveRange(favourites);
             context.RemoveRange(reservationPayments);
+            context.SaveChanges();
+
 
             return base.Delete(id);
         }
