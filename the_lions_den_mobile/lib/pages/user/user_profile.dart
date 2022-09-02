@@ -162,8 +162,9 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                     TextFormField(
                       enabled: false,
-                      initialValue:
-                          DateFormat('yyyy-MM-dd').format(data.dateOfBirth!),
+                      initialValue: data.dateOfBirth != null
+                          ? DateFormat('yyyy-MM-dd').format(data.dateOfBirth!)
+                          : "",
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           labelText: "Date of birth",

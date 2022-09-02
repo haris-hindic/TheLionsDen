@@ -35,8 +35,8 @@ class UserProvider extends BaseProvider<UserResponse> {
 
     if (response.statusCode == 400) {
       var body = jsonDecode(response.body);
-      var errMsg = body['errors']['Error message'];
-      throw Exception(errMsg.toString());
+      var errMsg = body['errors'];
+      throw Exception(errMsg.toString().replaceAll(RegExp(r'[\[\]{}]'), ''));
     }
 
     if (isValidResponseCode(response)) {
