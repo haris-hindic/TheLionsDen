@@ -13,7 +13,7 @@ namespace TheLionsDen.Model.Requests
         public string LastName { get; set; }
         [Required(AllowEmptyStrings = false), EmailAddress, MaxLength(50)]
         public string Email { get; set; }
-        [MaxLength(40)]
+        [MaxLength(40),Phone]
         public string PhoneNumber { get; set; }
         [MaxLength(100)]
         public string Password { get; set; }

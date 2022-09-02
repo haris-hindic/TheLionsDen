@@ -16,7 +16,7 @@ namespace TheLionsDen.Model.Requests
         public DateTime EmploymentDate { get; set; }
         [MaxLength(40)]
         public string Address { get; set; }
-        [MaxLength(40)]
+        [MaxLength(40),Phone]
         public string PhoneNumber { get; set; }
         [Required(AllowEmptyStrings = false), EmailAddress,MaxLength(40)]
         public string Email { get; set; }
