@@ -49,10 +49,11 @@ class _EditProfileState extends State<EditProfile> {
       _firstNameController.text = tempData.firstName!;
       _lastNameController.text = tempData.lastName!;
       _emailController.text = tempData.email!;
-      _phoneNumberController.text = tempData.phoneNumber!;
-      _genderController.text = tempData.gender!;
-      _dateOfBirthController.text =
-          DateFormat('yyyy-MM-dd').format(tempData.dateOfBirth!);
+      _phoneNumberController.text = tempData.phoneNumber ?? '';
+      _genderController.text = tempData.gender ?? '';
+      _dateOfBirthController.text = tempData.dateOfBirth == null
+          ? ''
+          : DateFormat('yyyy-MM-dd').format(tempData.dateOfBirth!);
     });
   }
 
@@ -230,7 +231,6 @@ class _EditProfileState extends State<EditProfile> {
       var response = await _userProvider!
           .customerUpdate(AuthHelper.user!.userId!, request);
 
-      AuthHelper.password = _passwordController.text;
       showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
@@ -238,8 +238,13 @@ class _EditProfileState extends State<EditProfile> {
                 content: const Text("Changes saved successfully."),
                 actions: [
                   TextButton(
-                      onPressed: () async => await Navigator.pushNamed(
-                          context, UserProfile.routeName),
+                      onPressed: () async {
+                        if (_passwordController.text.isNotEmpty) {
+                          AuthHelper.password = _passwordController.text;
+                        }
+                        await Navigator.pushNamed(
+                            context, UserProfile.routeName);
+                      },
                       child: const Text("Ok"))
                 ],
               ));

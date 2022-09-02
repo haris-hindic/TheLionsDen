@@ -321,7 +321,7 @@ class _RoomReservationState extends State<RoomReservation> {
     _firstNameController.text = AuthHelper.user!.firstName!;
     _lastNameController.text = AuthHelper.user!.lastName!;
     _emailController.text = AuthHelper.user!.email!;
-    _phoneNumberController.text = AuthHelper.user!.phoneNumber!;
+    _phoneNumberController.text = AuthHelper.user!.phoneNumber ?? 'N/A';
   }
 
   List<DropdownMenuItem> _buildEstimatedArrivalTimeDownList() {

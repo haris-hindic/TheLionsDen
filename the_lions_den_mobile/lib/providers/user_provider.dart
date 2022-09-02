@@ -54,6 +54,12 @@ class UserProvider extends BaseProvider<UserResponse> {
     var jsonRequest = jsonEncode(request);
     var response = await http!.put(url, headers: headers, body: jsonRequest);
 
+    if (response.statusCode == 400) {
+      var body = jsonDecode(response.body);
+      var errMsg = body['errors'];
+      throw Exception(errMsg.toString().replaceAll(RegExp(r'[\[\]{}]'), ''));
+    }
+
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       return fromJson(data);
