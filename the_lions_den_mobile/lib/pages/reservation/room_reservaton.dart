@@ -184,6 +184,7 @@ class _RoomReservationState extends State<RoomReservation> {
               key: _formKey,
               child: Column(children: [
                 TextFormField(
+                  keyboardType: TextInputType.none,
                   controller: _arrivalController,
                   decoration: InputDecoration(
                       labelText: "Arrival", icon: Icon(Icons.calendar_today)),
@@ -212,6 +213,7 @@ class _RoomReservationState extends State<RoomReservation> {
                   },
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.none,
                   controller: _departureController,
                   decoration: InputDecoration(
                       labelText: "Departure", icon: Icon(Icons.calendar_today)),
@@ -429,9 +431,15 @@ class _RoomReservationState extends State<RoomReservation> {
                           fontSize: 14, fontWeight: FontWeight.w400),
                     )
                   : SizedBox(),
+              const SizedBox(
+                height: 15,
+              ),
               selectedFacility != 99
                   ? _buildRecommendedFacilities()
-                  : const SizedBox()
+                  : const SizedBox(),
+              const SizedBox(
+                height: 15,
+              ),
             ],
           ),
         ),
@@ -469,11 +477,13 @@ class _RoomReservationState extends State<RoomReservation> {
           builder: (BuildContext context) => AlertDialog(
                 title: Text(x.name!),
                 content: Container(
-                  height: 200,
-                  width: 200,
+                  height: 250,
+                  width: 250,
                   child: Column(
                     children: [
                       Container(
+                        height: 200,
+                        width: 200,
                         child: imageFromBase64String(x.image!),
                       ),
                       Text(x.description ?? ""),
@@ -514,7 +524,7 @@ class _RoomReservationState extends State<RoomReservation> {
               child: Column(
                 children: [
                   Container(
-                    height: 150,
+                    height: 130,
                     width: 100,
                     child: imageFromBase64String(x.image!),
                   ),

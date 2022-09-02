@@ -206,8 +206,8 @@ class _RoomDetailsState extends State<RoomDetails> {
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 1,
                                   childAspectRatio: 4 / 3,
-                                  crossAxisSpacing: 20,
-                                  mainAxisSpacing: 30),
+                                  crossAxisSpacing: 30,
+                                  mainAxisSpacing: 40),
                           scrollDirection: Axis.horizontal,
                           children: _buildAmenitesGrid(),
                         ),
