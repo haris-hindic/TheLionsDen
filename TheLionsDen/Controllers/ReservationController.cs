@@ -16,7 +16,7 @@ namespace TheLionsDen.Controllers
         {
             this.service = service;
         }
-        [Authorize(Roles = "Administrator,Employee")]
+        [Authorize(Roles = "Administrator,Customer")]
         public override Task<ReservationResponse> Insert([FromBody] ReservationInsertRequest request)
         {
             return base.Insert(request);
@@ -34,6 +34,7 @@ namespace TheLionsDen.Controllers
         }
 
 
+        [Authorize(Roles = "Administrator,Employee,Customer")]
         [HttpPut("{id}/Cancel")]
         public async Task<string> Cancel(int id)
         {
