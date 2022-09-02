@@ -10,7 +10,7 @@ namespace TheLionsDen.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator,Employee")]
     public class EmployeeController : BaseCRUDController<EmployeeResponse, EmployeeSearchObject, EmployeeInsertRequest, EmployeeUpdateRequest>
     {
         private readonly IEmployeeService service;

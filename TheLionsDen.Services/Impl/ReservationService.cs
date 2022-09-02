@@ -70,16 +70,16 @@ namespace TheLionsDen.Services.Impl
                 switch (searchObject.Comparator)
                 {
                     case "=":
-                        filteredQuery = filteredQuery.Where(x => x.Arrival <= searchObject.Date &&
-                                                        x.Departure >= searchObject.Date);
+                        filteredQuery = filteredQuery.Where(x => x.Arrival == searchObject.Date &&
+                                                        x.Departure == searchObject.Date);
                         break;
                     case ">":
-                        filteredQuery = filteredQuery.Where(x => x.Arrival <= searchObject.Date &&
-                                                        x.Departure <= searchObject.Date);
-                        break;
-                    case "<":
                         filteredQuery = filteredQuery.Where(x => x.Arrival >= searchObject.Date &&
                                                         x.Departure >= searchObject.Date);
+                        break;
+                    case "<":
+                        filteredQuery = filteredQuery.Where(x => x.Arrival <= searchObject.Date &&
+                                                        x.Departure <= searchObject.Date);
                         break;
                 }
             }

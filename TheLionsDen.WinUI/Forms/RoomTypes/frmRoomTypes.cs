@@ -21,6 +21,9 @@ namespace WinUI.Forms.RoomTypes
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            pbImage.Image = null;
+            images = new List<RoomImageResponse>();
+            imageIndex = 0;
             loadData();
         }
 
@@ -40,6 +43,11 @@ namespace WinUI.Forms.RoomTypes
         }
 
         private void btnClearForm_Click(object sender, EventArgs e)
+        {
+            clearFields();
+        }
+
+        private void clearFields()
         {
             txtName.Text = "";
             txtDesc.Text = "";

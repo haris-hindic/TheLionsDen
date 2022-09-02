@@ -28,7 +28,7 @@ namespace WinUI.Forms.Users
 
         private async void frmUserAddEdit_Load(object sender, EventArgs e)
         {
-            loadRoles();
+            await loadRoles();
 
             if (user != null)
             {
@@ -36,18 +36,19 @@ namespace WinUI.Forms.Users
             }
         }
 
-        private async void loadRoles()
+        private async Task loadRoles()
         {
             var roles = await roleAPI.Get();
 
             cbRole.DataSource = roles;
             cbRole.ValueMember = "RoleId";
             cbRole.DisplayMember = "Name";
+            //cbRole.SelectedValue = -1;
         }
 
         private void populateFields()
         {
-            cbRole.SelectedItem = user.Role;
+            cbRole.SelectedValue = user.RoleId;
             txtFirstName.Text = user.FirstName;
             txtLastName.Text = user.LastName;
             txtUsername.Text = user.Username;
@@ -101,6 +102,17 @@ namespace WinUI.Forms.Users
                                 }
                                 populateFields();
                             }
+                        }
+                    }
+                    else
+                    {
+                        var result = await userAPI.Put(user.UserId, request);
+
+                        if (result != null)
+                        {
+                            MessageBox.Show($"User {result.Username} successfully updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.user = result;
+                            populateFields();
                         }
                     }
                 }

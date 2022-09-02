@@ -34,11 +34,7 @@ namespace WinUI.Forms.Employees
 
         private async void loadData()
         {
-            var jobTypesList = await jobTypeAPI.Get();
-
-            cmbJobType.DataSource = jobTypesList;
-            cmbJobType.DisplayMember = "Name";
-            cmbJobType.ValueMember = "JobTypeId";
+            await loadJobs();
 
             cmbStatus.DataSource = cmbHelper.employee;
 
@@ -46,6 +42,15 @@ namespace WinUI.Forms.Employees
             {
                 populateFields();
             }
+        }
+
+        private async Task loadJobs()
+        {
+            var jobTypesList = await jobTypeAPI.Get();
+
+            cmbJobType.DataSource = jobTypesList;
+            cmbJobType.DisplayMember = "Name";
+            cmbJobType.ValueMember = "JobTypeId";
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
@@ -83,7 +88,7 @@ namespace WinUI.Forms.Employees
 
         private void populateFields()
         {
-            cmbJobType.SelectedItem = employee.JobType;
+            cmbJobType.SelectedValue = employee.JobTypeId;
             txtFirstName.Text = employee.FirstName;
             txtLastName.Text = employee.LastName;
             txtEmail.Text = employee.Email;
