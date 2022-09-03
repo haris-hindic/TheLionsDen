@@ -156,6 +156,7 @@ class _EditProfileState extends State<EditProfile> {
                         controller: _genderController,
                       ),
                       TextFormField(
+                        keyboardType: TextInputType.none,
                         controller: _dateOfBirthController,
                         decoration: InputDecoration(
                             labelText: "Date of birth",

@@ -139,6 +139,7 @@ class _RegistrationState extends State<Registration> {
                         controller: _genderController,
                       ),
                       TextFormField(
+                        keyboardType: TextInputType.none,
                         controller: _dateOfBirthController,
                         decoration: InputDecoration(
                             labelText: "Date of birth",

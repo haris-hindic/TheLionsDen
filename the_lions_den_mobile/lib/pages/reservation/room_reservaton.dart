@@ -882,7 +882,7 @@ class _RoomReservationState extends State<RoomReservation> {
                 title: Text("Booked dates"),
                 content: Container(
                     width: 100,
-                    height: 100,
+                    height: 10,
                     child: Center(child: Text("Not future reservations."))),
                 actions: [
                   TextButton(
@@ -898,20 +898,9 @@ class _RoomReservationState extends State<RoomReservation> {
                 content: Container(
                     width: 100,
                     height: 100,
-                    child: GridView(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 1,
-                            childAspectRatio: 4 / 3,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 20),
+                    child: ListView(
                         scrollDirection: Axis.vertical,
-                        children: bookedDates
-                            .map((e) => Container(
-                                  child: Text(e),
-                                  height: 20,
-                                ))
-                            .cast<Widget>()
-                            .toList())),
+                        children: _createBookedDates())),
                 actions: [
                   TextButton(
                       onPressed: () => Navigator.pop(context),
@@ -919,5 +908,17 @@ class _RoomReservationState extends State<RoomReservation> {
                 ],
               ));
     }
+  }
+
+  _createBookedDates() {
+    List<Widget> list = bookedDates
+        .map((e) => Container(
+              child: Text(e),
+              height: 25,
+            ))
+        .cast<Widget>()
+        .toList();
+
+    return list;
   }
 }
