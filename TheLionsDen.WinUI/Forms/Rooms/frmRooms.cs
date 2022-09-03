@@ -174,7 +174,7 @@ namespace WinUI.Forms.Rooms
                 if (e.RowIndex >= 0)
                 {
                     var item = dgvRooms.Rows[e.RowIndex].DataBoundItem as RoomResponse;
-                    if (item == null)
+                    if (item != null)
                         setButtons(dgvRooms.Rows[e.RowIndex].DataBoundItem as RoomResponse);
                 }
             }
