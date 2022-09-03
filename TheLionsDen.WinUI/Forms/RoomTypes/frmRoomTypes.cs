@@ -83,7 +83,11 @@ namespace WinUI.Forms.RoomTypes
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (images.Count() == 0) MessageBox.Show("No images!");
+            if (images.Count() == 0)
+            {
+                MessageBox.Show("No images!");
+                return;
+            }
 
             if (images.Count() > (imageIndex + 1))
             {
@@ -98,7 +102,11 @@ namespace WinUI.Forms.RoomTypes
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            if (images.Count() == 0) MessageBox.Show("No images!");
+            if (images.Count() == 0)
+            {
+                MessageBox.Show("No images!");
+                return;
+            }
 
             if (imageIndex > 0)
             {

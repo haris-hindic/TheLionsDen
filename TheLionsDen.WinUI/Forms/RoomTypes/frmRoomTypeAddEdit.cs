@@ -107,7 +107,10 @@ namespace WinUI.Forms.RoomTypes
         private void btnNext_Click(object sender, EventArgs e)
         {
             if (images.Count() == 0)
+            {
                 MessageBox.Show("No images!");
+                return;
+            }
 
             if (images.Count() > (imageIndex + 1))
             {
@@ -123,7 +126,10 @@ namespace WinUI.Forms.RoomTypes
         private void btnPrevious_Click(object sender, EventArgs e)
         {
             if (images.Count() == 0)
+            {
                 MessageBox.Show("No images!");
+                return;
+            }
 
             if (imageIndex > 0)
             {
@@ -252,7 +258,10 @@ namespace WinUI.Forms.RoomTypes
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             if (images.Count() == 0)
+            {
                 MessageBox.Show("No images!");
+                return;
+            }
 
             var confirmResult = MessageBox.Show("Are you sure that you want to delete this item ??", "Confirm Delete!!", MessageBoxButtons.YesNo);
 
